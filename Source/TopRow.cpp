@@ -37,7 +37,7 @@ TopRow::~TopRow() = default;
 
 void TopRow::paint(juce::Graphics& g)
 {
-    g.setColour(juce::Colour(255, 255, 255));
+    g.setColour(juce::Colour(62, 72, 73));
     g.fillRoundedRectangle(getLocalBounds().toFloat(), 0.f);
 }
 
