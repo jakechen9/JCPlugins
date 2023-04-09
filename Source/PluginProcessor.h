@@ -12,6 +12,7 @@
 #include "Delay.h"
 #include "ParameterManager.h"
 #include "Grain.h"
+#include "Filter.h"
 
 //==============================================================================
 /**
@@ -62,12 +63,15 @@ public:
     ParameterManager* getParameterManager();
 
 private:
-    float mInputGain = 0;
-    float mOutputGain = 0;
+//    float mInputGain = 0;
+//    float mOutputGain = 0;
     ParameterManager mParameterManager;
     Delay mDelayL;
     Delay mDelayR;
-    Grain mGrain;
+    Grain mGrainL;
+    Grain mGrainR;
+    Filter mFilterL;
+    Filter mFilterR;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Week6AssignmentAudioProcessor)
 };

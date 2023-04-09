@@ -15,22 +15,19 @@
 TopRow::TopRow(Week6AssignmentAudioProcessor& inAudioProcessor) :
 audioProcessor(inAudioProcessor){
     auto& tree_state = audioProcessor.getParameterManager()->getTreeState();
-    mDelayMix = std::make_unique<SliderContainer>();
-    mDelayMix->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Mix]);
-    addAndMakeVisible(mDelayMix.get());
+    mFilterMix = std::make_unique<SliderContainer>();
+    mFilterMix->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::FilterMix]);
+    addAndMakeVisible(mFilterMix.get());
     
-    mDelayTime = std::make_unique<SliderContainer>();
-    mDelayTime->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Time]);
-    addAndMakeVisible(mDelayTime.get());
+    mLow= std::make_unique<SliderContainer>();
+    mLow->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Low]);
+    addAndMakeVisible(mLow.get());
     
-    mDelaySpread = std::make_unique<SliderContainer>();
-    mDelaySpread->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Spread]);
-    addAndMakeVisible(mDelaySpread.get());
+    mHigh = std::make_unique<SliderContainer>();
+    mHigh->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::High]);
+    addAndMakeVisible(mHigh.get());
     
-    mDelayFeedback = std::make_unique<SliderContainer>();
-    mDelayFeedback->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Feedback]);
-    addAndMakeVisible(mDelayFeedback.get());
-    
+
 }
 
 TopRow::~TopRow() = default;
@@ -43,12 +40,7 @@ void TopRow::paint(juce::Graphics& g)
 
 void TopRow::resized()
 {
-//    auto width = getWidth()/4;
-//    auto area = getLocalBounds().reduced(5, 0);
-//    const int boundHeight = (area.getHeight() - 5) / 4;
-    
-    mDelayMix->setBounds(176, 55, 50, 50);
-//    mDelayTime->setBounds(area.removeFromLeft(width));
-//    mDelaySpread->setBounds(area.removeFromLeft(width));
-//    mDelayFeedback->setBounds(area.removeFromLeft(width));
+    mFilterMix->setBounds(176, 55, 70, 70);
+    mLow -> setBounds(301, 55, 70, 70);
+    mHigh -> setBounds(426, 55, 70, 70);
 }

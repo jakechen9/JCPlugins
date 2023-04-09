@@ -30,12 +30,10 @@ public:
     void resized() override;
 
 private:
-//    TopRow mTopRow;
     std::unique_ptr<BottomRow> mBottomRow;
     std::unique_ptr<GrainRow> mGrainRow;
-//    std::unique_ptr<TopRow> mTopRow;
+    std::unique_ptr<TopRow> mTopRow;
     MyLookAndFeel mLookAndFeel;
-    // the slider components
     juce::OwnedArray<SliderContainer> mSliderContainers;
 
     // This reference is provided as a quick way for your editor to

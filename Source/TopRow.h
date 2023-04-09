@@ -24,13 +24,9 @@ public:
     
 private:
     juce::Label mDelaySectionTitle;
-    std::unique_ptr<SliderContainer> mDelayMix;
-    std::unique_ptr<SliderContainer> mDelayTime;
-    std::unique_ptr<SliderContainer> mDelaySpread;
-    std::unique_ptr<SliderContainer> mDelayFeedback;
-    std::unique_ptr<SliderContainer> mDelayWidth;
-    std::unique_ptr<SliderContainer> mDelayLowpass;
-    std::unique_ptr<SliderContainer> mDelayHighpass;
+    std::unique_ptr<SliderContainer> mFilterMix;
+    std::unique_ptr<SliderContainer> mLow;
+    std::unique_ptr<SliderContainer> mHigh;
     
     Week6AssignmentAudioProcessor& audioProcessor;
     

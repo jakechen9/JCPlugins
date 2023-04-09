@@ -8,6 +8,8 @@
         <FILE id="LrYFNz" name="AudioHelpers.h" compile="0" resource="0" file="Source/AudioHelpers.h"/>
         <FILE id="sdwshg" name="Delay.cpp" compile="1" resource="0" file="Source/Delay.cpp"/>
         <FILE id="L9V4zx" name="Delay.h" compile="0" resource="0" file="Source/Delay.h"/>
+        <FILE id="dKpavV" name="Filter.cpp" compile="1" resource="0" file="Source/Filter.cpp"/>
+        <FILE id="e10TxC" name="Filter.h" compile="0" resource="0" file="Source/Filter.h"/>
         <FILE id="hmSk0G" name="Grain.cpp" compile="1" resource="0" file="Source/Grain.cpp"/>
         <FILE id="CI8vgJ" name="Grain.h" compile="0" resource="0" file="Source/Grain.h"/>
       </GROUP>

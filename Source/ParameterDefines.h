@@ -20,6 +20,9 @@ enum AppParameterID{
     Highpass,
     GrainSize,
     GrainMix,
+    FilterMix,
+    Low,
+    High,
     TotalNumberParameters
 };
 
@@ -32,7 +35,10 @@ static juce::Array<juce::String> ParameterIDStrings {
     "Lowpass",
     "Highpass",
     "GrainSize",
-    "GrainMix"
+    "GrainMix",
+    "FilterMix",
+    "Low",
+    "High"
 };
 
 static juce::Array<float> ParameterMinimum {
@@ -44,7 +50,10 @@ static juce::Array<float> ParameterMinimum {
     20.f,
     20.f,
     0.f,
-    0.f
+    0.f,
+    0.f,
+    20.f,
+    20.f
 };
 
 static juce::Array<float> ParameterMaximum {
@@ -56,7 +65,10 @@ static juce::Array<float> ParameterMaximum {
     22000.f,
     22000.f,
     10.f,
-    1.f
+    1.f,
+    1.f,
+    22000.f,
+    22000.f
 };
 
 static juce::Array<float> ParameterDefault {
@@ -68,6 +80,9 @@ static juce::Array<float> ParameterDefault {
     22000.f,
     20.f,
     5.f,
-    .5f
+    .5f,
+    .5f,
+    22000.f,
+    20.f
 };
 

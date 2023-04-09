@@ -12,42 +12,30 @@
 #define Grain_h
 
 #include "JuceHeader.h"
-#include "AudioHelpers.h"
+
 
 class Grain {
+    
 public:
     
-    void setSize(int inGrainSize) {
-        mGrainSize = inGrainSize;
-    }
+    Grain();
     
-    void reset() {
-        mGrainCounter = 0;
-    }
+    ~Grain();
     
-    float getNextWindowSample() {
-        mGrainCounter++;
-        
-        auto val = 0.5 * (1 - std::cos(6.283185307179586 * (float)mGrainCounter / (((float)mGrainSize)-1.f)));
-        
-        return val;
-    }
+    void initialize(float inSampleRate, int inBlocksize);
     
-    bool isActive() {
-        if (mGrainCounter < mGrainSize) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    void setParameters(float inMix, int inGrainSize);
+    
+    void processBlock(float* inBuffer, int inNumSamples);
+    
+    void processSample(float& inSample);
     
 private:
-    
-    // size in sample
-    int mGrainSize  = 0;
-    
-    // position in sample
+    float mSampleRate;
+    float mGrainMix = 0;
+    int mGrainSize = 0;
     int mGrainCounter = 0;
+    float mWriteHead = 0;
 };
 
-#endif
+#endif /* Grain_h */

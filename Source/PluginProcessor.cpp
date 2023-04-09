@@ -36,9 +36,16 @@ void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int sample
     mDelayL.initialize(sampleRate, samplesPerBlock);
     mDelayR.initialize(sampleRate, samplesPerBlock);
     
+    mGrainL.initialize(sampleRate, samplesPerBlock);
+    mGrainR.initialize(sampleRate, samplesPerBlock);
     
-    mGrain.setSize(.5f * getSampleRate());
-    mGrain.reset();
+    mFilterL.initialize(sampleRate, samplesPerBlock);
+    mFilterR.initialize(sampleRate, samplesPerBlock);
+    
+//    grain parts from class
+//
+//    mGrain.setSize(.5f * getSampleRate());
+//    mGrain.reset();
 }
 
 void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
@@ -54,27 +61,28 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     
     
     
-        
-        float input_gain = 0;
-        input_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
-        input_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
-        input_gain /= 2;
-        mInputGain = input_gain;
-        
-        auto* left = buffer.getWritePointer(0);
-        auto* right = buffer.getWritePointer(1);
-        
-        for (int i = 0; i < buffer.getNumSamples(); i++) {
-            
-            auto grain_val = mGrain.getNextWindowSample();
-            
-            left[i] = left[i] * grain_val;
-            right[i] = right[i] * grain_val;
-            
-            if (!mGrain.isActive()) {
-                mGrain.reset();
-            }
-        }
+//        grain parts from class
+    
+//        float input_gain = 0;
+//        input_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
+//        input_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
+//        input_gain /= 2;
+//        mInputGain = input_gain;
+//
+//        auto* left = buffer.getWritePointer(0);
+//        auto* right = buffer.getWritePointer(1);
+//
+//        for (int i = 0; i < buffer.getNumSamples(); i++) {
+//
+//            auto grain_val = mGrain.getNextWindowSample();
+//
+//            left[i] = left[i] * grain_val;
+//            right[i] = right[i] * grain_val;
+//
+//            if (!mGrain.isActive()) {
+//                mGrain.reset();
+//            }
+//        }
     
     
     
@@ -92,15 +100,32 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
                           mParameterManager.getCurrentParameterValue(Lowpass),
                           mParameterManager.getCurrentParameterValue(Highpass));
     
+//    mGrainL.setParameters(mParameterManager.getCurrentParameterValue(GrainMix),
+//                          mParameterManager.getCurrentParameterValue(GrainSize));
+//    mGrainR.setParameters(mParameterManager.getCurrentParameterValue(GrainMix),
+//                          mParameterManager.getCurrentParameterValue(GrainSize));
+    
+    
+    mFilterL.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),mParameterManager.getCurrentParameterValue(Low),mParameterManager.getCurrentParameterValue(High));
+    
+    mFilterR.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),mParameterManager.getCurrentParameterValue(Low),mParameterManager.getCurrentParameterValue(High));
+    
     mDelayL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
     mDelayR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
     
+    mGrainL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
+    mGrainR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
     
-    float output_gain = 0;
-    output_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
-    output_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
-    output_gain /= 2;
-    mOutputGain = output_gain;
+    mFilterL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
+    mFilterR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
+    
+    
+//    grain parts from class
+//    float output_gain = 0;
+//    output_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
+//    output_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
+//    output_gain /= 2;
+//    mOutputGain = output_gain;
 }
 
 
