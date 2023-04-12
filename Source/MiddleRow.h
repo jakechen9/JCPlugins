@@ -8,13 +8,27 @@
   ==============================================================================
 */
 #pragma once
-
 #include "JuceHeader.h"
+#include "SliderContainer.h"
+#include "PluginProcessor.h"
+#include "DraggableButton.h"
+
 class MiddleRow : public juce::Component
 {
 public:
+    MiddleRow(Week6AssignmentAudioProcessor&);
+    ~MiddleRow() override;
     
     void paint(juce::Graphics& g) override;
+    void resized() override;
     
 private:
+    DraggableButton mDraggableAttackButton, mDraggableDelayButton, mDraggableSustainButton, mDraggableReleaseButton;
+    juce::Path mResponseCurve;
+    juce::Colour getColour();
+    void updateResponseCurve();
+    void updateChain();
+    void setDraggableButtonBounds();
+    Week6AssignmentAudioProcessor& audioProcessor;
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MiddleRow)
 };

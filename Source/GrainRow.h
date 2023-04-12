@@ -27,6 +27,11 @@ private:
 //    juce::Label mGrainTitle;
     std::unique_ptr<SliderContainer> mGrainMix;
     std::unique_ptr<SliderContainer> mGrainSize;
+    std::unique_ptr<SliderContainer> mGrainLow;
+    std::unique_ptr<SliderContainer> mGrainHigh;
+    std::unique_ptr<SliderContainer> mGrainPitch;
+    std::unique_ptr<SliderContainer> mGrainSpray;
+    std::unique_ptr<SliderContainer> mGrainGain;
     
     
     Week6AssignmentAudioProcessor& audioProcessor;

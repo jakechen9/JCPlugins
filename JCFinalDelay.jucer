@@ -5,13 +5,20 @@
   <MAINGROUP id="LPB6V8" name="JCFinalDelay">
     <GROUP id="{151EEAA3-D3DD-7845-5D7C-6E087A6A74AF}" name="Source">
       <GROUP id="{18D6BC33-D066-D747-D39E-4005C65123BA}" name="DSP">
+        <GROUP id="{12788153-1333-1343-B0B4-629375427319}" name="Granular">
+          <FILE id="Ly6MC1" name="Grain.h" compile="0" resource="0" file="Source/Grain.h"/>
+          <FILE id="nW0YTM" name="GrainBuffer.h" compile="0" resource="0" file="Source/GrainBuffer.h"/>
+          <FILE id="zpP5Ls" name="RealTimeGranular.cpp" compile="1" resource="0"
+                file="Source/RealTimeGranular.cpp"/>
+          <FILE id="QBL3O6" name="RealTimeGranular.h" compile="0" resource="0"
+                file="Source/RealTimeGranular.h"/>
+          <FILE id="y8vNOC" name="Scheduler.h" compile="0" resource="0" file="Source/Scheduler.h"/>
+        </GROUP>
         <FILE id="LrYFNz" name="AudioHelpers.h" compile="0" resource="0" file="Source/AudioHelpers.h"/>
         <FILE id="sdwshg" name="Delay.cpp" compile="1" resource="0" file="Source/Delay.cpp"/>
         <FILE id="L9V4zx" name="Delay.h" compile="0" resource="0" file="Source/Delay.h"/>
         <FILE id="dKpavV" name="Filter.cpp" compile="1" resource="0" file="Source/Filter.cpp"/>
         <FILE id="e10TxC" name="Filter.h" compile="0" resource="0" file="Source/Filter.h"/>
-        <FILE id="hmSk0G" name="Grain.cpp" compile="1" resource="0" file="Source/Grain.cpp"/>
-        <FILE id="CI8vgJ" name="Grain.h" compile="0" resource="0" file="Source/Grain.h"/>
       </GROUP>
       <GROUP id="{6F39D9E2-1155-42CF-800C-DE0AC73B7D5D}" name="Managers">
         <FILE id="SxAZ6Q" name="ParameterDefines.h" compile="0" resource="0"
@@ -23,6 +30,10 @@
       </GROUP>
       <GROUP id="{2C9A9F98-409D-9311-B430-EF76DAF4ABEA}" name="Components">
         <GROUP id="{0DC0B424-020E-437C-C615-F475012608A8}" name="UI Rows">
+          <FILE id="qGgq09" name="DraggableButton.cpp" compile="1" resource="0"
+                file="Source/DraggableButton.cpp"/>
+          <FILE id="EVl0Kv" name="DraggableButton.h" compile="0" resource="0"
+                file="Source/DraggableButton.h"/>
           <FILE id="klKJuC" name="GrainRow.cpp" compile="1" resource="0" file="Source/GrainRow.cpp"/>
           <FILE id="YInrLa" name="GrainRow.h" compile="0" resource="0" file="Source/GrainRow.h"/>
           <FILE id="xKtCnO" name="MiddleRow.cpp" compile="1" resource="0" file="Source/MiddleRow.cpp"/>

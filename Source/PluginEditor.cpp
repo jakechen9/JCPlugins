@@ -26,6 +26,9 @@ Week6AssignmentAudioProcessorEditor::Week6AssignmentAudioProcessorEditor (Week6A
     mGrainRow = std::make_unique<GrainRow>(audioProcessor);
     addAndMakeVisible(mGrainRow.get());
     
+    mMiddleRow = std::make_unique<MiddleRow>(audioProcessor);
+    addAndMakeVisible(mMiddleRow.get());
+    
     setSize (1100, 720);
 }
 
@@ -46,5 +49,6 @@ void Week6AssignmentAudioProcessorEditor::resized()
     mBottomRow->setBounds(0, 483, 550, 237);
     mGrainRow -> setBounds(550, 483, 550, 237);
     mTopRow -> setBounds(0, 0, 1100, 160);
+    mMiddleRow -> setBounds(0, 160, 1100, 323);
 }
 

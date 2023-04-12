@@ -2,7 +2,7 @@
   ==============================================================================
 
     Grain.h
-    Created: 4 Apr 2023 2:39:32pm
+    Created: 10 Apr 2023 9:21:05pm
     Author:  程
 
   ==============================================================================
@@ -12,30 +12,75 @@
 #define Grain_h
 
 #include "JuceHeader.h"
-
+#include "GrainBuffer.h"
+#include "AudioHelpers.h"
+#include "ParameterManager.h"
 
 class Grain {
-    
 public:
     
-    Grain();
+    /* */
+    void processSample(const GrainBuffer& inGrainBuffer, float& outLeft, float& outRight) {
+        
+        float val = getNextWindowSample();
+        
+        outLeft = inGrainBuffer.getSample(0, mGrainReadhead) * val;
+        outRight = inGrainBuffer.getSample(1, mGrainReadhead) * val;
+        
+        mGrainReadhead += 2.f;
+        
+        mGrainReadhead = AudioHelpers::wrap_buffer(mGrainReadhead, inGrainBuffer.getNumSamples());
+    }
+
+    void setSize(int inGrainSize) {
+        mGrainSize = inGrainSize;
+        // this make it not active after a set size call.
+        // could be more explicit
+        mGrainCounter = mGrainSize;
+    }
+        
+    void start(float inStartPosition, int inCircularBufferSize, float inGrainPitch) {
+        float distance_past_write = (inGrainPitch - 1.f) * mGrainSize;
+        
+        mGrainReadhead = inStartPosition;
+        mGrainReadhead = AudioHelpers::wrap_buffer(mGrainReadhead - distance_past_write, inCircularBufferSize);
+        mGrainCounter = 0;
+    }
     
-    ~Grain();
+    float getNextWindowSample() {
+        if (isActive()) {
+            mGrainCounter++;
+                        
+            return 0.5f * (1.0f - cos(juce::MathConstants<float>::twoPi * (float)mGrainCounter / (float)mGrainSize));
+        } else {
+            return 0;
+        }
+    }
     
-    void initialize(float inSampleRate, int inBlocksize);
-    
-//    void setParameters(float inMix, int inGrainSize);
-    
-    void processBlock(float* inBuffer, int inNumSamples);
-    
-    void processSample(float& inSample);
+    bool isActive() {
+        if (mGrainCounter < mGrainSize) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
 private:
-    float mSampleRate;
-    float mGrainMix = 0;
-    int mGrainSize = 0;
+    
+    // where to read from in the buffer
+    float mGrainReadhead = 0.f;
+    
+    // size in sample
+    int mGrainSize  = 0;
+    
+    // position in sample
     int mGrainCounter = 0;
-    float mWriteHead = 0;
+    
+    // up one octave
+    float mPitch = 1.8f;
+    
+    // parameter manager
 };
 
-#endif /* Grain_h */
+
+#endif /* Grain_hpp */

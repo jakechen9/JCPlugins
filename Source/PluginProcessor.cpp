@@ -36,8 +36,8 @@ void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int sample
     mDelayL.initialize(sampleRate, samplesPerBlock);
     mDelayR.initialize(sampleRate, samplesPerBlock);
     
-    mGrainL.initialize(sampleRate, samplesPerBlock);
-    mGrainR.initialize(sampleRate, samplesPerBlock);
+//    mGrainL.initialize(sampleRate, samplesPerBlock);
+//    mGrainR.initialize(sampleRate, samplesPerBlock);
     
     mFilterL.initialize(sampleRate, samplesPerBlock);
     mFilterR.initialize(sampleRate, samplesPerBlock);
@@ -58,47 +58,25 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
         buffer.clear (i, 0, buffer.getNumSamples());
     
     
-    
-    
-    
-//        grain parts from class
-    
-//        float input_gain = 0;
-//        input_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
-//        input_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
-//        input_gain /= 2;
-//        mInputGain = input_gain;
-//
-//        auto* left = buffer.getWritePointer(0);
-//        auto* right = buffer.getWritePointer(1);
-//
-//        for (int i = 0; i < buffer.getNumSamples(); i++) {
-//
-//            auto grain_val = mGrain.getNextWindowSample();
-//
-//            left[i] = left[i] * grain_val;
-//            right[i] = right[i] * grain_val;
-//
-//            if (!mGrain.isActive()) {
-//                mGrain.reset();
-//            }
-//        }
-    
-    
-    
-    
+    float input_gain = 0;
+    input_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
+    input_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
+    input_gain /= 2;
+    mInputGain = input_gain;
     
     mDelayL.setParameters(mParameterManager.getCurrentParameterValue(Time),
                           mParameterManager.getCurrentParameterValue(Feedback),
                           mParameterManager.getCurrentParameterValue(Mix),
                           mParameterManager.getCurrentParameterValue(Lowpass),
-                          mParameterManager.getCurrentParameterValue(Highpass));
+                          mParameterManager.getCurrentParameterValue(Highpass),
+                          mParameterManager.getCurrentParameterValue(GrainPitch));
     
     mDelayR.setParameters(mParameterManager.getCurrentParameterValue(Time),
                           mParameterManager.getCurrentParameterValue(Feedback),
                           mParameterManager.getCurrentParameterValue(Mix),
                           mParameterManager.getCurrentParameterValue(Lowpass),
-                          mParameterManager.getCurrentParameterValue(Highpass));
+                          mParameterManager.getCurrentParameterValue(Highpass),
+                          mParameterManager.getCurrentParameterValue(GrainPitch));
     
 //    mGrainL.setParameters(mParameterManager.getCurrentParameterValue(GrainMix),
 //                          mParameterManager.getCurrentParameterValue(GrainSize));
@@ -113,19 +91,14 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     mDelayL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
     mDelayR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
     
-    mGrainL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
-    mGrainR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
-    
     mFilterL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
     mFilterR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
     
-    
-//    grain parts from class
-//    float output_gain = 0;
-//    output_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
-//    output_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
-//    output_gain /= 2;
-//    mOutputGain = output_gain;
+    float output_gain = 0;
+    output_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
+    output_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
+    output_gain /= 2;
+    mOutputGain = output_gain;
 }
 
 

@@ -15,11 +15,13 @@
 #include "TopRow.h"
 #include "BottomRow.h"
 #include "GrainRow.h"
+#include "MiddleRow.h"
 
 //==============================================================================
 /**
 */
 class Week6AssignmentAudioProcessorEditor  : public juce::AudioProcessorEditor
+                                                
 {
 public:
     Week6AssignmentAudioProcessorEditor (Week6AssignmentAudioProcessor&);
@@ -33,6 +35,7 @@ private:
     std::unique_ptr<BottomRow> mBottomRow;
     std::unique_ptr<GrainRow> mGrainRow;
     std::unique_ptr<TopRow> mTopRow;
+    std::unique_ptr<MiddleRow> mMiddleRow;
     MyLookAndFeel mLookAndFeel;
     juce::OwnedArray<SliderContainer> mSliderContainers;
 

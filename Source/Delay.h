@@ -13,6 +13,8 @@
 
 #include "JuceHeader.h"
 #include "AudioHelpers.h"
+#include "RealTimeGranular.h"
+
 
 class Delay {
     
@@ -28,7 +30,7 @@ public:
     void initialize(float inSampleRate, int inBlocksize);
     
     /* */
-    void setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq);
+    void setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch);
     
     /* */
     void processBlock(float* inBuffer, int inNumSamples);
@@ -37,6 +39,7 @@ public:
     void processSample(float& inSample);
     
 private:
+    RealTimeGranular mRealTimeGranulator;
     
     float mSampleRate;
     
@@ -44,6 +47,7 @@ private:
 //    float mGain = 0;
     float mFeedbackAmount = 0;
     juce::LinearSmoothedValue<float> mTimeInSeconds;
+    juce::LinearSmoothedValue<float> mGrainPitch;
     
     float mWriteHead = 0;
     float mFeedbackSample = 0;
