@@ -99,7 +99,7 @@ void Delay::processSample(float& inSample)
     
     mFeedbackSample = output_sample;
     
-    mFeedbackSample = mRealTimeGranulator.processSample(mFeedbackSample, mGrainPitch);
+    mFeedbackSample = mRealTimeGranulator.processSample(mFeedbackSample, mGrainPitch.getNextValue());
         
     inSample = (output_sample * mMix) + (inSample * (1.f - mMix));
 }
