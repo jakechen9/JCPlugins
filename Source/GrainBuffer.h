@@ -14,9 +14,12 @@
 
 class GrainBuffer {
 public:
+    GrainBuffer() = default;
+    ~GrainBuffer() = default;
     
     void setSize(int numSamples) {
         mCircularBuffer.setSize(2, numSamples);
+        mCircularBuffer.clear();
     }
     
     void writeToBuffer(float& inLeft, float& inRight) {

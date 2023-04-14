@@ -30,7 +30,7 @@ public:
     void initialize(float inSampleRate, int inBlocksize);
     
     /* */
-    void setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch);
+    void setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch, float inGrainSize);
     
     /* */
     void processBlock(float* inBuffer, int inNumSamples);
@@ -42,11 +42,11 @@ private:
     RealTimeGranular mRealTimeGranulator;
     
     float mSampleRate;
-    
     float mMix = 0;
 //    float mGain = 0;
     float mFeedbackAmount = 0;
     juce::LinearSmoothedValue<float> mTimeInSeconds;
+    float mGrainSize = 0;
     juce::LinearSmoothedValue<float> mGrainPitch;
     
     float mWriteHead = 0;

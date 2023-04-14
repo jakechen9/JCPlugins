@@ -14,14 +14,16 @@
 #include "GrainBuffer.h"
 #include "Scheduler.h"
 
+
 class RealTimeGranular {
+
 public:
     
     /* */
     void prepareToPlay(int inSampleRate, int inBlockSize);
     
-    /* */
-    void process(float* inBufferLeft, float* inBufferRight, int inNumSamples);
+    
+    void setParameters(float inGrainSize);
     
     /* */
     float processSample(float inSample, float inGrainPitch);
@@ -30,6 +32,8 @@ private:
     
     const float mGrainsizeSeconds = 0.1f;
     const float mGrainOverlapRate = 2.f;
+    float mSampleRate = 0.f;
+    
     
     Scheduler mScheduler;
     GrainBuffer mGrainBuffer;

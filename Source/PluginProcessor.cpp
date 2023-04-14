@@ -33,6 +33,7 @@ Week6AssignmentAudioProcessor::~Week6AssignmentAudioProcessor()
 
 void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+//    DBG("Prepare To Play Called");
     mDelayL.initialize(sampleRate, samplesPerBlock);
     mDelayR.initialize(sampleRate, samplesPerBlock);
     
@@ -69,20 +70,18 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
                           mParameterManager.getCurrentParameterValue(Mix),
                           mParameterManager.getCurrentParameterValue(Lowpass),
                           mParameterManager.getCurrentParameterValue(Highpass),
-                          mParameterManager.getCurrentParameterValue(GrainPitch));
+                          mParameterManager.getCurrentParameterValue(GrainPitch),
+                          mParameterManager.getCurrentParameterValue(GrainSize)
+                          );
     
     mDelayR.setParameters(mParameterManager.getCurrentParameterValue(Time),
                           mParameterManager.getCurrentParameterValue(Feedback),
                           mParameterManager.getCurrentParameterValue(Mix),
                           mParameterManager.getCurrentParameterValue(Lowpass),
                           mParameterManager.getCurrentParameterValue(Highpass),
-                          mParameterManager.getCurrentParameterValue(GrainPitch));
-    
-//    mGrainL.setParameters(mParameterManager.getCurrentParameterValue(GrainMix),
-//                          mParameterManager.getCurrentParameterValue(GrainSize));
-//    mGrainR.setParameters(mParameterManager.getCurrentParameterValue(GrainMix),
-//                          mParameterManager.getCurrentParameterValue(GrainSize));
-    
+                          mParameterManager.getCurrentParameterValue(GrainPitch),
+                          mParameterManager.getCurrentParameterValue(GrainSize)
+                          );
     
     mFilterL.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),mParameterManager.getCurrentParameterValue(Low),mParameterManager.getCurrentParameterValue(High));
     

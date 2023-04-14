@@ -14,7 +14,6 @@
 #include "JuceHeader.h"
 #include "GrainBuffer.h"
 #include "AudioHelpers.h"
-#include "ParameterManager.h"
 
 class Grain {
 public:
@@ -33,15 +32,19 @@ public:
     }
 
     void setSize(int inGrainSize) {
-        mGrainSize = inGrainSize;
-        // this make it not active after a set size call.
-        // could be more explicit
-        mGrainCounter = mGrainSize;
+        if (mGrainSize != inGrainSize) {
+            mGrainSize = inGrainSize;
+//            DBG("setSzieCalled");
+//            DBG(mGrainSize);
+            // this make it not active after a set size call.
+            // could be more explicit
+            mGrainCounter = mGrainSize;
+        }
     }
         
     void start(float inStartPosition, int inCircularBufferSize, float inGrainPitch) {
+        // distance_past_write grain span,
         float distance_past_write = (inGrainPitch - 1.f) * mGrainSize;
-        
         mGrainReadhead = inStartPosition;
         mGrainReadhead = AudioHelpers::wrap_buffer(mGrainReadhead - distance_past_write, inCircularBufferSize);
         mGrainCounter = 0;
@@ -75,11 +78,6 @@ private:
     
     // position in sample
     int mGrainCounter = 0;
-    
-    // up one octave
-    float mPitch = 1.8f;
-    
-    // parameter manager
 };
 
 

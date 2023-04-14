@@ -74,7 +74,7 @@ static juce::Array<float> ParameterMinimum {
     20.f,
     
 //  Grain Section
-    0.f,
+    .05f,
     0.f,
     20.f,
     20.f,
@@ -100,7 +100,7 @@ static juce::Array<float> ParameterMaximum {
     22000.f,
     
 //  Grain Section
-    10.f,
+    1.f,
     1.f,
     22000.f,
     22000.f,
@@ -125,7 +125,7 @@ static juce::Array<float> ParameterDefault {
     20.f,
 
 //  Grain Section
-    5.f,
+    .1f,
     .5f,
     22000.f,
     20.f,
