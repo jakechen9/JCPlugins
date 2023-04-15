@@ -13,7 +13,8 @@
 #include "PluginProcessor.h"
 #include "DraggableButton.h"
 
-class MiddleRow : public juce::Component
+class MiddleRow : public juce::Component,
+                  public juce::Timer
 {
 public:
     MiddleRow(Week6AssignmentAudioProcessor&);
@@ -21,6 +22,7 @@ public:
     
     void paint(juce::Graphics& g) override;
     void resized() override;
+    void timerCallback() override;
     
 private:
     DraggableButton mDraggableAttackButton, mDraggableDelayButton, mDraggableSustainButton, mDraggableReleaseButton;

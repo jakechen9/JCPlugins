@@ -13,28 +13,27 @@
 /* */
 void RealTimeGranular::prepareToPlay(int inSampleRate, int inBlockSize)
 {
-    
-//    mSampleRate = inSampleRate;
-//    for (int i = 0; i < mGrains.size(); i++) {
-//            mGrains[i].setSize(mGrainsizeSeconds * mSampleRate);
-//        }
     mSampleRate = inSampleRate;
+    for (int i = 0; i < mGrains.size(); i++) {
+        mGrains[i].setSize(mGrainsizeSeconds * mSampleRate);
+    }
     
     mGrainBuffer.setSize(10.f * inSampleRate);
-    mScheduler.initialize(inSampleRate);
+    mScheduler.setTime(mGrainsizeSeconds / mGrainOverlapRate * inSampleRate);
+//    mScheduler.initialize(inSampleRate);
     mScheduler.reset();
     
 }
 
 
 
-void RealTimeGranular::setParameters(float inGrainSize)
-{
-    for (int i = 0; i < mGrains.size(); i++) {
-        mGrains[i].setSize(inGrainSize * mSampleRate);
-    }
-    mScheduler.setTime(inGrainSize);
-}
+//void RealTimeGranular::setParameters(float inGrainSize)
+//{
+//    for (int i = 0; i < mGrains.size(); i++) {
+//        mGrains[i].setSize(inGrainSize * mSampleRate);
+//    }
+//    mScheduler.setTime(inGrainSize);
+//}
 
 
 /* */

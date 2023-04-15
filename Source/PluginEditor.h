@@ -20,8 +20,10 @@
 //==============================================================================
 /**
 */
-class Week6AssignmentAudioProcessorEditor  : public juce::AudioProcessorEditor
-                                                
+class Week6AssignmentAudioProcessorEditor  : public juce::AudioProcessorEditor,
+                                             public juce::DragAndDropContainer,
+                                             public juce::ComponentDragger,
+                                             public juce::ComponentBoundsConstrainer
 {
 public:
     Week6AssignmentAudioProcessorEditor (Week6AssignmentAudioProcessor&);
@@ -38,7 +40,6 @@ private:
     std::unique_ptr<MiddleRow> mMiddleRow;
     MyLookAndFeel mLookAndFeel;
     juce::OwnedArray<SliderContainer> mSliderContainers;
-
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     Week6AssignmentAudioProcessor& audioProcessor;

@@ -31,16 +31,21 @@ public:
         mGrainReadhead = AudioHelpers::wrap_buffer(mGrainReadhead, inGrainBuffer.getNumSamples());
     }
 
+    
     void setSize(int inGrainSize) {
-        if (mGrainSize != inGrainSize) {
-            mGrainSize = inGrainSize;
-//            DBG("setSzieCalled");
-//            DBG(mGrainSize);
-            // this make it not active after a set size call.
-            // could be more explicit
-            mGrainCounter = mGrainSize;
-        }
+        mGrainSize = inGrainSize;
+        // this make it not active after a set size call.
+        // could be more explicit
+        mGrainCounter = mGrainSize;
     }
+//    void setSize(int inGrainSize) {
+//        if (mGrainSize != inGrainSize) {
+//            mGrainSize = inGrainSize;
+//            // this make it not active after a set size call.
+//            // could be more explicit
+//            mGrainCounter = mGrainSize;
+//        }
+//    }
         
     void start(float inStartPosition, int inCircularBufferSize, float inGrainPitch) {
         // distance_past_write grain span,

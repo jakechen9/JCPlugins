@@ -52,7 +52,7 @@ void Delay::setParameters(float inTimeSeconds, float inFeedbackAmount, float inM
     mFeedbackAmount = inFeedbackAmount;
     mMix = inMix;
     
-    mRealTimeGranulator.setParameters(inGrainSize);
+//    mRealTimeGranulator.setParameters(inGrainSize);
     
     mHighPassFilter.coefficients = mHighpassCoefficients.makeHighPass(mSampleRate, inHPFreq);
     mLowpassFilter.coefficients = mLowpassCoefficients.makeLowPass(mSampleRate, inLPFreq);

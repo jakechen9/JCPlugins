@@ -23,7 +23,7 @@ public:
     void prepareToPlay(int inSampleRate, int inBlockSize);
     
     
-    void setParameters(float inGrainSize);
+//    void setParameters(float inGrainSize);
     
     /* */
     float processSample(float inSample, float inGrainPitch);

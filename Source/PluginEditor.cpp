@@ -52,3 +52,4 @@ void Week6AssignmentAudioProcessorEditor::resized()
     mMiddleRow -> setBounds(0, 160, 1100, 323);
 }
 
+

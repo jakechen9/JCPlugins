@@ -13,12 +13,12 @@
 class Scheduler {
 public:
     
-    void initialize(float inSampleRate) {
-        mSampleRate = inSampleRate;
-    }
+//    void initialize(float inSampleRate) {
+//        mSampleRate = inSampleRate;
+//    }
     
-    void setTime(float inGrainSize) {
-        mTimeInSamples = inGrainSize / mGrainOverlapRate * mSampleRate;
+    void setTime(float inTimeSamples) {
+        mTimeInSamples = inTimeSamples;
     }
     
     bool trigger() {

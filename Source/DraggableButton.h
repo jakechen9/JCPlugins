@@ -12,8 +12,11 @@
 
 #include "JuceHeader.h"
 
-class DraggableButton : public juce::Component
-//                        public juce::DragAndDropContainer
+class DraggableButton : public juce::Component,
+                        public juce::DragAndDropContainer,
+                        public juce::ComponentDragger,
+                        public juce::ComponentBoundsConstrainer
+
 {
 public:
     DraggableButton();
@@ -21,9 +24,8 @@ public:
     
     void paint(juce::Graphics& g) override;
     void resized() override;
-    
-    void mouseEnter(const juce::MouseEvent& e) override;
-    void mouseExit (const juce::MouseEvent& e) override;
+    void mouseDown (const juce::MouseEvent& e) override;
+    void mouseDrag (const juce::MouseEvent& e) override;
     void setState(const bool state);
     
 private:

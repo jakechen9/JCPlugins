@@ -33,20 +33,11 @@ Week6AssignmentAudioProcessor::~Week6AssignmentAudioProcessor()
 
 void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-//    DBG("Prepare To Play Called");
     mDelayL.initialize(sampleRate, samplesPerBlock);
     mDelayR.initialize(sampleRate, samplesPerBlock);
     
-//    mGrainL.initialize(sampleRate, samplesPerBlock);
-//    mGrainR.initialize(sampleRate, samplesPerBlock);
-    
     mFilterL.initialize(sampleRate, samplesPerBlock);
     mFilterR.initialize(sampleRate, samplesPerBlock);
-    
-//    grain parts from class
-//
-//    mGrain.setSize(.5f * getSampleRate());
-//    mGrain.reset();
 }
 
 void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
