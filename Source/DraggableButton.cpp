@@ -47,9 +47,9 @@ void DraggableButton::mouseDown (const juce::MouseEvent& e)
 
 void DraggableButton::mouseDrag (const juce::MouseEvent& e)
 {
-    juce::ComponentDragger::dragComponent(this, e, nullptr);
-    juce::ComponentBoundsConstrainer::setSizeLimits(3, 160, 1100, 483);
-    
+    juce::ComponentBoundsConstrainer constrainer;
+    constrainer.setMinimumOnscreenAmounts(200, 200, 200, 200);
+    juce::ComponentDragger::dragComponent(this, e, &constrainer);
 }
 
 void DraggableButton::setState (const bool state)

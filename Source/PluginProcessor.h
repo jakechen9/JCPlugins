@@ -65,15 +65,15 @@ public:
 private:
 //    float mInputGain = 0;
 //    float mOutputGain = 0;
-    juce::ADSR mADSR;
+//    juce::ADSR mADSR;
+//    bool mADSRStarted = false;
+    
     ParameterManager mParameterManager;
     
     float mInputGain = 0;
     float mOutputGain = 0;
     Delay mDelayL;
     Delay mDelayR;
-//    Grain mGrainL;
-//    Grain mGrainR;
     Filter mFilterL;
     Filter mFilterR;
     //==============================================================================

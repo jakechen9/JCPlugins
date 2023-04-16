@@ -33,6 +33,9 @@ Week6AssignmentAudioProcessor::~Week6AssignmentAudioProcessor()
 
 void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    //set sample rate
+//    mADSR.setSampleRate(sampleRate);
+    
     mDelayL.initialize(sampleRate, samplesPerBlock);
     mDelayR.initialize(sampleRate, samplesPerBlock);
     
@@ -55,6 +58,19 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     input_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
     input_gain /= 2;
     mInputGain = input_gain;
+    
+    // ADSR things
+//    juce::ADSR::Parameters adsr_params;
+//    adsr_params.attack = 1.f;
+//    adsr_params.decay = 1.f;
+//    adsr_params.sustain = 0.f;
+//    adsr_params.release = 0.f;
+//    
+//    mADSR.setParameters(adsr_params);
+//    
+//    if(!mADSRStarted) {
+//        mADSR.noteOn();
+//    }
     
     mDelayL.setParameters(mParameterManager.getCurrentParameterValue(Time),
                           mParameterManager.getCurrentParameterValue(Feedback),

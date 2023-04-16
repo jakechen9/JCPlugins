@@ -16,7 +16,6 @@ class DraggableButton : public juce::Component,
                         public juce::DragAndDropContainer,
                         public juce::ComponentDragger,
                         public juce::ComponentBoundsConstrainer
-
 {
 public:
     DraggableButton();

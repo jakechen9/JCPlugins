@@ -13,9 +13,9 @@
 
 MiddleRow::MiddleRow(Week6AssignmentAudioProcessor& inAudioProcessor) :
 audioProcessor(inAudioProcessor){
-    
+    startTimerHz (60);
     addAndMakeVisible(mDraggableAttackButton);
-    addAndMakeVisible(mDraggableDelayButton);
+    addAndMakeVisible(mDraggableDecayButton);
     addAndMakeVisible(mDraggableSustainButton);
     addAndMakeVisible(mDraggableReleaseButton);
 }
@@ -25,29 +25,34 @@ MiddleRow::~MiddleRow() = default;
 void MiddleRow::paint(juce::Graphics& g)
 {
     g.setColour (juce::Colours::hotpink.withBrightness (0.8f));
-    g.setColour (juce::Colours::indianred);
     
     g.setColour(juce::Colour(205, 212, 212));
     g.fillRoundedRectangle(getLocalBounds().toFloat(), 0.f);
     
-    mResponseCurve.clear();
-    juce::Point<float> startPoint(static_cast<float> (mDraggableAttackButton.getX()), static_cast<float> (mDraggableAttackButton.getY()));
-    juce::Point<float> endPoint(static_cast<float> (mDraggableDelayButton.getX()), static_cast<float> (mDraggableDelayButton.getY()));
-    mResponseCurve.startNewSubPath(startPoint);
-    mResponseCurve.lineTo(endPoint);
+    
+    float size = getWidth() / 1000.0f * 20;
+    juce::Path mResponseCurve;
+    juce::Point<float> attackPoint(mDraggableAttackButton.getX() + size / 2.f ,mDraggableAttackButton.getY() + size / 2.f);
+    juce::Point<float> decayPoint(mDraggableDecayButton.getX() + size / 2.f,  mDraggableDecayButton.getY() + size / 2.f);
+    juce::Point<float> sustainPoint(mDraggableSustainButton.getX() + size / 2.f, mDraggableSustainButton.getY() + size / 2.f);
+    juce::Point<float> releasePoint(mDraggableReleaseButton.getX() + size / 2.f, mDraggableReleaseButton.getY() + size / 2.f);
+    mResponseCurve.startNewSubPath(attackPoint);
+    mResponseCurve.lineTo(decayPoint);
+    mResponseCurve.startNewSubPath(decayPoint);
+    mResponseCurve.lineTo(sustainPoint);
+    mResponseCurve.startNewSubPath(sustainPoint);
+    mResponseCurve.lineTo(releasePoint);
+    g.setColour (juce::Colours::hotpink.withBrightness (0.8f));
     g.strokePath (mResponseCurve, juce::PathStrokeType (5.0f));
-//    mResponseCurve.closeSubPath();
 }
 
 void MiddleRow::resized()
 {
-    
-    
     float size = getWidth() / 1000.0f * 20;
     mDraggableAttackButton.setBounds(0, 301, size, size);
-    mDraggableDelayButton.setBounds(208, 0, size, size);
-    mDraggableSustainButton.setBounds(522, 84, size, size);
-    mDraggableReleaseButton.setBounds(818, 301, size, size);
+    mDraggableDecayButton.setBounds(275, 0, size, size);
+    mDraggableSustainButton.setBounds(550, 84, size, size);
+    mDraggableReleaseButton.setBounds(825, 301, size, size);
 }
 
 void MiddleRow::timerCallback()
