@@ -34,6 +34,12 @@ enum AppParameterID{
     Low,
     High,
     
+//  ADSR MOD Section
+    Attack,
+    Decay,
+    Sustain,
+    Release,
+    
     TotalNumberParameters
 };
 
@@ -60,7 +66,13 @@ static juce::Array<juce::String> ParameterIDStrings {
 //  Filter Section
     "FilterMix",
     "Low",
-    "High"
+    "High",
+    
+//  ADSR MOD Section
+    "Attack",
+    "Decay",
+    "Sustain",
+    "Release"
 };
 
 static juce::Array<float> ParameterMinimum {
@@ -86,7 +98,13 @@ static juce::Array<float> ParameterMinimum {
 //  Filter Section
     0.f,
     20.f,
-    20.f
+    20.f,
+    
+//  ADSR MOD Section
+    0.f,
+    0.f,
+    0.f,
+    0.f
 };
 
 static juce::Array<float> ParameterMaximum {
@@ -111,7 +129,13 @@ static juce::Array<float> ParameterMaximum {
 //  Filter Section
     1.f,
     22000.f,
-    22000.f
+    22000.f,
+    
+//  ADSR MOD Section
+    1.f,
+    1.f,
+    1.f,
+    1.f
 };
 
 static juce::Array<float> ParameterDefault {
@@ -136,6 +160,12 @@ static juce::Array<float> ParameterDefault {
 //  Filter Section
     .5f,
     22000.f,
-    20.f
+    20.f,
+    
+//  ADSR MOD Section
+    .2f,
+    .3f,
+    .5f,
+    .2f
 };
 

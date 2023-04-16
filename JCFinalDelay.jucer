@@ -14,6 +14,8 @@
                 file="Source/RealTimeGranular.h"/>
           <FILE id="y8vNOC" name="Scheduler.h" compile="0" resource="0" file="Source/Scheduler.h"/>
         </GROUP>
+        <FILE id="SKEb6Z" name="ADSR.cpp" compile="1" resource="0" file="Source/ADSR.cpp"/>
+        <FILE id="vBddAc" name="ADSR.h" compile="0" resource="0" file="Source/ADSR.h"/>
         <FILE id="LrYFNz" name="AudioHelpers.h" compile="0" resource="0" file="Source/AudioHelpers.h"/>
         <FILE id="sdwshg" name="Delay.cpp" compile="1" resource="0" file="Source/Delay.cpp"/>
         <FILE id="L9V4zx" name="Delay.h" compile="0" resource="0" file="Source/Delay.h"/>

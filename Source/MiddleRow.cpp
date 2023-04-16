@@ -53,6 +53,9 @@ void MiddleRow::resized()
     mDraggableDecayButton.setBounds(275, 0, size, size);
     mDraggableSustainButton.setBounds(550, 84, size, size);
     mDraggableReleaseButton.setBounds(825, 301, size, size);
+    
+//    juce::ComponentBoundsConstrainer constrainer;
+//    constrainer.applyBoundsToComponent(mDraggableAttackButton, mDraggableAttackButton.getBounds().withX().withRight());
 }
 
 void MiddleRow::timerCallback()
