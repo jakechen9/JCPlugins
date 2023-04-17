@@ -36,11 +36,13 @@ void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int sample
     //set sample rate
 //    mADSR.setSampleRate(sampleRate);
     
+    
     mDelayL.initialize(sampleRate, samplesPerBlock);
     mDelayR.initialize(sampleRate, samplesPerBlock);
     
     mFilterL.initialize(sampleRate, samplesPerBlock);
     mFilterR.initialize(sampleRate, samplesPerBlock);
+    
 }
 
 void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
@@ -59,19 +61,7 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     input_gain /= 2;
     mInputGain = input_gain;
     
-    // ADSR things
-//    juce::ADSR::Parameters adsr_params;
-//    adsr_params.attack = 1.f;
-//    adsr_params.decay = 1.f;
-//    adsr_params.sustain = 0.f;
-//    adsr_params.release = 0.f;
-//    
-//    mADSR.setParameters(adsr_params);
-//    
-//    if(!mADSRStarted) {
-//        mADSR.noteOn();
-//    }
-    
+    // Set Delay Parameter to control
     mDelayL.setParameters(mParameterManager.getCurrentParameterValue(Time),
                           mParameterManager.getCurrentParameterValue(Feedback),
                           mParameterManager.getCurrentParameterValue(Mix),
@@ -90,15 +80,36 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
                           mParameterManager.getCurrentParameterValue(GrainSize)
                           );
     
-    mFilterL.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),mParameterManager.getCurrentParameterValue(Low),mParameterManager.getCurrentParameterValue(High));
+    mFilterL.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),
+                           mParameterManager.getCurrentParameterValue(Low),
+                           mParameterManager.getCurrentParameterValue(High));
     
-    mFilterR.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),mParameterManager.getCurrentParameterValue(Low),mParameterManager.getCurrentParameterValue(High));
+    mFilterR.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),
+                           mParameterManager.getCurrentParameterValue(Low),
+                           mParameterManager.getCurrentParameterValue(High));
+    
+//    mADSR.setParameters(mParameterManager.getCurrentParameterValue(Attack),
+//                        mParameterManager.getCurrentParameterValue(Decay),
+//                        mParameterManager.getCurrentParameterValue(Sustain),
+//                        mParameterManager.getCurrentParameterValue(Release));
+    
+//    auto modular = mADSR.getNextSample();
+//
+//    mMODFilterL.setParameters(
+//                              mParameterManager.getCurrentParameterValue(Cutoff),
+//                              mParameterManager.getCurrentParameterValue(High));
+//
+//    mMODFilterR.setParameters(
+//                              mParameterManager.getCurrentParameterValue(Cutoff),
+//                              mParameterManager.getCurrentParameterValue(High));
     
     mDelayL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
     mDelayR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
     
     mFilterL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
     mFilterR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
+    
+//    mADSR.applyEnvelopeToBuffer(buffer, 0, buffer.getNumSamples());
     
     float output_gain = 0;
     output_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());

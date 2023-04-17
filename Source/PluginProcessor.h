@@ -13,6 +13,8 @@
 #include "ParameterManager.h"
 #include "Grain.h"
 #include "Filter.h"
+#include "ADSR.h"
+#include "MODFilter.h"
 
 //==============================================================================
 /**
@@ -63,11 +65,6 @@ public:
     ParameterManager* getParameterManager();
 
 private:
-//    float mInputGain = 0;
-//    float mOutputGain = 0;
-//    juce::ADSR mADSR;
-//    bool mADSRStarted = false;
-    
     ParameterManager mParameterManager;
     
     float mInputGain = 0;
@@ -76,6 +73,9 @@ private:
     Delay mDelayR;
     Filter mFilterL;
     Filter mFilterR;
+    MODFilter mMODFilterL;
+    MODFilter mMODFilterR;
+    ADSR mADSR;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Week6AssignmentAudioProcessor)
 };

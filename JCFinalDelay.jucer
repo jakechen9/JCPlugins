@@ -21,6 +21,8 @@
         <FILE id="L9V4zx" name="Delay.h" compile="0" resource="0" file="Source/Delay.h"/>
         <FILE id="dKpavV" name="Filter.cpp" compile="1" resource="0" file="Source/Filter.cpp"/>
         <FILE id="e10TxC" name="Filter.h" compile="0" resource="0" file="Source/Filter.h"/>
+        <FILE id="dzwYcX" name="MODFilter.cpp" compile="1" resource="0" file="Source/MODFilter.cpp"/>
+        <FILE id="VjzI1y" name="MODFilter.h" compile="0" resource="0" file="Source/MODFilter.h"/>
       </GROUP>
       <GROUP id="{6F39D9E2-1155-42CF-800C-DE0AC73B7D5D}" name="Managers">
         <FILE id="SxAZ6Q" name="ParameterDefines.h" compile="0" resource="0"

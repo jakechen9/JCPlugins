@@ -24,6 +24,6 @@ public:
     void setParameters(float inAttack, float inDecay, float inSustain, float inRelease);
     
 private:
-    juce::ADSR mADSR;
+//    juce::ADSR mADSR;
 };
 # endif

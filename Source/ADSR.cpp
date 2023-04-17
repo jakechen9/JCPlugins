@@ -19,6 +19,7 @@ ADSR::~ADSR()
     
 }
 
+
 void ADSR::setParameters(float inAttack, float inDecay, float inSustain, float inRelease){
     juce::ADSR::Parameters adsr_params;
     adsr_params.attack = inAttack;
@@ -26,5 +27,5 @@ void ADSR::setParameters(float inAttack, float inDecay, float inSustain, float i
     adsr_params.sustain = inSustain;
     adsr_params.release = inRelease;
     
-    mADSR.setParameters(adsr_params);
+//    mADSR.setParameters(adsr_params);
 }
