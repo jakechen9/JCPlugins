@@ -12,9 +12,8 @@
 #include "Delay.h"
 #include "ParameterManager.h"
 #include "Grain.h"
-#include "Filter.h"
-#include "ADSR.h"
 #include "MODFilter.h"
+#include "ADSR.h"
 
 //==============================================================================
 /**
@@ -71,11 +70,9 @@ private:
     float mOutputGain = 0;
     Delay mDelayL;
     Delay mDelayR;
-    Filter mFilterL;
-    Filter mFilterR;
-    MODFilter mMODFilterL;
-    MODFilter mMODFilterR;
-    ADSR mADSR;
+    MODFilter mFilterL;
+    MODFilter mFilterR;
+//    ADSR mADSR;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Week6AssignmentAudioProcessor)
 };

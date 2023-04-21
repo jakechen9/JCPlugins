@@ -80,28 +80,21 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
                           mParameterManager.getCurrentParameterValue(GrainSize)
                           );
     
-    mFilterL.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),
+    mFilterL.setParameters(
                            mParameterManager.getCurrentParameterValue(Low),
-                           mParameterManager.getCurrentParameterValue(High));
+                           mParameterManager.getCurrentParameterValue(Res));
     
-    mFilterR.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),
+    mFilterR.setParameters(
                            mParameterManager.getCurrentParameterValue(Low),
-                           mParameterManager.getCurrentParameterValue(High));
+                           mParameterManager.getCurrentParameterValue(Res));
     
 //    mADSR.setParameters(mParameterManager.getCurrentParameterValue(Attack),
 //                        mParameterManager.getCurrentParameterValue(Decay),
 //                        mParameterManager.getCurrentParameterValue(Sustain),
 //                        mParameterManager.getCurrentParameterValue(Release));
     
-//    auto modular = mADSR.getNextSample();
+//    mADSR.getNextSample();
 //
-//    mMODFilterL.setParameters(
-//                              mParameterManager.getCurrentParameterValue(Cutoff),
-//                              mParameterManager.getCurrentParameterValue(High));
-//
-//    mMODFilterR.setParameters(
-//                              mParameterManager.getCurrentParameterValue(Cutoff),
-//                              mParameterManager.getCurrentParameterValue(High));
     
     mDelayL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
     mDelayR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());

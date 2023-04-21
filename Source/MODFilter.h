@@ -2,16 +2,15 @@
   ==============================================================================
 
     MODFilter.h
-    Created: 16 Apr 2023 4:12:13pm
+    Created: 21 Apr 2023 1:20:34pm
     Author:  程
 
   ==============================================================================
 */
 
-#ifndef MODFilter_h
-#define MODFilter_h
-
+#pragma once
 #include "JuceHeader.h"
+#include "AudioHelpers.h"
 
 class MODFilter
 {
@@ -29,15 +28,14 @@ public:
     
     void processSample(float& inSample);
     
-    void reset();
-    
 private:
-    float mSampleRate;
-    float mModulator = 0;
+    
+    juce::dsp::StateVariableTPTFilter<float> mFilter;
+    juce::AudioBuffer<float> mCircularBuffer;
+    
+    float mWriteHead = 0;
     float mFrequency = 0;
     float mResonance = 0;
-    juce::dsp::StateVariableTPTFilter<float> mFilter;
-//    bool isPrepared { false };
+    float mSampleRate;
 };
 
-# endif

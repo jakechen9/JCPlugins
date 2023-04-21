@@ -50,6 +50,7 @@ void DraggableButton::mouseDrag (const juce::MouseEvent& e)
     juce::ComponentBoundsConstrainer constrainer;
     constrainer.setMinimumOnscreenAmounts(200, 200, 200, 200);
     juce::ComponentDragger::dragComponent(this, e, &constrainer);
+    onDrag();
 }
 
 void DraggableButton::setState (const bool state)

@@ -25,6 +25,7 @@ public:
     void resized() override;
     void mouseDown (const juce::MouseEvent& e) override;
     void mouseDrag (const juce::MouseEvent& e) override;
+    std::function<void()> onDrag;
     void setState(const bool state);
     
 private:

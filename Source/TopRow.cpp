@@ -24,9 +24,9 @@ audioProcessor(inAudioProcessor){
     mLow->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Low]);
     addAndMakeVisible(mLow.get());
     
-    mHigh = std::make_unique<SliderContainer>();
-    mHigh->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::High]);
-    addAndMakeVisible(mHigh.get());
+    mRes = std::make_unique<SliderContainer>();
+    mRes->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Res]);
+    addAndMakeVisible(mRes.get());
     
     mAttack = std::make_unique<SliderContainer>();
     mAttack->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Attack]);
@@ -57,7 +57,7 @@ void TopRow::resized()
 {
     mFilterMix->setBounds(176, 55, 70, 70);
     mLow -> setBounds(301, 55, 70, 70);
-    mHigh -> setBounds(426, 55, 70, 70);
+    mRes -> setBounds(426, 55, 70, 70);
     mAttack -> setBounds(611, 55, 70, 70);
     mDecay -> setBounds(726, 55, 70, 70);
     mSustain -> setBounds(851, 55, 70, 70);

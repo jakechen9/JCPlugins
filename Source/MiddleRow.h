@@ -14,7 +14,6 @@
 #include "DraggableButton.h"
 
 class MiddleRow : public juce::Component,
-                  public juce::Timer,
                   public juce::ComponentBoundsConstrainer
 {
 public:
@@ -23,11 +22,11 @@ public:
     
     void paint(juce::Graphics& g) override;
     void resized() override;
-    void timerCallback() override;
+    
+    void sanatizePoints();
     
 private:
     DraggableButton mDraggableAttackButton, mDraggableDecayButton, mDraggableSustainButton, mDraggableReleaseButton;
-//    juce::Path mResponseCurve;
     juce::Colour getColour();
     Week6AssignmentAudioProcessor& audioProcessor;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MiddleRow)

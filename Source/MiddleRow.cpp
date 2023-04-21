@@ -13,7 +13,19 @@
 
 MiddleRow::MiddleRow(Week6AssignmentAudioProcessor& inAudioProcessor) :
 audioProcessor(inAudioProcessor){
-    startTimerHz (60);
+    mDraggableAttackButton.onDrag = [this](){
+        sanatizePoints();
+    };
+    mDraggableDecayButton.onDrag = [this](){
+        sanatizePoints();
+    };
+    mDraggableSustainButton.onDrag = [this](){
+        sanatizePoints();
+    };
+    mDraggableReleaseButton.onDrag = [this](){
+        sanatizePoints();
+    };
+    
     addAndMakeVisible(mDraggableAttackButton);
     addAndMakeVisible(mDraggableDecayButton);
     addAndMakeVisible(mDraggableSustainButton);
@@ -30,17 +42,13 @@ void MiddleRow::paint(juce::Graphics& g)
     g.fillRoundedRectangle(getLocalBounds().toFloat(), 0.f);
     
     float size = getWidth() / 1000.0f * 20;
+    
     juce::ComponentBoundsConstrainer constrainer;
     constrainer.applyBoundsToComponent(mDraggableAttackButton, mDraggableAttackButton.getBounds().withPosition(0, 301));
-    
+
     constrainer.applyBoundsToComponent(mDraggableDecayButton, mDraggableDecayButton.getBounds().withY(0));
-    
-//    juce::Range<int> sustainRange(mDraggableDecayButton.getX() + size / 2.f, mDraggableReleaseButton.getX() + size / 2.f);
-//
-//    constrainer.applyBoundsToComponent(mDraggableSustainButton, mDraggableSustainButton.getBounds().);
-    
+
     constrainer.applyBoundsToComponent(mDraggableReleaseButton, mDraggableReleaseButton.getBounds().withY(301));
-    
     
     juce::Path mResponseCurve;
     juce::Point<float> attackPoint(mDraggableAttackButton.getX() + size / 2.f ,mDraggableAttackButton.getY() + size / 2.f);
@@ -59,21 +67,22 @@ void MiddleRow::paint(juce::Graphics& g)
 
 void MiddleRow::resized()
 {
-    
-    
-    
     float size = getWidth() / 1000.0f * 20;
     mDraggableAttackButton.setBounds(0, 301, size, size);
     mDraggableDecayButton.setBounds(275, 0, size, size);
     mDraggableSustainButton.setBounds(550, 84, size, size);
     mDraggableReleaseButton.setBounds(825, 301, size, size);
-    
-    
 }
 
-void MiddleRow::timerCallback()
+
+
+void MiddleRow::sanatizePoints()
 {
+    int x  = juce::jlimit(mDraggableAttackButton.getBounds().getX(), mDraggableSustainButton.getBounds().getX(), mDraggableDecayButton.getBounds().getX());
+    
+    mDraggableDecayButton.setCentrePosition(x, mDraggableDecayButton.getBounds().getY());
+    
+    
     repaint();
 }
-
 
