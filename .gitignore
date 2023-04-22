@@ -1,0 +1,176 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.out
+
+.DS_Store
+.idea
+
+**/Builds/
+
+**/cmake-build-debug/
+
+/cmake-build-debug/SDKs/JUCE/tools/.ninja_deps
+/cmake-build-debug/.ninja_deps
+/cmake-build-debug/SDKs/JUCE/tools/.ninja_log
+/cmake-build-debug/.ninja_log
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData.h
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData1.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData2.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData3.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData4.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData5.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData6.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData7.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData8.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData9.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData10.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData11.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData12.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData13.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData14.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData15.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData16.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData17.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData18.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData19.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData20.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData21.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData22.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData23.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData24.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData25.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData26.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData27.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData28.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData29.cpp
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/BinaryData30.cpp
+/cmake-build-debug/SDKs/JUCE/tools/build.ninja
+/cmake-build-debug/build.ninja
+/cmake-build-debug/.cmake/api/v1/query/cache-v2
+/cmake-build-debug/.cmake/api/v1/reply/cache-v2-0c4df14929684e4998c8.json
+/cmake-build-debug/CMakeFiles/clion-Debug-log.txt
+/cmake-build-debug/CMakeFiles/clion-environment.txt
+/cmake-build-debug/CMakeFiles/cmake.check_cache
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/cmake.check_cache
+/cmake-build-debug/CMakeFiles/cmake.verify_globs
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/cmake.verify_globs
+/cmake-build-debug/Plugins/Launch Delay/cmake_install.cmake
+/cmake-build-debug/SDKs/JUCE/extras/Build/juceaide/cmake_install.cmake
+/cmake-build-debug/SDKs/JUCE/extras/Build/cmake_install.cmake
+/cmake-build-debug/SDKs/JUCE/modules/cmake_install.cmake
+/cmake-build-debug/SDKs/JUCE/tools/extras/Build/juceaide/cmake_install.cmake
+/cmake-build-debug/SDKs/JUCE/tools/extras/Build/cmake_install.cmake
+/cmake-build-debug/SDKs/JUCE/tools/modules/cmake_install.cmake
+/cmake-build-debug/SDKs/JUCE/tools/cmake_install.cmake
+/cmake-build-debug/SDKs/JUCE/cmake_install.cmake
+/cmake-build-debug/cmake_install.cmake
+/cmake-build-debug/SDKs/JUCE/tools/CMakeCache.txt
+/cmake-build-debug/CMakeCache.txt
+/cmake-build-debug/CMakeFiles/3.24.2/CMakeCCompiler.cmake
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/3.24.2/CMakeCCompiler.cmake
+/cmake-build-debug/CMakeFiles/3.24.2/CompilerIdC/CMakeCCompilerId.c
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/3.24.2/CompilerIdC/CMakeCCompilerId.c
+/cmake-build-debug/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake
+/cmake-build-debug/CMakeFiles/3.24.2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/3.24.2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+/cmake-build-debug/CMakeFiles/3.24.2/CMakeDetermineCompilerABI_C.bin
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/3.24.2/CMakeDetermineCompilerABI_C.bin
+/cmake-build-debug/CMakeFiles/3.24.2/CMakeDetermineCompilerABI_CXX.bin
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/3.24.2/CMakeDetermineCompilerABI_CXX.bin
+/cmake-build-debug/CMakeFiles/CMakeError.log
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/CMakeError.log
+/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1
+/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-b697ad0c20e7227a37eb.json
+/cmake-build-debug/CMakeFiles/CMakeOutput.log
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/CMakeOutput.log
+/cmake-build-debug/CMakeFiles/3.24.2/CMakeSystem.cmake
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/3.24.2/CMakeSystem.cmake
+/cmake-build-debug/.cmake/api/v1/query/codemodel-v2
+/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-54b67893f17b0e062204.json
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/Debug/Defs.txt
+/cmake-build-debug/SDKs/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/JuceLibraryCode/Debug/Defs.txt
+/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json
+/cmake-build-debug/.cmake/api/v1/reply/directory-Plugins.Launch Delay-Debug-54b31db45a0be56e2472.json
+/cmake-build-debug/.cmake/api/v1/reply/directory-SDKs.JUCE.extras.Build.juceaide-Debug-c306e1876bec32b2e46b.json
+/cmake-build-debug/.cmake/api/v1/reply/directory-SDKs.JUCE.extras.Build-Debug-f3d46dce42021c9b7c6b.json
+/cmake-build-debug/.cmake/api/v1/reply/directory-SDKs.JUCE.modules-Debug-b52819e7b2c1c8a5ff1a.json
+/cmake-build-debug/.cmake/api/v1/reply/directory-SDKs.JUCE-Debug-633cc66ddc145c407216.json
+/cmake-build-debug/.cmake/api/v1/reply/index-2023-01-31T01-04-48-0892.json
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/Debug/AAX/Launch Delay.aaxplugin/Contents/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/Debug/AU/Launch Delay.component/Contents/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/Debug/Standalone/Launch Delay.app/Contents/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/Debug/VST/Launch Delay.vst/Contents/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/Debug/VST3/Launch Delay.vst3/Contents/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_AAX/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_AU/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_Standalone/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_VST/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_VST3/Info.plist
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/Info.txt
+/cmake-build-debug/Plugins/Launch Delay/juce_binarydata_LaunchDelay_BinaryData/JuceLibraryCode/input_file_list
+/cmake-build-debug/SDKs/JUCE/tools/juce_lv2_helper
+/cmake-build-debug/SDKs/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Debug/juceaide
+/cmake-build-debug/SDKs/JUCE/tools/JUCEConfig.cmake
+/cmake-build-debug/SDKs/JUCE/JUCEConfig.cmake
+/cmake-build-debug/SDKs/JUCE/tools/JUCEConfigVersion.cmake
+/cmake-build-debug/SDKs/JUCE/JUCEConfigVersion.cmake
+/cmake-build-debug/SDKs/JUCE/tools/JUCEExportConfig.cmake
+/cmake-build-debug/SDKs/JUCE/JUCEExportConfig.cmake
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/JuceHeader.h
+/cmake-build-debug/SDKs/JUCE/tools/JUCEToolsExport.cmake
+/cmake-build-debug/Testing/Temporary/LastTest.log
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/Debug/Standalone/Launch Delay.app/Contents/MacOS/Launch Delay
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_AAX.entitlements
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_AU.entitlements
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_Standalone.entitlements
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_VST.entitlements
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_VST3.entitlements
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/Export/0a8757d299ae06c55806401f6461d0d1/LV2_HELPER.cmake
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/Export/0a8757d299ae06c55806401f6461d0d1/LV2_HELPER-debug.cmake
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/Debug/Standalone/Launch Delay.app/Contents/PkgInfo
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/JuceLibraryCode/LaunchDelay_Standalone/PkgInfo
+/cmake-build-debug/Plugins/Launch Delay/LaunchDelay_artefacts/Debug/Standalone/Launch Delay.app/Contents/Resources/RecentFilesMenuTemplate.nib
+/cmake-build-debug/CMakeFiles/rules.ninja
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/rules.ninja
+/cmake-build-debug/.cmake/api/v1/reply/target-LaunchDelay-Debug-9a07686860ecbf44e3ad.json
+/cmake-build-debug/.cmake/api/v1/reply/target-LaunchDelay_AAX-Debug-544f1d84931be5d9c057.json
+/cmake-build-debug/.cmake/api/v1/reply/target-LaunchDelay_All-Debug-b2a75aa7a43d4e70c21f.json
+/cmake-build-debug/.cmake/api/v1/reply/target-LaunchDelay_AU-Debug-702aef98b5c93cd8b72b.json
+/cmake-build-debug/.cmake/api/v1/reply/target-LaunchDelay_BinaryData-Debug-484ed4c11f2d21e34a41.json
+/cmake-build-debug/.cmake/api/v1/reply/target-LaunchDelay_Standalone-Debug-c14ad8d27bcac32473ef.json
+/cmake-build-debug/.cmake/api/v1/reply/target-LaunchDelay_VST3-Debug-2da3d9daa79c32792757.json
+/cmake-build-debug/.cmake/api/v1/reply/target-LaunchDelay_VST-Debug-70c52f7c839154f8dcb6.json
+/cmake-build-debug/CMakeFiles/TargetDirectories.txt
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/TargetDirectories.txt
+/cmake-build-debug/.cmake/api/v1/query/toolchains-v1
+/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-b57293a485ebf36c82cc.json
+/cmake-build-debug/CMakeFiles/VerifyGlobs.cmake
+/cmake-build-debug/SDKs/JUCE/tools/CMakeFiles/VerifyGlobs.cmake
