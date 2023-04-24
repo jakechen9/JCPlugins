@@ -11,6 +11,7 @@
 #include "JuceHeader.h"
 #include "SliderContainer.h"
 #include "PluginProcessor.h"
+#include "ParameterManager.h"
 #include "DraggableButton.h"
 
 
@@ -30,5 +31,7 @@ private:
     DraggableButton mDraggableAttackButton, mDraggableDecayButton, mDraggableSustainButton, mDraggableReleaseButton;
     juce::Colour getColour();
     Week6AssignmentAudioProcessor& audioProcessor;
+
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MiddleRow)
 };

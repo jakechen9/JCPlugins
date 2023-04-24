@@ -24,9 +24,9 @@ audioProcessor(inAudioProcessor){
     mDelayTime->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Time]);
     addAndMakeVisible(mDelayTime.get());
     
-    mDelaySpread = std::make_unique<SliderContainer>();
-    mDelaySpread->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Spread]);
-    addAndMakeVisible(mDelaySpread.get());
+    mDelayWidth = std::make_unique<SliderContainer>();
+    mDelayWidth->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Width]);
+    addAndMakeVisible(mDelayWidth.get());
     
     mDelayFeedback = std::make_unique<SliderContainer>();
     mDelayFeedback->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Feedback]);
@@ -60,7 +60,7 @@ void BottomRow::resized()
 
     mDelayMix->setBounds(61*2, 84, size, size);
     mDelayTime->setBounds(176*2, 30, size, size);
-    mDelaySpread->setBounds(176*2, 141, size, size);
+    mDelayWidth->setBounds(176*2, 141, size, size);
     mDelayFeedback->setBounds(301*2, 30, size, size);
     mGrainPitch->setBounds(301*2, 141, size, size);
     mDelayLowpass->setBounds(426*2, 141, size, size);

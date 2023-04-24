@@ -13,13 +13,14 @@
 #include "ParameterManager.h"
 #include "Grain.h"
 #include "Filter.h"
+#include "WidthEffect.h"
 //#include "ADSR.h"
 
 //==============================================================================
 /**
 */
-class Week6AssignmentAudioProcessor  : public juce::AudioProcessor
-//                                      public juce::ADSR
+class Week6AssignmentAudioProcessor  : public juce::AudioProcessor,
+                                      public juce::ADSR
                             #if JucePlugin_Enable_ARA
                              , public juce::AudioProcessorARAExtension
                             #endif
@@ -73,8 +74,9 @@ private:
     Delay mDelayR;
     Filter mFilterL;
     Filter mFilterR;
-//    juce::ADSR mADSR;
-//    bool mADSRStarted = false;
+    WidthEffect mWidth;
+    juce::ADSR mADSR;
+    bool mADSRStarted = false;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Week6AssignmentAudioProcessor)

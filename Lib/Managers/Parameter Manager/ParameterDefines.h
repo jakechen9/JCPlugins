@@ -102,7 +102,7 @@ static juce::Array<float> ParameterMaximum {
     1.f,
     500.f,
     .95f,
-    100.f,
+    1.f,
     22000.f,
     22000.f,
     
@@ -129,7 +129,7 @@ static juce::Array<float> ParameterDefault {
     .5f,
     0.f,
     .5f,
-    50.f,
+    .5f,
     22000.f,
     20.f,
 
