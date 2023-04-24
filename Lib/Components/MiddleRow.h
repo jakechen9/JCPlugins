@@ -13,6 +13,7 @@
 #include "PluginProcessor.h"
 #include "DraggableButton.h"
 
+
 class MiddleRow : public juce::Component,
                   public juce::ComponentBoundsConstrainer
 {

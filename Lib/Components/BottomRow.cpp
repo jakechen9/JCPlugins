@@ -9,7 +9,6 @@
 */
 
 #include "BottomRow.h"
-#include "ParameterManager.h"
 
 
 BottomRow::BottomRow(Week6AssignmentAudioProcessor& inAudioProcessor) :
@@ -33,9 +32,9 @@ audioProcessor(inAudioProcessor){
     mDelayFeedback->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Feedback]);
     addAndMakeVisible(mDelayFeedback.get());
     
-    mDelayWidth = std::make_unique<SliderContainer>();
-    mDelayWidth->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Width]);
-    addAndMakeVisible(mDelayWidth.get());
+    mGrainPitch = std::make_unique<SliderContainer>();
+    mGrainPitch->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::GrainPitch]);
+    addAndMakeVisible(mGrainPitch.get());
     
     mDelayLowpass = std::make_unique<SliderContainer>();
     mDelayLowpass->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Lowpass]);
@@ -57,14 +56,13 @@ void BottomRow::paint(juce::Graphics& g)
 
 void BottomRow::resized()
 {
-//    auto area = getLocalBounds().reduced(5, 0);
-//    const int boundHeight = (area.getHeight() - 5) / 4;
-    
-    mDelayMix->setBounds(61, 94, 70, 70);
-    mDelayTime->setBounds(176, 43, 70, 70);
-    mDelaySpread->setBounds(176, 151, 70, 70);
-    mDelayFeedback->setBounds(301, 43, 70, 70);
-    mDelayWidth->setBounds(301, 151, 70, 70);
-    mDelayLowpass->setBounds(426, 151, 70, 70);
-    mDelayHighpass->setBounds(426, 43, 70, 70);
+    float size = 90;
+
+    mDelayMix->setBounds(61*2, 84, size, size);
+    mDelayTime->setBounds(176*2, 30, size, size);
+    mDelaySpread->setBounds(176*2, 141, size, size);
+    mDelayFeedback->setBounds(301*2, 30, size, size);
+    mGrainPitch->setBounds(301*2, 141, size, size);
+    mDelayLowpass->setBounds(426*2, 141, size, size);
+    mDelayHighpass->setBounds(426*2, 30, size, size);
 }

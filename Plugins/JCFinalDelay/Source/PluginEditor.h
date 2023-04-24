@@ -14,7 +14,6 @@
 #include "MyLookAndFeel.h"
 #include "TopRow.h"
 #include "BottomRow.h"
-#include "GrainRow.h"
 #include "MiddleRow.h"
 
 //==============================================================================
@@ -35,10 +34,9 @@ public:
 
 private:
     std::unique_ptr<BottomRow> mBottomRow;
-    std::unique_ptr<GrainRow> mGrainRow;
     std::unique_ptr<TopRow> mTopRow;
     std::unique_ptr<MiddleRow> mMiddleRow;
-    MyLookAndFeel mLookAndFeel;
+    std::unique_ptr<MyLookAndFeel> mLookAndFeel;
     juce::OwnedArray<SliderContainer> mSliderContainers;
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.

@@ -60,7 +60,13 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     input_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
     input_gain /= 2;
     mInputGain = input_gain;
-    
+
+//    mADSR.setParameters(mParameterManager.getCurrentParameterValue(Attack),
+//                        mParameterManager.getCurrentParameterValue(Decay),
+//                        mParameterManager.getCurrentParameterValue(Sustain),
+//                        mParameterManager.getCurrentParameterValue(Release));
+
+
     // Set Delay Parameter to control
     mDelayL.setParameters(mParameterManager.getCurrentParameterValue(Time),
                           mParameterManager.getCurrentParameterValue(Feedback),
@@ -80,27 +86,28 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
                           mParameterManager.getCurrentParameterValue(GrainSize)
                           );
     
-    mFilterL.setParameters(
+    mFilterL.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),
                            mParameterManager.getCurrentParameterValue(Low),
-                           mParameterManager.getCurrentParameterValue(Res));
+                           mParameterManager.getCurrentParameterValue(High));
     
-    mFilterR.setParameters(
+    mFilterR.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),
                            mParameterManager.getCurrentParameterValue(Low),
-                           mParameterManager.getCurrentParameterValue(Res));
+                           mParameterManager.getCurrentParameterValue(High));
     
-//    mADSR.setParameters(mParameterManager.getCurrentParameterValue(Attack),
-//                        mParameterManager.getCurrentParameterValue(Decay),
-//                        mParameterManager.getCurrentParameterValue(Sustain),
-//                        mParameterManager.getCurrentParameterValue(Release));
+//
     
 //    mADSR.getNextSample();
 //
     
-    mDelayL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
-    mDelayR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
+    mDelayL.processBlock(buffer.getWritePointer(0),
+                         buffer.getNumSamples());
+    mDelayR.processBlock(buffer.getWritePointer(1),
+                         buffer.getNumSamples());
     
-    mFilterL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());
-    mFilterR.processBlock(buffer.getWritePointer(1), buffer.getNumSamples());
+    mFilterL.processBlock(buffer.getWritePointer(0),
+                          buffer.getNumSamples());
+    mFilterR.processBlock(buffer.getWritePointer(1),
+                          buffer.getNumSamples());
     
 //    mADSR.applyEnvelopeToBuffer(buffer, 0, buffer.getNumSamples());
     

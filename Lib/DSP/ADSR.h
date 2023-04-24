@@ -21,7 +21,7 @@ public:
     
     /* */
     ~ADSR();
-    
+
     void setParameters(float inAttack, float inDecay, float inSustain, float inRelease);
     
 private:

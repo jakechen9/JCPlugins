@@ -45,7 +45,9 @@ float RealTimeGranular::processSample(float inSample, float inGrainPitch)
     if (mScheduler.trigger()) {
         for (int j = 0; j < mGrains.size(); j++) {
             if (mGrains[j].isActive() == false) {
-                mGrains[j].start(mGrainBuffer.getWriteHead() - 2, mGrainBuffer.getNumSamples(), inGrainPitch);
+                mGrains[j].start(mGrainBuffer.getWriteHead() - 2,
+                                 mGrainBuffer.getNumSamples(),
+                                 inGrainPitch);
                 break;
             }
         }

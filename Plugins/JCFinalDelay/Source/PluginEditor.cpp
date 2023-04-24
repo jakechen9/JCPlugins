@@ -14,17 +14,15 @@
 Week6AssignmentAudioProcessorEditor::Week6AssignmentAudioProcessorEditor (Week6AssignmentAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
+    mLookAndFeel = std::make_unique<MyLookAndFeel>();
     
-    setLookAndFeel(&mLookAndFeel);
+    setLookAndFeel(mLookAndFeel.get());
     
     mTopRow = std::make_unique<TopRow>(audioProcessor);
     addAndMakeVisible(mTopRow.get());
   
     mBottomRow = std::make_unique<BottomRow>(audioProcessor);
     addAndMakeVisible(mBottomRow.get());
-    
-    mGrainRow = std::make_unique<GrainRow>(audioProcessor);
-    addAndMakeVisible(mGrainRow.get());
     
     mMiddleRow = std::make_unique<MiddleRow>(audioProcessor);
     addAndMakeVisible(mMiddleRow.get());
@@ -46,8 +44,7 @@ void Week6AssignmentAudioProcessorEditor::paint (juce::Graphics& g)
 
 void Week6AssignmentAudioProcessorEditor::resized()
 {
-    mBottomRow->setBounds(0, 483, 550, 237);
-    mGrainRow -> setBounds(550, 483, 550, 237);
+    mBottomRow->setBounds(0, 483, 1100, 237);
     mTopRow -> setBounds(0, 0, 1100, 160);
     mMiddleRow -> setBounds(0, 160, 1100, 323);
 }

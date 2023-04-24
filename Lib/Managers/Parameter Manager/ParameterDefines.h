@@ -22,12 +22,7 @@ enum AppParameterID{
     
 //  Grain Section
     GrainSize,
-    GrainMix,
-    GrainLow,
-    GrainHigh,
     GrainPitch,
-    GrainSpray,
-    GrainGain,
     
 //  Filter Section
     FilterMix,
@@ -57,12 +52,7 @@ static juce::Array<juce::String> ParameterIDStrings {
     
 //  Grain Section
     "GrainSize",
-    "GrainMix",
-    "GrainLow",
-    "GrainHigh",
     "GrainPitch",
-    "GrainSpray",
-    "GrainGain",
     
     
 //  Filter Section
@@ -90,12 +80,7 @@ static juce::Array<float> ParameterMinimum {
     
 //  Grain Section
     .05f,
-    0.f,
-    20.f,
-    20.f,
-    1.f,
-    0.f,
-    0.f,
+    .3f,
     
     
 //  Filter Section
@@ -123,12 +108,7 @@ static juce::Array<float> ParameterMaximum {
     
 //  Grain Section
     1.f,
-    1.f,
-    22000.f,
-    22000.f,
     6.f,
-    500.f,
-    10.f,
     
 //  Filter Section
     1.f,
@@ -155,12 +135,7 @@ static juce::Array<float> ParameterDefault {
 
 //  Grain Section
     .1f,
-    .5f,
-    22000.f,
-    20.f,
-    2.f,
-    0.f,
-    0.f,
+    1.f,
 
 //  Filter Section
     .5f,

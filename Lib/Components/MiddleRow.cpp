@@ -51,10 +51,14 @@ void MiddleRow::paint(juce::Graphics& g)
 //    constrainer.applyBoundsToComponent(mDraggableReleaseButton, mDraggableReleaseButton.getBounds().withY(301));
     
     juce::Path mResponseCurve;
-    juce::Point<float> attackPoint(mDraggableAttackButton.getX() + size / 2.f ,mDraggableAttackButton.getY() + size / 2.f);
-    juce::Point<float> decayPoint(mDraggableDecayButton.getX() + size / 2.f,  mDraggableDecayButton.getY() + size / 2.f);
-    juce::Point<float> sustainPoint(mDraggableSustainButton.getX() + size / 2.f, mDraggableSustainButton.getY() + size / 2.f);
-    juce::Point<float> releasePoint(mDraggableReleaseButton.getX() + size / 2.f, mDraggableReleaseButton.getY() + size / 2.f);
+    juce::Point<float> attackPoint(mDraggableAttackButton.getX() + size / 2.f,
+                                   mDraggableAttackButton.getY() + size / 2.f);
+    juce::Point<float> decayPoint(mDraggableDecayButton.getX() + size / 2.f,
+                                  mDraggableDecayButton.getY() + size / 2.f);
+    juce::Point<float> sustainPoint(mDraggableSustainButton.getX() + size / 2.f,
+                                    mDraggableSustainButton.getY() + size / 2.f);
+    juce::Point<float> releasePoint(mDraggableReleaseButton.getX() + size / 2.f,
+                                    mDraggableReleaseButton.getY() + size / 2.f);
     mResponseCurve.startNewSubPath(attackPoint);
     mResponseCurve.lineTo(decayPoint);
     mResponseCurve.startNewSubPath(decayPoint);
@@ -78,12 +82,19 @@ void MiddleRow::resized()
 
 void MiddleRow::sanatizePoints()
 {
-    int x  = juce::jlimit(mDraggableAttackButton.getBounds().getX(), mDraggableSustainButton.getBounds().getX(), mDraggableDecayButton.getBounds().getX());
-    
-    mDraggableDecayButton.setTopLeftPosition(x, 0);
+    int x  = juce::jlimit(mDraggableAttackButton.getBounds().getX(),
+                         mDraggableSustainButton.getBounds().getX(),
+                         mDraggableDecayButton.getBounds().getX());
+
+    int x1 = juce::jlimit(mDraggableDecayButton.getBounds().getX(),
+                          mDraggableReleaseButton.getBounds().getX(),
+                          mDraggableSustainButton.getBounds().getX());
+
     mDraggableAttackButton.setTopLeftPosition(mDraggableAttackButton.getBounds().getX(), 301);
-    
-    
+    mDraggableDecayButton.setTopLeftPosition(x, 0);
+    mDraggableSustainButton.setTopLeftPosition(x1, mDraggableSustainButton.getBounds().getY());
+    mDraggableReleaseButton.setTopLeftPosition(mDraggableReleaseButton.getBounds().getX(), 301);
+
     repaint();
 }
 

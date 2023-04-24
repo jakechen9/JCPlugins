@@ -28,7 +28,7 @@ private:
     std::unique_ptr<SliderContainer> mDelayTime;
     std::unique_ptr<SliderContainer> mDelaySpread;
     std::unique_ptr<SliderContainer> mDelayFeedback;
-    std::unique_ptr<SliderContainer> mDelayWidth;
+    std::unique_ptr<SliderContainer> mGrainPitch;
     std::unique_ptr<SliderContainer> mDelayLowpass;
     std::unique_ptr<SliderContainer> mDelayHighpass;
     

@@ -12,13 +12,14 @@
 #include "Delay.h"
 #include "ParameterManager.h"
 #include "Grain.h"
-#include "MODFilter.h"
-#include "ADSR.h"
+#include "Filter.h"
+//#include "ADSR.h"
 
 //==============================================================================
 /**
 */
 class Week6AssignmentAudioProcessor  : public juce::AudioProcessor
+//                                      public juce::ADSR
                             #if JucePlugin_Enable_ARA
                              , public juce::AudioProcessorARAExtension
                             #endif
@@ -70,9 +71,11 @@ private:
     float mOutputGain = 0;
     Delay mDelayL;
     Delay mDelayR;
-    MODFilter mFilterL;
-    MODFilter mFilterR;
-//    ADSR mADSR;
+    Filter mFilterL;
+    Filter mFilterR;
+//    juce::ADSR mADSR;
+//    bool mADSRStarted = false;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Week6AssignmentAudioProcessor)
 };
