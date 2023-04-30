@@ -12,7 +12,6 @@
 #include "Delay.h"
 #include "ParameterManager.h"
 #include "Grain.h"
-#include "Filter.h"
 #include "WidthEffect.h"
 //#include "ADSR.h"
 
@@ -72,8 +71,6 @@ private:
     float mOutputGain = 0;
     Delay mDelayL;
     Delay mDelayR;
-    Filter mFilterL;
-    Filter mFilterR;
     WidthEffect mWidth;
     juce::ADSR mADSR;
     bool mADSRStarted = false;

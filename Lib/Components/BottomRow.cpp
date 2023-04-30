@@ -56,8 +56,7 @@ void BottomRow::paint(juce::Graphics& g)
 
 void BottomRow::resized()
 {
-    float size = 90;
-
+    auto size = 90;
     mDelayMix->setBounds(61*2, 84, size, size);
     mDelayTime->setBounds(176*2, 30, size, size);
     mDelayWidth->setBounds(176*2, 141, size, size);

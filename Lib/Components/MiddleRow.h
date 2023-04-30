@@ -9,10 +9,9 @@
 */
 #pragma once
 #include "JuceHeader.h"
-#include "SliderContainer.h"
 #include "PluginProcessor.h"
-#include "ParameterManager.h"
 #include "DraggableButton.h"
+#include "ParameterManager.h"
 
 
 class MiddleRow : public juce::Component,
@@ -31,7 +30,7 @@ private:
     DraggableButton mDraggableAttackButton, mDraggableDecayButton, mDraggableSustainButton, mDraggableReleaseButton;
     juce::Colour getColour();
     Week6AssignmentAudioProcessor& audioProcessor;
-
+    std::unique_ptr<ParameterManager> mParameterManager;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MiddleRow)
 };

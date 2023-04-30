@@ -9,7 +9,8 @@
 */
 
 #include "MiddleRow.h"
-#include "ParameterManager.h"
+
+
 
 MiddleRow::MiddleRow(Week6AssignmentAudioProcessor& inAudioProcessor) :
 audioProcessor(inAudioProcessor){
@@ -43,13 +44,6 @@ void MiddleRow::paint(juce::Graphics& g)
     
     float size = getWidth() / 1000.0f * 20;
     
-//    juce::ComponentBoundsConstrainer constrainer;
-//    constrainer.applyBoundsToComponent(mDraggableAttackButton, mDraggableAttackButton.getBounds().withPosition(0, 301));
-//
-//    constrainer.applyBoundsToComponent(mDraggableDecayButton, mDraggableDecayButton.getBounds().withY(0));
-//
-//    constrainer.applyBoundsToComponent(mDraggableReleaseButton, mDraggableReleaseButton.getBounds().withY(301));
-    
     juce::Path mResponseCurve;
     juce::Point<float> attackPoint(mDraggableAttackButton.getX() + size / 2.f,
                                    mDraggableAttackButton.getY() + size / 2.f);
@@ -73,7 +67,8 @@ void MiddleRow::resized()
 {
     float size = getWidth() / 1000.0f * 20;
     mDraggableAttackButton.setBounds(0, 301, size, size);
-    mDraggableDecayButton.setBounds(275, 0, size, size);
+//    auto attack_val = mParameterManager->getCurrentParameterValue(Attack);
+    mDraggableDecayButton.setBounds(juce::jmap (mParameterManager->getCurrentParameterValue(Attack), 0.f, 366.f), 0, size, size);
     mDraggableSustainButton.setBounds(550, 84, size, size);
     mDraggableReleaseButton.setBounds(825, 301, size, size);
 }
@@ -83,18 +78,21 @@ void MiddleRow::resized()
 void MiddleRow::sanatizePoints()
 {
     int x  = juce::jlimit(mDraggableAttackButton.getBounds().getX(),
-                         mDraggableSustainButton.getBounds().getX(),
+                         366,
                          mDraggableDecayButton.getBounds().getX());
 
-    int x1 = juce::jlimit(mDraggableDecayButton.getBounds().getX(),
-                          mDraggableReleaseButton.getBounds().getX(),
+    int x1 = juce::jlimit(367,
+                          733,
                           mDraggableSustainButton.getBounds().getX());
 
-    mDraggableAttackButton.setTopLeftPosition(mDraggableAttackButton.getBounds().getX(), 301);
+    int x2 = juce::jlimit(734,
+                          1100,
+                          mDraggableReleaseButton.getBounds().getX());
+
+    mDraggableAttackButton.setTopLeftPosition(0, 301);
     mDraggableDecayButton.setTopLeftPosition(x, 0);
     mDraggableSustainButton.setTopLeftPosition(x1, mDraggableSustainButton.getBounds().getY());
-    mDraggableReleaseButton.setTopLeftPosition(mDraggableReleaseButton.getBounds().getX(), 301);
-
+    mDraggableReleaseButton.setTopLeftPosition(x2, 301);
     repaint();
 }
 

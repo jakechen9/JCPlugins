@@ -30,7 +30,7 @@ public:
     void initialize(float inSampleRate, int inBlocksize);
     
     /* */
-    void setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch, float inGrainSize);
+    void setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch);
     
     /* */
     void processBlock(float* inBuffer, int inNumSamples);

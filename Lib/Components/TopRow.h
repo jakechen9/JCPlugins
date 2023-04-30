@@ -23,10 +23,6 @@ public:
     void resized() override;
     
 private:
-    juce::Label mDelaySectionTitle;
-    std::unique_ptr<SliderContainer> mFilterMix;
-    std::unique_ptr<SliderContainer> mLow;
-    std::unique_ptr<SliderContainer> mHigh;
     std::unique_ptr<SliderContainer> mAttack;
     std::unique_ptr<SliderContainer> mDecay;
     std::unique_ptr<SliderContainer> mSustain;

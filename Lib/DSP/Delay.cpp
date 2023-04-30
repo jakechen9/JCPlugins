@@ -46,7 +46,7 @@ void Delay::initialize(float inSampleRate, int inBlocksize)
 }
 
 /* */
-void Delay::setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch, float inGrainSize)
+void Delay::setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch)
 {
     mTimeInSeconds.setTargetValue(inTimeSeconds);
     mFeedbackAmount = inFeedbackAmount;

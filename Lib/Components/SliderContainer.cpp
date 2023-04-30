@@ -30,6 +30,5 @@ void SliderContainer::resized()
     auto bounds = getLocalBounds();
     mSlider.setBounds(bounds.removeFromTop(getHeight()*.8));
     mSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, mSlider.getWidth(), getHeight()*.2);
-    
     mLabel.setBounds(bounds);
 }

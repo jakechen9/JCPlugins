@@ -39,9 +39,7 @@ void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int sample
     
     mDelayL.initialize(sampleRate, samplesPerBlock);
     mDelayR.initialize(sampleRate, samplesPerBlock);
-    
-    mFilterL.initialize(sampleRate, samplesPerBlock);
-    mFilterR.initialize(sampleRate, samplesPerBlock);
+
     
 }
 
@@ -72,9 +70,9 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     if (!mADSRStarted) {
         mADSR.noteOn();
     }
-    else{
-        mADSR.noteOff();
-    }
+//    else{
+//        mADSR.noteOff();
+//    }
 
     // Set Delay Parameter to control
     mDelayL.setParameters(mParameterManager.getCurrentParameterValue(Time),
@@ -82,8 +80,7 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
                           mParameterManager.getCurrentParameterValue(Mix),
                           mParameterManager.getCurrentParameterValue(Lowpass),
                           mParameterManager.getCurrentParameterValue(Highpass),
-                          mParameterManager.getCurrentParameterValue(GrainPitch),
-                          mParameterManager.getCurrentParameterValue(GrainSize)
+                          mParameterManager.getCurrentParameterValue(GrainPitch)
                           );
     
     mDelayR.setParameters(mParameterManager.getCurrentParameterValue(Time),
@@ -91,40 +88,63 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
                           mParameterManager.getCurrentParameterValue(Mix),
                           mParameterManager.getCurrentParameterValue(Lowpass),
                           mParameterManager.getCurrentParameterValue(Highpass),
-                          mParameterManager.getCurrentParameterValue(GrainPitch),
-                          mParameterManager.getCurrentParameterValue(GrainSize)
+                          mParameterManager.getCurrentParameterValue(GrainPitch)
                           );
     
-    mFilterL.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),
-                           mParameterManager.getCurrentParameterValue(Low),
-                           mParameterManager.getCurrentParameterValue(High));
-    
-    mFilterR.setParameters(mParameterManager.getCurrentParameterValue(FilterMix),
-                           mParameterManager.getCurrentParameterValue(Low),
-                           mParameterManager.getCurrentParameterValue(High));
+
     
 //
-    
 //    mADSR.getNextSample();
 //
-    
+//    DBG("mDelay");
+//    float Delay_Left = 0.f;
+
     mDelayL.processBlock(buffer.getWritePointer(0),
                          buffer.getNumSamples());
     mDelayR.processBlock(buffer.getWritePointer(1),
                          buffer.getNumSamples());
-    
-    mFilterL.processBlock(buffer.getWritePointer(0),
-                          buffer.getNumSamples());
-    mFilterR.processBlock(buffer.getWritePointer(1),
-                          buffer.getNumSamples());
+
+//    auto* buffer_write_left = buffer.getWritePointer(0);
+//    auto* buffer_write_right = buffer.getWritePointer(1);
+//
+//    for (int i = 0; i < buffer.getNumSamples(); i++)
+//    {
+//        Delay_Left *= buffer_write_left[i];
+//        Delay_Left *= buffer_write_right[i];
+//    }
+//
+//    DBG(Delay_Left);
+//
+//    Delay_Left = 0;
+//
+//
+//    DBG("Width:");
+//    Delay_Left = 0;
 
     mWidth.processBlock(buffer.getWritePointer(0),
                         buffer.getWritePointer(1),
                         mParameterManager.getCurrentParameterValue(Width),
                         buffer.getNumSamples());
 
+//    for (int i = 0; i < buffer.getNumSamples(); i++)
+//    {
+//        Delay_Left *= buffer_write_left[i];
+//        Delay_Left *= buffer_write_right[i];
+//    }
+//
+//    DBG(Delay_Left);
+//    Delay_Left = 0.f;
+//    DBG("ADSR:");
+
     mADSR.applyEnvelopeToBuffer(buffer, 0, buffer.getNumSamples());
 
+//    for (int i = 0; i < buffer.getNumSamples(); i++)
+//    {
+//        Delay_Left *= buffer_write_left[i];
+//        Delay_Left *= buffer_write_right[i];
+//    }
+//
+//    DBG(Delay_Left);
 
     float output_gain = 0;
     output_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());

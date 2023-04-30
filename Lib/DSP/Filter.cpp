@@ -26,6 +26,7 @@ void Filter::initialize(float inSampleRate, int inBlocksize)
 {
     mSampleRate = inSampleRate;
     mCircularBuffer.setSize(1, 5 * inSampleRate);
+    mCircularBuffer.clear();
     juce::dsp::ProcessSpec spec;
     spec.sampleRate = inSampleRate;
     spec.maximumBlockSize = inBlocksize;
@@ -37,7 +38,7 @@ void Filter::initialize(float inSampleRate, int inBlocksize)
     mHighPassFilter.reset();
     mLowpassFilter.reset();
     
-    mCircularBuffer.clear();
+
 }
 
 void Filter::setParameters(float inMix, float inLPFreq, float inHPFreq)

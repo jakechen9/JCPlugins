@@ -13,18 +13,7 @@
 TopRow::TopRow(Week6AssignmentAudioProcessor& inAudioProcessor) :
 audioProcessor(inAudioProcessor){
     auto& tree_state = audioProcessor.getParameterManager()->getTreeState();
-    
-    mFilterMix = std::make_unique<SliderContainer>();
-    mFilterMix->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::FilterMix]);
-    addAndMakeVisible(mFilterMix.get());
-    
-    mLow= std::make_unique<SliderContainer>();
-    mLow->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Low]);
-    addAndMakeVisible(mLow.get());
-    
-    mHigh = std::make_unique<SliderContainer>();
-    mHigh->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::High]);
-    addAndMakeVisible(mHigh.get());
+
     
     mAttack = std::make_unique<SliderContainer>();
     mAttack->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Attack]);
@@ -53,11 +42,10 @@ void TopRow::paint(juce::Graphics& g)
 
 void TopRow::resized()
 {
-    mFilterMix->setBounds(176, 55, 70, 70);
-    mLow -> setBounds(301, 55, 70, 70);
-    mHigh -> setBounds(426, 55, 70, 70);
-    mAttack -> setBounds(611, 55, 70, 70);
-    mDecay -> setBounds(726, 55, 70, 70);
-    mSustain -> setBounds(851, 55, 70, 70);
-    mRelease -> setBounds(976, 55, 70, 70);
+    auto size = 90;
+    auto knob_y = (getLocalBounds().getCentreY()) - size / 2;
+    mAttack -> setBounds(61*2, knob_y, size, size);
+    mDecay -> setBounds(176*2, knob_y, size, size);
+    mSustain -> setBounds(301*2, knob_y, size, size);
+    mRelease -> setBounds(426*2, knob_y, size, size);
 }

@@ -18,6 +18,7 @@ void WidthEffect::processBlock(float* inBufferL, float* inBufferR, float inWidth
     for (int i = 0; i < inNumSamples; ++i) {
         float mid = (inBufferL[i] + inBufferR[i]) / sqrt(2);
         float side = (inBufferL[i] - inBufferR[i]) / sqrt(2);
+
         mid *= 2.f * (1.f - inWidth);
         side *= 2.f * inWidth;
 
