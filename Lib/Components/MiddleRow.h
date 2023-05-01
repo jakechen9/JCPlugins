@@ -11,11 +11,12 @@
 #include "JuceHeader.h"
 #include "PluginProcessor.h"
 #include "DraggableButton.h"
-#include "ParameterManager.h"
+#include "SliderContainer.h"
 
 
 class MiddleRow : public juce::Component,
                   public juce::ComponentBoundsConstrainer
+//                  public juce::Timer
 {
 public:
     MiddleRow(Week6AssignmentAudioProcessor&);
@@ -23,14 +24,15 @@ public:
     
     void paint(juce::Graphics& g) override;
     void resized() override;
-    
     void sanatizePoints();
+    void updateBounds();
+//    void timerCallback() override;
     
 private:
     DraggableButton mDraggableAttackButton, mDraggableDecayButton, mDraggableSustainButton, mDraggableReleaseButton;
     juce::Colour getColour();
+    std::unique_ptr<SliderContainer> mAttack;
     Week6AssignmentAudioProcessor& audioProcessor;
-    std::unique_ptr<ParameterManager> mParameterManager;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MiddleRow)
 };

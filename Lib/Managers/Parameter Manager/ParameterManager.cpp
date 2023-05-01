@@ -47,3 +47,7 @@ float ParameterManager::getCurrentParameterValue(AppParameterID inParameterID)
     return mParameterValues[inParameterID]->load();
 }
 
+void ParameterManager:: getParameter(AppParameterID inParameterID, float inValue)
+{
+    mParameterState.getParameter(ParameterIDStrings[inParameterID])->setValueNotifyingHost(inValue);
+}

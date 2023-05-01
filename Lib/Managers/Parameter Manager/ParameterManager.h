@@ -23,6 +23,8 @@ public:
     juce::AudioProcessorValueTreeState& getTreeState();
     
     float getCurrentParameterValue(AppParameterID inParameterID);
+
+    void getParameter(AppParameterID inParameterID, float inValue);
     
 private:
     juce::Array<std::atomic<float>*> mParameterValues;
