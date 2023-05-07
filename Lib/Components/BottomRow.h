@@ -12,11 +12,12 @@
 #include "JuceHeader.h"
 #include "SliderContainer.h"
 #include "PluginProcessor.h"
+#include "interfaceDefine.h"
 
 class BottomRow : public juce::Component
 {
 public:
-    BottomRow(Week6AssignmentAudioProcessor&);
+    BottomRow(ProcessorInterface* inAudioProcessor);
     ~BottomRow() override;
     
     void paint(juce::Graphics& g) override;
@@ -32,7 +33,7 @@ private:
     std::unique_ptr<SliderContainer> mDelayLowpass;
     std::unique_ptr<SliderContainer> mDelayHighpass;
     
-    Week6AssignmentAudioProcessor& audioProcessor;
+    ProcessorInterface* mProcessorInterface;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(BottomRow)
 };

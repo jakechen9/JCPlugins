@@ -12,9 +12,8 @@
 
 
 
-MiddleRow::MiddleRow(Week6AssignmentAudioProcessor& inAudioProcessor) :
-audioProcessor(inAudioProcessor){
-//    startTimerHz(30);
+MiddleRow::MiddleRow(ProcessorInterface* inAudioProcessor) :mProcessorInterface(inAudioProcessor){
+    startTimerHz(30);
     mDraggableAttackButton.onDrag = [this](){
         sanatizePoints();
     };
@@ -72,9 +71,9 @@ void MiddleRow::resized()
 }
 
 
-
 void MiddleRow::sanatizePoints()
 {
+
     int x  = juce::jlimit(mDraggableAttackButton.getBounds().getX(),
                          366,
                          mDraggableDecayButton.getBounds().getX());
@@ -84,7 +83,7 @@ void MiddleRow::sanatizePoints()
                           mDraggableSustainButton.getBounds().getX());
 
     int x2 = juce::jlimit(734,
-                          1100,
+                          1078,
                           mDraggableReleaseButton.getBounds().getX());
 
     mDraggableAttackButton.setTopLeftPosition(0, 301);
@@ -94,16 +93,17 @@ void MiddleRow::sanatizePoints()
 
 
     float attackValue = mDraggableDecayButton.getBounds().getX()/366.f;
-    audioProcessor.getParameterManager()->getParameter(Attack, attackValue);
+    mProcessorInterface->getParameterManager()->getParameter(Attack, attackValue);
 
     float decayValue = (mDraggableSustainButton.getBounds().getX() - 367.f)/366.f;
-    audioProcessor.getParameterManager()->getParameter(Decay, decayValue);
+    mProcessorInterface->getParameterManager()->getParameter(Decay, decayValue);
 
     float sustainValue = mDraggableSustainButton.getBounds().getY()/301.f;
-    audioProcessor.getParameterManager()->getParameter(Sustain, sustainValue);
+    sustainValue = juce::jmap(sustainValue, 1.f, 0.f);
+    mProcessorInterface->getParameterManager()->getParameter(Sustain, sustainValue);
 
-    float releaseValue = (mDraggableReleaseButton.getBounds().getX()- 734.f)/366.f;
-    audioProcessor.getParameterManager()->getParameter(Release, releaseValue);
+    float releaseValue = (mDraggableReleaseButton.getBounds().getX()- 734.f)/344.f;
+    mProcessorInterface->getParameterManager()->getParameter(Release, releaseValue);
 
     repaint();
 }
@@ -112,18 +112,18 @@ void MiddleRow::updateBounds()
 {
     float size = getWidth() / 1000.0f * 20;
     mDraggableAttackButton.setBounds(0, 301, size, size);
-    float attackVal = audioProcessor.getParameterManager()->getCurrentParameterValue(Attack);
-    float decayVal = audioProcessor.getParameterManager()->getCurrentParameterValue(Decay);
-    float sustainVal = audioProcessor.getParameterManager()->getCurrentParameterValue(Sustain);
-    float releaseVal = audioProcessor.getParameterManager()->getCurrentParameterValue(Release);
+    float attackVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Attack);
+    float decayVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Decay);
+    float sustainVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Sustain);
+    float releaseVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Release);
     mDraggableDecayButton.setBounds(juce::jmap (attackVal, 0.f, 366.f), 0, size, size);
     mDraggableSustainButton.setBounds(juce::jmap(decayVal, 367.f, 733.f),
                                       juce::jmap(sustainVal, 301.f, 0.f), size, size);
-    mDraggableReleaseButton.setBounds(juce::jmap(releaseVal, 734.f, 1100.f), 301, size, size);
+    mDraggableReleaseButton.setBounds(juce::jmap(releaseVal, 734.f, 1078.f), 301, size, size);
     repaint();
 }
 
-//void MiddleRow::timerCallback()
-//{
-//    updateBounds();
-//}
+void MiddleRow::timerCallback()
+{
+    updateBounds();
+}

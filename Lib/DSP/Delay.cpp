@@ -19,13 +19,14 @@ Delay::Delay()
 /* */
 Delay::~Delay()
 {
-    
+
 }
 
 /* */
 void Delay::initialize(float inSampleRate, int inBlocksize)
 {
     mSampleRate = inSampleRate;
+    mADSR.setSampleRate(inSampleRate);
     mCircularBuffer.setSize(1, 5 * inSampleRate);
     mTimeInSeconds.reset(inSampleRate, 0.25);
     mTimeInSeconds.setCurrentAndTargetValue(0.01);
@@ -40,20 +41,25 @@ void Delay::initialize(float inSampleRate, int inBlocksize)
     
     mHighPassFilter.reset();
     mLowpassFilter.reset();
-    
-//    DBG("Real Time Grain Prepare To Play Called");
+
     mRealTimeGranulator.prepareToPlay(inSampleRate, inBlocksize);
 }
 
 /* */
-void Delay::setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch)
+void Delay::setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch, float inAttack,
+                          float inDecay, float inSustain, float inRelease, float inNoteLength)
 {
     mTimeInSeconds.setTargetValue(inTimeSeconds);
     mFeedbackAmount = inFeedbackAmount;
     mMix = inMix;
-    
-//    mRealTimeGranulator.setParameters(inGrainSize);
-    
+
+    mNoteLength = inNoteLength;
+    adsr_param.attack = inAttack;
+    adsr_param.decay = inDecay;
+    adsr_param.sustain = inSustain;
+    adsr_param.release = inRelease;
+    mADSR.setParameters(adsr_param);
+
     mHighPassFilter.coefficients = mHighpassCoefficients.makeHighPass(mSampleRate, inHPFreq);
     mLowpassFilter.coefficients = mLowpassCoefficients.makeLowPass(mSampleRate, inLPFreq);
     mGrainPitch.setTargetValue(inGrainPitch);
@@ -70,6 +76,23 @@ void Delay::processBlock(float* inBuffer, int inNumSamples)
 /* */
 void Delay::processSample(float& inSample)
 {
+    if (!mADSRStarted) {
+        mADSRStarted = true;
+        mADSR.noteOn();
+    }
+    if (static_cast<float>(mCounter) > mNoteLength){
+        mADSR.noteOff();
+        mCounter = 0;
+        mADSR.noteOn();
+//        DBG("ADSR Triggered");
+    }
+    mCounter +=1;
+//    DBG(mCounter);
+    float ADSRMOD = mADSR.getNextSample();
+
+
+
+
     mCircularBuffer.setSample(0, mWriteHead, std::tanh(inSample + (mFeedbackSample * mFeedbackAmount)));
     
     mWriteHead++;
@@ -82,16 +105,14 @@ void Delay::processSample(float& inSample)
     float read_head = mWriteHead - time_in_sample;
     
     read_head = AudioHelpers::wrap_buffer(read_head, mCircularBuffer.getNumSamples());
-    
-    // Get Interpolation Positions
+
     int sample_x_pos = floor(read_head);
     int sample_x1_pos = sample_x_pos + 1;
     
     sample_x1_pos = AudioHelpers::wrap_buffer(sample_x1_pos, mCircularBuffer.getNumSamples());
     
     float inter_sample_amount = read_head - sample_x_pos;
-    
-    // Get Interpolation Values
+
     float sample_x = mCircularBuffer.getSample(0, sample_x_pos);
     float sample_x1 = mCircularBuffer.getSample(0, sample_x1_pos);
     float output_sample = AudioHelpers::lin_interp(sample_x, sample_x1, inter_sample_amount);
@@ -104,5 +125,6 @@ void Delay::processSample(float& inSample)
     mFeedbackSample = mRealTimeGranulator.processSample(mFeedbackSample, mGrainPitch.getNextValue());
         
     inSample = (output_sample * mMix) + (inSample * (1.f - mMix));
-}
 
+    inSample *= ADSRMOD;
+}

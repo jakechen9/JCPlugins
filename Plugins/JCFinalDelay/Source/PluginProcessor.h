@@ -11,15 +11,17 @@
 #include <JuceHeader.h>
 #include "Delay.h"
 #include "ParameterManager.h"
+#include "interfaceDefine.h"
 #include "Grain.h"
 #include "WidthEffect.h"
-//#include "ADSR.h"
+#include "TimeDiv.h"
 
 //==============================================================================
 /**
 */
 class Week6AssignmentAudioProcessor  : public juce::AudioProcessor,
-                                      public juce::ADSR
+                                       public ProcessorInterface
+//                                      public juce::ADSR
                             #if JucePlugin_Enable_ARA
                              , public juce::AudioProcessorARAExtension
                             #endif
@@ -30,12 +32,16 @@ public:
     ~Week6AssignmentAudioProcessor() override;
 
     //==============================================================================
-    juce::AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
+//    juce::AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     void releaseResources() override;
+
+
+    ParameterManager* getParameterManager() override;
+    AudioProcessor* getAudioProcessor() override;
 
    #ifndef JucePlugin_PreferredChannelConfigurations
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
@@ -62,19 +68,20 @@ public:
     const juce::String getProgramName (int index) override;
     void changeProgramName (int index, const juce::String& newName) override;
 
-    ParameterManager* getParameterManager();
+
 
 private:
-    ParameterManager mParameterManager;
+    std::unique_ptr<ParameterManager> mParameterManager;
     
     float mInputGain = 0;
     float mOutputGain = 0;
     Delay mDelayL;
     Delay mDelayR;
     WidthEffect mWidth;
-    juce::ADSR mADSR;
-    bool mADSRStarted = false;
 
+//    juce::ADSR mADSR;
+    bool mADSRStarted = false;
+//    int mCounter = 0;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Week6AssignmentAudioProcessor)
 };

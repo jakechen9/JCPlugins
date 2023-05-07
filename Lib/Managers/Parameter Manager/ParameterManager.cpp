@@ -10,44 +10,45 @@
 
 #include "ParameterManager.h"
 
-ParameterManager::ParameterManager(juce::AudioProcessor* inOwnerProcessor)
-: mParameterState (*inOwnerProcessor, nullptr, juce::Identifier("ParamterState"),getParameterLayout())
+
+ParameterManager::ParameterManager(ProcessorInterface* inAudioProcessor)
+:mProcessorInterface(inAudioProcessor)
 {
-    for (int i = 0; i < AppParameterID::TotalNumberParameters; i++) {
-        mParameterValues.add(mParameterState.getRawParameterValue(ParameterIDStrings[i]));
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> parameters;
+
+    for (int i = 0; i < TotalNumberParameters; i++) {
+        switch (PARAM_TYPE[i]){
+            case ParameterUtil::FreqP:
+                ParameterUtil::createFrequencyParameter(parameters, PARAM_ID[i], PARAM_ID[i].getParamID(), ParameterMinimum[i], ParameterMaximum[i], ParameterDefault[i]);
+                break;
+            case ParameterUtil::TimeDivP:
+                ParameterUtil::createTimeDivParameter(parameters, PARAM_ID[i], PARAM_ID[i].getParamID(), ParameterMinimum[i], ParameterMaximum[i], ParameterDefault[i]);
+                break;
+            case ParameterUtil::FloatP:
+                ParameterUtil::createFloatParameter(parameters, PARAM_ID[i], PARAM_ID[i].getParamID(), ParameterMinimum[i], ParameterMaximum[i], ParameterDefault[i], ParameterCenter[i]);
+                break;
+            case ParameterUtil::PercentP:
+                ParameterUtil::createPercentageParameter(parameters, PARAM_ID[i], PARAM_ID[i].getParamID(),  ParameterDefault[i]);
+                break;
+        }
+//        mParameterValues.add(mParameterState.getRawParameterValue(ParameterIDStrings[i]));
     }
+    mParameterState.reset(new juce::AudioProcessorValueTreeState(*mProcessorInterface ->getAudioProcessor(), nullptr,
+                                                                 "PARAMETER_STATE", {parameters.begin(),parameters.end()}));
 }
 
 
-juce::AudioProcessorValueTreeState& ParameterManager::getTreeState()
+float ParameterManager::getCurrentParameterValue(int inParameterID)
 {
-    return mParameterState;
+    return mParameterState->getRawParameterValue(PARAM_ID[inParameterID].getParamID()) -> load();
 }
 
-// here we actually define our params
-juce::AudioProcessorValueTreeState::ParameterLayout ParameterManager::getParameterLayout()
+void ParameterManager:: getParameter(int inParameterID, float inValue)
 {
-    juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    
-    for (int i = 0; i < AppParameterID::TotalNumberParameters; i++) {
-        
-        layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID(ParameterIDStrings[i], 1),
-                                                               ParameterIDStrings[i],
-                                                               ParameterMinimum[i],
-                                                               ParameterMaximum[i],
-                                                               ParameterDefault[i]));
-        
-    }
-    
-    return layout;
+    mParameterState->getParameter(PARAM_ID[inParameterID].getParamID())->setValueNotifyingHost(inValue);
 }
 
-float ParameterManager::getCurrentParameterValue(AppParameterID inParameterID)
+juce::AudioProcessorValueTreeState* ParameterManager::getValueTree()
 {
-    return mParameterValues[inParameterID]->load();
-}
-
-void ParameterManager:: getParameter(AppParameterID inParameterID, float inValue)
-{
-    mParameterState.getParameter(ParameterIDStrings[inParameterID])->setValueNotifyingHost(inValue);
+    return mParameterState.get();
 }

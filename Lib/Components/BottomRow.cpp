@@ -11,37 +11,36 @@
 #include "BottomRow.h"
 
 
-BottomRow::BottomRow(Week6AssignmentAudioProcessor& inAudioProcessor) :
-audioProcessor(inAudioProcessor){
-    auto& tree_state = audioProcessor.getParameterManager()->getTreeState();
+BottomRow::BottomRow(ProcessorInterface* inAudioProcessor) :mProcessorInterface(inAudioProcessor){
+    auto& tree_state = *mProcessorInterface->getParameterManager()->getValueTree();
     
     mDelayMix = std::make_unique<SliderContainer>();
-    mDelayMix->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Mix]);
+    mDelayMix->setParameterToControl(tree_state, PARAM_ID[AppParamID::Mix].getParamID());
     addAndMakeVisible(mDelayMix.get());
     
     
     mDelayTime = std::make_unique<SliderContainer>();
-    mDelayTime->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Time]);
+    mDelayTime->setParameterToControl(tree_state, PARAM_ID[AppParamID::Time].getParamID());
     addAndMakeVisible(mDelayTime.get());
     
     mDelayWidth = std::make_unique<SliderContainer>();
-    mDelayWidth->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Width]);
+    mDelayWidth->setParameterToControl(tree_state, PARAM_ID[AppParamID::Width].getParamID());
     addAndMakeVisible(mDelayWidth.get());
     
     mDelayFeedback = std::make_unique<SliderContainer>();
-    mDelayFeedback->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Feedback]);
+    mDelayFeedback->setParameterToControl(tree_state, PARAM_ID[AppParamID::Feedback].getParamID());
     addAndMakeVisible(mDelayFeedback.get());
     
     mGrainPitch = std::make_unique<SliderContainer>();
-    mGrainPitch->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::GrainPitch]);
+    mGrainPitch->setParameterToControl(tree_state, PARAM_ID[AppParamID::GrainPitch].getParamID());
     addAndMakeVisible(mGrainPitch.get());
     
     mDelayLowpass = std::make_unique<SliderContainer>();
-    mDelayLowpass->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Lowpass]);
+    mDelayLowpass->setParameterToControl(tree_state, PARAM_ID[AppParamID::Lowpass].getParamID());
     addAndMakeVisible(mDelayLowpass.get());
     
     mDelayHighpass = std::make_unique<SliderContainer>();
-    mDelayHighpass->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Highpass]);
+    mDelayHighpass->setParameterToControl(tree_state, PARAM_ID[AppParamID::Highpass].getParamID());
     addAndMakeVisible(mDelayHighpass.get());
     
 }

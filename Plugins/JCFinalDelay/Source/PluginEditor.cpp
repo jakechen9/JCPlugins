@@ -18,13 +18,13 @@ Week6AssignmentAudioProcessorEditor::Week6AssignmentAudioProcessorEditor (Week6A
     
     setLookAndFeel(mLookAndFeel.get());
     
-    mTopRow = std::make_unique<TopRow>(audioProcessor);
+    mTopRow = std::make_unique<TopRow>(&audioProcessor);
     addAndMakeVisible(mTopRow.get());
   
-    mBottomRow = std::make_unique<BottomRow>(audioProcessor);
+    mBottomRow = std::make_unique<BottomRow>(&audioProcessor);
     addAndMakeVisible(mBottomRow.get());
     
-    mMiddleRow = std::make_unique<MiddleRow>(audioProcessor);
+    mMiddleRow = std::make_unique<MiddleRow>(&audioProcessor);
     addAndMakeVisible(mMiddleRow.get());
     
     setSize (1100, 720);

@@ -16,7 +16,8 @@
 #include "RealTimeGranular.h"
 
 
-class Delay {
+class Delay
+{
     
 public:
     
@@ -30,7 +31,10 @@ public:
     void initialize(float inSampleRate, int inBlocksize);
     
     /* */
-    void setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch);
+    void setParameters(float inTimeSeconds, float inFeedbackAmount,
+                       float inMix, float inLPFreq,
+                       float inHPFreq, float inGrainPitch, float inAttack,
+                       float inDecay, float inSustain, float inRelease, float inNoteLength);
     
     /* */
     void processBlock(float* inBuffer, int inNumSamples);
@@ -43,16 +47,18 @@ private:
     
     float mSampleRate;
     float mMix = 0;
-//    float mGain = 0;
     float mFeedbackAmount = 0;
     juce::LinearSmoothedValue<float> mTimeInSeconds;
-    float mGrainSize = 0;
     juce::LinearSmoothedValue<float> mGrainPitch;
     
     float mWriteHead = 0;
     float mFeedbackSample = 0;
     juce::AudioBuffer<float> mCircularBuffer;
-        
+    float mNoteLength = 0;
+    float mCounter = 0;
+    bool mADSRStarted = false;
+    juce::ADSR mADSR;
+    juce::ADSR::Parameters adsr_param;
     juce::dsp::IIR::Coefficients<float> mHighpassCoefficients;
     juce::dsp::IIR::Filter<float> mHighPassFilter;
     

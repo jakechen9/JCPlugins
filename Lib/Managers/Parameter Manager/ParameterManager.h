@@ -12,21 +12,26 @@
 
 #include "JuceHeader.h"
 #include "ParameterDefines.h"
+#include "interfaceDefine.h"
 
 class ParameterManager{
 public:
     
-    ParameterManager(juce::AudioProcessor* inOwnerProcessor);
+    ParameterManager(ProcessorInterface* inAudioProcessor);
     
-    juce::AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
+//    juce::AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
+//
+//    juce::AudioProcessorValueTreeState& getTreeState();
     
-    juce::AudioProcessorValueTreeState& getTreeState();
-    
-    float getCurrentParameterValue(AppParameterID inParameterID);
+    float getCurrentParameterValue(int inParameterID);
 
-    void getParameter(AppParameterID inParameterID, float inValue);
+    void getParameter(int inParameterID, float inValue);
+
+    juce::AudioProcessorValueTreeState* getValueTree();
     
 private:
     juce::Array<std::atomic<float>*> mParameterValues;
-    juce::AudioProcessorValueTreeState mParameterState;
+    std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterState;
+    ProcessorInterface* mProcessorInterface;
+
 };

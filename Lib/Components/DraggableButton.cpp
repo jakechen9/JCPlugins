@@ -21,7 +21,7 @@ DraggableButton::~DraggableButton()
 
 void DraggableButton::paint (juce::Graphics& g)
 {
-    g.setColour (getColour().darker().darker());
+    g.setColour (juce::Colour(8, 143, 173));
     g.fillEllipse (0, 0, getWidth(), getHeight());
     g.setColour (getColour());
     g.fillEllipse (getWidth() / 5.0f, getHeight() / 5.0f, getWidth() / 5.0f * 3, getHeight() / 5.0f * 3);

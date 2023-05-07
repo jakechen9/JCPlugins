@@ -18,12 +18,12 @@ Week6AssignmentAudioProcessor::Week6AssignmentAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       ),
+                       )
 
-    mParameterManager(this)
-    {
-    
-    }
+
+{
+    mParameterManager.reset(new ParameterManager(this));
+}
 Week6AssignmentAudioProcessor::~Week6AssignmentAudioProcessor()
 {
 }
@@ -33,10 +33,6 @@ Week6AssignmentAudioProcessor::~Week6AssignmentAudioProcessor()
 
 void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    //set sample rate
-    mADSR.setSampleRate(sampleRate);
-    
-    
     mDelayL.initialize(sampleRate, samplesPerBlock);
     mDelayR.initialize(sampleRate, samplesPerBlock);
 
@@ -59,43 +55,47 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     input_gain /= 2;
     mInputGain = input_gain;
 
-    ADSR::Parameters adsr_params;
-    adsr_params.attack = mParameterManager.getCurrentParameterValue(Attack);
-    adsr_params.decay = mParameterManager.getCurrentParameterValue(Decay);
-    adsr_params.sustain = mParameterManager.getCurrentParameterValue(Sustain);
-    adsr_params.release = mParameterManager.getCurrentParameterValue(Release);
+    juce::AudioPlayHead::CurrentPositionInfo mTempoInfo;
+    getPlayHead()->getCurrentPosition(mTempoInfo);
+    auto bpm = juce::jmax(static_cast<float>(mTempoInfo.bpm), 1.f);
+//    DBG(bpm);
+    // trigger quarter note
+//    float samplePerBeats = (60.f/bpm) * getSampleRate();
+//    // 1/8 note
+//    float eighthNote = samplePerBeats / 2.f;
+//    // time division
+//    float time_div = (60.f/bpm) / 2.f;
 
-    mADSR.setParameters(adsr_params);
-
-    if (!mADSRStarted) {
-        mADSR.noteOn();
-    }
-//    else{
-//        mADSR.noteOff();
-//    }
-
+    auto noteLength = getTimeDivisonSamples(EighthNote, getSampleRate(), bpm);
+    auto time_div = TIMDIV(EighthNote, bpm);
     // Set Delay Parameter to control
-    mDelayL.setParameters(mParameterManager.getCurrentParameterValue(Time),
-                          mParameterManager.getCurrentParameterValue(Feedback),
-                          mParameterManager.getCurrentParameterValue(Mix),
-                          mParameterManager.getCurrentParameterValue(Lowpass),
-                          mParameterManager.getCurrentParameterValue(Highpass),
-                          mParameterManager.getCurrentParameterValue(GrainPitch)
+    mDelayL.setParameters(mParameterManager->getCurrentParameterValue(Time),
+                          mParameterManager->getCurrentParameterValue(Feedback),
+                          mParameterManager->getCurrentParameterValue(Mix),
+                          mParameterManager->getCurrentParameterValue(Lowpass),
+                          mParameterManager->getCurrentParameterValue(Highpass),
+                          mParameterManager->getCurrentParameterValue(GrainPitch),
+                          mParameterManager->getCurrentParameterValue(Attack) * time_div,
+                          mParameterManager->getCurrentParameterValue(Decay) * time_div,
+                          mParameterManager->getCurrentParameterValue(Sustain) * time_div,
+                          mParameterManager->getCurrentParameterValue(Release) * time_div,
+                          noteLength
                           );
     
-    mDelayR.setParameters(mParameterManager.getCurrentParameterValue(Time),
-                          mParameterManager.getCurrentParameterValue(Feedback),
-                          mParameterManager.getCurrentParameterValue(Mix),
-                          mParameterManager.getCurrentParameterValue(Lowpass),
-                          mParameterManager.getCurrentParameterValue(Highpass),
-                          mParameterManager.getCurrentParameterValue(GrainPitch)
+    mDelayR.setParameters(mParameterManager->getCurrentParameterValue(Time),
+                          mParameterManager->getCurrentParameterValue(Feedback),
+                          mParameterManager->getCurrentParameterValue(Mix),
+                          mParameterManager->getCurrentParameterValue(Lowpass),
+                          mParameterManager->getCurrentParameterValue(Highpass),
+                          mParameterManager->getCurrentParameterValue(GrainPitch),
+                          mParameterManager->getCurrentParameterValue(Attack) * time_div,
+                          mParameterManager->getCurrentParameterValue(Decay) * time_div,
+                          mParameterManager->getCurrentParameterValue(Sustain) * time_div,
+                          mParameterManager->getCurrentParameterValue(Release) * time_div,
+                          noteLength
                           );
-    
 
-    
-//
-//    mADSR.getNextSample();
-//
+
 //    DBG("mDelay");
 //    float Delay_Left = 0.f;
 
@@ -103,6 +103,7 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
                          buffer.getNumSamples());
     mDelayR.processBlock(buffer.getWritePointer(1),
                          buffer.getNumSamples());
+
 
 //    auto* buffer_write_left = buffer.getWritePointer(0);
 //    auto* buffer_write_right = buffer.getWritePointer(1);
@@ -123,20 +124,8 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
 
     mWidth.processBlock(buffer.getWritePointer(0),
                         buffer.getWritePointer(1),
-                        mParameterManager.getCurrentParameterValue(Width),
+                        mParameterManager->getCurrentParameterValue(Width),
                         buffer.getNumSamples());
-
-//    for (int i = 0; i < buffer.getNumSamples(); i++)
-//    {
-//        Delay_Left *= buffer_write_left[i];
-//        Delay_Left *= buffer_write_right[i];
-//    }
-//
-//    DBG(Delay_Left);
-//    Delay_Left = 0.f;
-//    DBG("ADSR:");
-
-    mADSR.applyEnvelopeToBuffer(buffer, 0, buffer.getNumSamples());
 
 //    for (int i = 0; i < buffer.getNumSamples(); i++)
 //    {
@@ -154,11 +143,21 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
 }
 
 
+ParameterManager* Week6AssignmentAudioProcessor::getParameterManager()
+{
+    return mParameterManager.get();
+}
+
+juce::AudioProcessor* Week6AssignmentAudioProcessor::getAudioProcessor()
+{
+    return this;
+}
+
 // STATE
 //==============================================================================
 void Week6AssignmentAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    auto state = mParameterManager.getTreeState().copyState();
+    auto state = mParameterManager->getValueTree()->copyState();
     std::unique_ptr<juce::XmlElement> xml(state.createXml());
     copyXmlToBinary(*xml, destData);
 }
@@ -167,13 +166,9 @@ void Week6AssignmentAudioProcessor::getStateInformation (juce::MemoryBlock& dest
 void Week6AssignmentAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary (data, sizeInBytes));
-    mParameterManager.getTreeState().replaceState(juce::ValueTree::fromXml(*xmlState));
+    mParameterManager->getValueTree()->replaceState(juce::ValueTree::fromXml(*xmlState));
 }
 
-ParameterManager* Week6AssignmentAudioProcessor::getParameterManager()
-{
-    return &mParameterManager;
-}
 
 
 

@@ -9,8 +9,10 @@
 */
 
 #pragma once
+#include "JuceHeader.h"
+#include "ParameterUtil.h"
 
-enum AppParameterID{
+enum AppParamID{
 //  Delay Section
     Mix = 0,
     Time,
@@ -27,30 +29,60 @@ enum AppParameterID{
     Decay,
     Sustain,
     Release,
-    
+
+//  ADSR Rate
+    Rate,
     TotalNumberParameters
 };
 
-static juce::Array<juce::String> ParameterIDStrings {
+static const juce::Array<juce::ParameterID> PARAM_ID {
 //  Delay Section
-    "Mix",
-    "Time",
-    "Feedback",
-    "Width",
-    "Lowpass",
-    "Highpass",
+    juce::ParameterID("Mix",1),
+    juce::ParameterID("Time", 1),
+    juce::ParameterID("Feedback", 1),
+    juce::ParameterID("Width",1),
+    juce::ParameterID("Lowpass",1),
+    juce::ParameterID("Highpass",1),
     
 //  Grain Section
-    "GrainPitch",
+    juce::ParameterID("GrainPitch",1),
     
 //  ADSR MOD Section
-    "Attack",
-    "Decay",
-    "Sustain",
-    "Release"
+    juce::ParameterID("Attack",1),
+    juce::ParameterID("Decay",1),
+    juce::ParameterID("Sustain",1),
+    juce::ParameterID("Release",1),
+
+//  ADSR Rate
+    juce::ParameterID("Rate",1)
 };
 
-static juce::Array<float> ParameterMinimum {
+static const juce::Array<ParameterUtil::PARAMETER_TYPE> PARAM_TYPE{
+//  Delay Section
+    ParameterUtil::PercentP,
+    ParameterUtil::FloatP,
+    ParameterUtil::PercentP,
+    ParameterUtil::PercentP,
+    ParameterUtil::FreqP,
+    ParameterUtil::FreqP,
+
+//  GrainSection
+    ParameterUtil::FloatP,
+
+//  ADSR MOD Section
+    ParameterUtil::FloatP,
+    ParameterUtil::FloatP,
+    ParameterUtil::FloatP,
+    ParameterUtil::FloatP,
+
+//  ADSR Rate
+    ParameterUtil::TimeDivP
+
+};
+
+
+
+static const juce::Array<float> ParameterMinimum {
 //  Delay Section
     0.f,
     .1f,
@@ -66,10 +98,13 @@ static juce::Array<float> ParameterMinimum {
     0.f,
     0.f,
     0.f,
-    0.f
+    0.f,
+
+//  Rate Minimum
+    8.f
 };
 
-static juce::Array<float> ParameterMaximum {
+static const juce::Array<float> ParameterMaximum {
 //  Delay Section
     1.f,
     1.f,
@@ -85,10 +120,13 @@ static juce::Array<float> ParameterMaximum {
     1.f,
     1.f,
     1.f,
-    1.f
+    1.f,
+
+//  Rate Maximum
+    21.f
 };
 
-static juce::Array<float> ParameterDefault {
+static const juce::Array<float> ParameterDefault {
 //  Delay Section
     .5f,
     .5f,
@@ -104,6 +142,31 @@ static juce::Array<float> ParameterDefault {
     .2f,
     .3f,
     .5f,
-    .2f
+    .2f,
+
+//  Rate Default
+    12.f
+};
+
+static const juce::Array<float> ParameterCenter {
+    //  Delay Section
+    .5f,
+    .5f,
+    .5f,
+    .5f,
+    500.f,
+    500.f,
+
+    //  Grain Section
+    .5f,
+
+    //  ADSR MOD Section
+    .5f,
+    .5f,
+    .5f,
+    .5f,
+
+    //  Rate Default
+    18.f
 };
 
