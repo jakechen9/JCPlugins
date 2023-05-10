@@ -115,6 +115,6 @@ void MyLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width,
 
 //juce::Typeface::Ptr getTypefaceForFont(const juce::Font& f)
 //{
-//    static juce::Typeface::Ptr myFont = juce::Typeface::createSystemTypefaceFor(BinaryData::Fire_Flight_FREE.ttf, BinaryData::Fire_Flight_FREE.ttf);
+//    static juce::Typeface::Ptr myFont = juce::Typeface::createSystemTypefaceFor(BinaryData::Fire_Flight_FREE_ttf, BinaryData::Fire_Flight_FREE_ttfSize);
 //    return myFont;
 //}

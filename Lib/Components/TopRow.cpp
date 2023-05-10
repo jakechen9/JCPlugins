@@ -11,6 +11,9 @@
 #include "TopRow.h"
 
 TopRow::TopRow(ProcessorInterface* inAudioProcessor) :mProcessorInterface(inAudioProcessor){
+
+    mBackGround = juce::ImageCache::getFromMemory(BinaryData::LFOParamFrame_png, BinaryData::LFOParamFrame_pngSize);
+
     auto& tree_state = *mProcessorInterface->getParameterManager()->getValueTree();
 
     
@@ -29,22 +32,28 @@ TopRow::TopRow(ProcessorInterface* inAudioProcessor) :mProcessorInterface(inAudi
     mRelease = std::make_unique<SliderContainer>();
     mRelease->setParameterToControl(tree_state, PARAM_ID[AppParamID::Release].getParamID());
     addAndMakeVisible(mRelease.get());
+
+    mRate = std::make_unique<SliderContainer>();
+    mRate->setParameterToControl(tree_state, PARAM_ID[AppParamID::Rate].getParamID());
+    addAndMakeVisible(mRate.get());
 }
 
 TopRow::~TopRow() = default;
 
 void TopRow::paint(juce::Graphics& g)
 {
-    g.setColour(juce::Colour(62, 72, 73));
-    g.fillRoundedRectangle(getLocalBounds().toFloat(), 0.f);
+    g.drawImage(mBackGround, 0, 0, 1100, 160, 0, 0, mBackGround.getWidth(), mBackGround.getHeight());
+//    g.setColour(juce::Colour(62, 72, 73));
+//    g.fillRoundedRectangle(getLocalBounds().toFloat(), 0.f);
 }
 
 void TopRow::resized()
 {
-    auto size = 90;
+    auto size = 100;
     auto knob_y = (getLocalBounds().getCentreY()) - size / 2;
-    mAttack -> setBounds(61*2, knob_y, size, size);
-    mDecay -> setBounds(176*2, knob_y, size, size);
-    mSustain -> setBounds(301*2, knob_y, size, size);
-    mRelease -> setBounds(426*2, knob_y, size, size);
+    mRate -> setBounds(176, knob_y, size, size);
+    mAttack -> setBounds(351, knob_y, size, size);
+    mDecay -> setBounds(525, knob_y, size, size);
+    mSustain -> setBounds(700, knob_y, size, size);
+    mRelease -> setBounds(875, knob_y, size, size);
 }

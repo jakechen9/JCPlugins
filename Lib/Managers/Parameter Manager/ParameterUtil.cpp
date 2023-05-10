@@ -48,3 +48,17 @@ void ParameterUtil::createTimeDivParameter(ParameterUtil::Parameters& inParamete
     int defaultValue = int(inDefaultValue);
     addParameter<juce::AudioParameterInt>(inParameters, inID, inName, minimum, maximum, defaultValue, juce::String(), timedivToString, nullptr);
 }
+
+void ParameterUtil::createTimeParameter(ParameterUtil::Parameters& inParameters,
+                                        juce::ParameterID inID,
+                                        juce::String inName,
+                                        float inMinimum,
+                                        float inMaximum,
+                                        float inDefaultValue)
+{
+    auto range = createNormalisableRange<float>(inMinimum, inMaximum, .5f);
+    addParameter<juce::AudioParameterFloat>(inParameters, inID, inName, range,
+                                            inDefaultValue, juce::String(),
+                                            juce::AudioProcessorParameter::genericParameter,
+                                            timeToString, nullptr);
+}

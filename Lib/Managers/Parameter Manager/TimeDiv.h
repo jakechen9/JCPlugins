@@ -5,7 +5,7 @@
 #pragma once
 #include "JuceHeader.h"
 
-enum TimDiv {
+enum TimeDiv {
 
     OneHundredTwentyEighthNote = 0,
     SixtyFourthNoteTriplet,
@@ -17,6 +17,8 @@ enum TimDiv {
 
     ThirtySecondNote,
     SixteenthNoteTriplet,
+
+    // Minimum
     ThirtySecondNoteDotted,
 
     SixteenthNote,
@@ -34,7 +36,7 @@ enum TimDiv {
     HalfNote,
     OneBarTriplet,
     HalfNoteDotted,
-
+//  Maximum
     OneBar,
     OneBarDotted,
     TwoBar,
@@ -88,7 +90,7 @@ static const juce::StringArray TIME_DIVISION_STRINGS {
     "32 Bars",
 };
 
-inline float getTimeDivisonSamples(TimDiv inDiv, float inSampleRate, float inBpm)
+inline float getTimeDivisonSamples(int inDiv, float inSampleRate, float inBpm)
 {
     float samplesPerBeat = ((60.f / inBpm) * inSampleRate);
 
@@ -133,7 +135,7 @@ inline float getTimeDivisonSamples(TimDiv inDiv, float inSampleRate, float inBpm
 };
 
 
-inline float TIMDIV(TimDiv inDiv, float inBpm)
+inline float TIMEDIV(int inDiv, float inBpm)
 {
     float secondsPerBeat = (60.f / inBpm);
 

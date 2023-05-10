@@ -66,8 +66,9 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
 //    // time division
 //    float time_div = (60.f/bpm) / 2.f;
 
-    auto noteLength = getTimeDivisonSamples(EighthNote, getSampleRate(), bpm);
-    auto time_div = TIMDIV(EighthNote, bpm);
+    auto noteLength = getTimeDivisonSamples(mParameterManager->getCurrentParameterValue(Rate), getSampleRate(), bpm);
+    auto time_div = TIMEDIV(mParameterManager->getCurrentParameterValue(Rate), bpm);
+
     // Set Delay Parameter to control
     mDelayL.setParameters(mParameterManager->getCurrentParameterValue(Time),
                           mParameterManager->getCurrentParameterValue(Feedback),
@@ -95,7 +96,7 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
                           noteLength
                           );
 
-
+    /* */
 //    DBG("mDelay");
 //    float Delay_Left = 0.f;
 
@@ -104,7 +105,7 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     mDelayR.processBlock(buffer.getWritePointer(1),
                          buffer.getNumSamples());
 
-
+    /* */
 //    auto* buffer_write_left = buffer.getWritePointer(0);
 //    auto* buffer_write_right = buffer.getWritePointer(1);
 //
@@ -121,12 +122,13 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
 //
 //    DBG("Width:");
 //    Delay_Left = 0;
+    /* */
 
     mWidth.processBlock(buffer.getWritePointer(0),
                         buffer.getWritePointer(1),
                         mParameterManager->getCurrentParameterValue(Width),
                         buffer.getNumSamples());
-
+    /* */
 //    for (int i = 0; i < buffer.getNumSamples(); i++)
 //    {
 //        Delay_Left *= buffer_write_left[i];
@@ -134,7 +136,7 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
 //    }
 //
 //    DBG(Delay_Left);
-
+    /* */
     float output_gain = 0;
     output_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
     output_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());

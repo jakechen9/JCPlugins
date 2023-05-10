@@ -28,7 +28,8 @@ private:
     std::unique_ptr<SliderContainer> mDecay;
     std::unique_ptr<SliderContainer> mSustain;
     std::unique_ptr<SliderContainer> mRelease;
-    
+    std::unique_ptr<SliderContainer> mRate;
+    juce::Image mBackGround;
     ProcessorInterface* mProcessorInterface;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TopRow)

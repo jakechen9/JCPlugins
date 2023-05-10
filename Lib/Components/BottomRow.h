@@ -32,7 +32,7 @@ private:
     std::unique_ptr<SliderContainer> mGrainPitch;
     std::unique_ptr<SliderContainer> mDelayLowpass;
     std::unique_ptr<SliderContainer> mDelayHighpass;
-    
+    juce::Image mBackGround;
     ProcessorInterface* mProcessorInterface;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(BottomRow)

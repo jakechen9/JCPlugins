@@ -60,7 +60,7 @@ static const juce::Array<juce::ParameterID> PARAM_ID {
 static const juce::Array<ParameterUtil::PARAMETER_TYPE> PARAM_TYPE{
 //  Delay Section
     ParameterUtil::PercentP,
-    ParameterUtil::FloatP,
+    ParameterUtil::TimeP,
     ParameterUtil::PercentP,
     ParameterUtil::PercentP,
     ParameterUtil::FreqP,
@@ -158,7 +158,7 @@ static const juce::Array<float> ParameterCenter {
     500.f,
 
     //  Grain Section
-    .5f,
+    3.5f,
 
     //  ADSR MOD Section
     .5f,

@@ -12,6 +12,9 @@
 
 
 BottomRow::BottomRow(ProcessorInterface* inAudioProcessor) :mProcessorInterface(inAudioProcessor){
+
+    mBackGround = juce::ImageCache::getFromMemory(BinaryData::DelayGrainParamFrame_png, BinaryData::DelayGrainParamFrame_pngSize);
+
     auto& tree_state = *mProcessorInterface->getParameterManager()->getValueTree();
     
     mDelayMix = std::make_unique<SliderContainer>();
@@ -49,18 +52,19 @@ BottomRow::~BottomRow() = default;
 
 void BottomRow::paint(juce::Graphics& g)
 {
-    g.setColour(juce::Colour(62, 72, 73));
-    g.fillRoundedRectangle(getLocalBounds().toFloat(), 0.f);
+    g.drawImage(mBackGround, 0, 0, 1100, 237, 0, 0, mBackGround.getWidth(), mBackGround.getHeight());
+//    g.setColour(juce::Colour(62, 72, 73));
+//    g.fillRoundedRectangle(getLocalBounds().toFloat(), 0.f);
 }
 
 void BottomRow::resized()
 {
-    auto size = 90;
-    mDelayMix->setBounds(61*2, 84, size, size);
-    mDelayTime->setBounds(176*2, 30, size, size);
-    mDelayWidth->setBounds(176*2, 141, size, size);
-    mDelayFeedback->setBounds(301*2, 30, size, size);
-    mGrainPitch->setBounds(301*2, 141, size, size);
-    mDelayLowpass->setBounds(426*2, 141, size, size);
-    mDelayHighpass->setBounds(426*2, 30, size, size);
+    auto size = 100;
+    mDelayMix->setBounds(61*2, 80, size, size);
+    mDelayTime->setBounds(176*2, 28, size, size);
+    mDelayWidth->setBounds(176*2, 135, size, size);
+    mDelayFeedback->setBounds(301*2, 28, size, size);
+    mGrainPitch->setBounds(301*2, 135, size, size);
+    mDelayLowpass->setBounds(426*2, 135, size, size);
+    mDelayHighpass->setBounds(426*2, 28, size, size);
 }

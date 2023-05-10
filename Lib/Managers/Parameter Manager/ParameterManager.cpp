@@ -30,6 +30,9 @@ ParameterManager::ParameterManager(ProcessorInterface* inAudioProcessor)
             case ParameterUtil::PercentP:
                 ParameterUtil::createPercentageParameter(parameters, PARAM_ID[i], PARAM_ID[i].getParamID(),  ParameterDefault[i]);
                 break;
+            case ParameterUtil::TimeP:
+                ParameterUtil::createTimeParameter(parameters, PARAM_ID[i], PARAM_ID[i].getParamID(), ParameterMinimum[i], ParameterMaximum[i], ParameterDefault[i]);
+                break;
         }
 //        mParameterValues.add(mParameterState.getRawParameterValue(ParameterIDStrings[i]));
     }
@@ -43,10 +46,12 @@ float ParameterManager::getCurrentParameterValue(int inParameterID)
     return mParameterState->getRawParameterValue(PARAM_ID[inParameterID].getParamID()) -> load();
 }
 
+
 void ParameterManager:: getParameter(int inParameterID, float inValue)
 {
     mParameterState->getParameter(PARAM_ID[inParameterID].getParamID())->setValueNotifyingHost(inValue);
 }
+
 
 juce::AudioProcessorValueTreeState* ParameterManager::getValueTree()
 {

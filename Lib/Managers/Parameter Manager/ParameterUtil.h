@@ -46,10 +46,13 @@ auto floatToString = [](float infloatVal, int)
 //    juce::String float_String = juce::String(int (infloatVal));
     return juce::String(infloatVal, 2);
 };
-//auto timeToString = [](float inTimeValue, int) {
-//    juce::String time_string = juce::String(int(inTimeValue * 1000.f));
-//    return time_string + " ms";
-//};
+auto timeToString = [](float inTimeValue, int) {
+    if(inTimeValue < 1.f){
+        return juce::String(int(inTimeValue * 1000.f)) + " ms";
+    } else{
+        return juce::String(int(inTimeValue)) + " s";
+    }
+};
 
 void createFloatParameter(ParameterUtil::Parameters& inParameters,juce::ParameterID inID,
                           juce::String inName,
@@ -73,10 +76,18 @@ void createFrequencyParameter(ParameterUtil::Parameters& inParameters,
                               float inMinimum,
                               float inMaximum,
                               float inDefaultValue);
+void createTimeParameter(ParameterUtil::Parameters& inParameters,
+                              juce::ParameterID inID,
+                              juce::String inName,
+                              float inMinimum,
+                              float inMaximum,
+                              float inDefaultValue);
+
 enum PARAMETER_TYPE{
     FreqP = 0,
     TimeDivP,
     PercentP,
-    FloatP
+    FloatP,
+    TimeP
 };
 }

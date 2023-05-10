@@ -32,9 +32,23 @@ void DraggableButton::resized()
     
 }
 
+void DraggableButton::mouseEnter(const juce::MouseEvent& event)
+{
+    isEntered = true;
+}
+
+void DraggableButton::mouseExit(const juce::MouseEvent& event)
+{
+    isEntered = false;
+}
+
 juce::Colour DraggableButton::getColour()
 {
-    return juce::Colours::hotpink;
+    if(isEntered){
+        return juce::Colours::hotpink.brighter();
+    } else{
+        return juce::Colours::hotpink;
+    }
 }
 
 void DraggableButton::mouseDown (const juce::MouseEvent& e)

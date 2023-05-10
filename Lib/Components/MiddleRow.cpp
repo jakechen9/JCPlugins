@@ -44,17 +44,17 @@ void MiddleRow::paint(juce::Graphics& g)
     g.setColour(juce::Colour(205, 212, 212));
     g.fillRoundedRectangle(getLocalBounds().toFloat(), 0.f);
     
-    float size = getWidth() / 1000.0f * 20;
+    float size = static_cast<float>(getWidth()) / 1000.0f * 20;
     
     juce::Path mResponseCurve;
-    juce::Point<float> attackPoint(mDraggableAttackButton.getX() + size / 2.f,
-                                   mDraggableAttackButton.getY() + size / 2.f);
-    juce::Point<float> decayPoint(mDraggableDecayButton.getX() + size / 2.f,
-                                  mDraggableDecayButton.getY() + size / 2.f);
-    juce::Point<float> sustainPoint(mDraggableSustainButton.getX() + size / 2.f,
-                                    mDraggableSustainButton.getY() + size / 2.f);
-    juce::Point<float> releasePoint(mDraggableReleaseButton.getX() + size / 2.f,
-                                    mDraggableReleaseButton.getY() + size / 2.f);
+    juce::Point<float> attackPoint(static_cast<float>(mDraggableAttackButton.getX()) + size / 2.f,
+                                   static_cast<float>(mDraggableAttackButton.getY()) + size / 2.f);
+    juce::Point<float> decayPoint(static_cast<float>(mDraggableDecayButton.getX()) + size / 2.f,
+                                  static_cast<float>(mDraggableDecayButton.getY()) + size / 2.f);
+    juce::Point<float> sustainPoint(static_cast<float>(mDraggableSustainButton.getX()) + size / 2.f,
+                                    static_cast<float>(mDraggableSustainButton.getY()) + size / 2.f);
+    juce::Point<float> releasePoint(static_cast<float>(mDraggableReleaseButton.getX()) + size / 2.f,
+                                    static_cast<float>(mDraggableReleaseButton.getY()) + size / 2.f);
     mResponseCurve.startNewSubPath(attackPoint);
     mResponseCurve.lineTo(decayPoint);
     mResponseCurve.startNewSubPath(decayPoint);
@@ -92,17 +92,17 @@ void MiddleRow::sanatizePoints()
     mDraggableReleaseButton.setTopLeftPosition(x2, 301);
 
 
-    float attackValue = mDraggableDecayButton.getBounds().getX()/366.f;
+    float attackValue = static_cast<float>(mDraggableDecayButton.getBounds().getX()) /366.f;
     mProcessorInterface->getParameterManager()->getParameter(Attack, attackValue);
 
-    float decayValue = (mDraggableSustainButton.getBounds().getX() - 367.f)/366.f;
+    float decayValue = (static_cast<float>(mDraggableSustainButton.getBounds().getX()) - 367.f)/366.f;
     mProcessorInterface->getParameterManager()->getParameter(Decay, decayValue);
 
-    float sustainValue = mDraggableSustainButton.getBounds().getY()/301.f;
+    float sustainValue = static_cast<float>(mDraggableSustainButton.getBounds().getY()) /301.f;
     sustainValue = juce::jmap(sustainValue, 1.f, 0.f);
     mProcessorInterface->getParameterManager()->getParameter(Sustain, sustainValue);
 
-    float releaseValue = (mDraggableReleaseButton.getBounds().getX()- 734.f)/344.f;
+    float releaseValue = (static_cast<float>(mDraggableReleaseButton.getBounds().getX()) - 734.f)/344.f;
     mProcessorInterface->getParameterManager()->getParameter(Release, releaseValue);
 
     repaint();
@@ -110,16 +110,19 @@ void MiddleRow::sanatizePoints()
 
 void MiddleRow::updateBounds()
 {
-    float size = getWidth() / 1000.0f * 20;
-    mDraggableAttackButton.setBounds(0, 301, size, size);
+    float size = static_cast<float>(getWidth() / 1000.0f * 20);
+    mDraggableAttackButton.setBounds(0, 301, static_cast<int>(size), static_cast<int>(size));
     float attackVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Attack);
     float decayVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Decay);
     float sustainVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Sustain);
     float releaseVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Release);
-    mDraggableDecayButton.setBounds(juce::jmap (attackVal, 0.f, 366.f), 0, size, size);
-    mDraggableSustainButton.setBounds(juce::jmap(decayVal, 367.f, 733.f),
-                                      juce::jmap(sustainVal, 301.f, 0.f), size, size);
-    mDraggableReleaseButton.setBounds(juce::jmap(releaseVal, 734.f, 1078.f), 301, size, size);
+    mDraggableDecayButton.setBounds(static_cast<int>(juce::jmap(attackVal, 0.f, 366.f)), 0, static_cast<int>(size), static_cast<int>(size));
+    mDraggableSustainButton.setBounds(
+        static_cast<int>(juce::jmap(decayVal, 367.f, 733.f)),
+                                      static_cast<int>(juce::jmap(sustainVal, 301.f, 0.f)),
+                                      static_cast<int>(size),
+                                      static_cast<int>(size));
+    mDraggableReleaseButton.setBounds(static_cast<int>(juce::jmap(releaseVal, 734.f, 1078.f)), 301, static_cast<int>(size), static_cast<int>(size));
     repaint();
 }
 
