@@ -4,25 +4,21 @@
 
 #include "WidthEffect.h"
 WidthEffect::WidthEffect()
-{
-
-}
+= default;
 
 WidthEffect::~WidthEffect()
-{
-
-}
+= default;
 
 void WidthEffect::processBlock(float* inBufferL, float* inBufferR, float inWidth, int inNumSamples)
 {
     for (int i = 0; i < inNumSamples; ++i) {
-        float mid = (inBufferL[i] + inBufferR[i]) / sqrt(2);
-        float side = (inBufferL[i] - inBufferR[i]) / sqrt(2);
+        auto mid = static_cast<float>((inBufferL[i] + inBufferR[i]) / sqrt(2));
+        auto side = static_cast<float>((inBufferL[i] - inBufferR[i]) / sqrt(2));
 
         mid *= 2.f * (1.f - inWidth);
         side *= 2.f * inWidth;
 
-        inBufferL[i] = (mid + side) / sqrt(2);
-        inBufferR[i] = (mid - side) / sqrt(2);
+        inBufferL[i] = static_cast<float>((mid + side) / sqrt(2));
+        inBufferR[i] = static_cast<float>((mid - side) / sqrt(2));
     }
 }

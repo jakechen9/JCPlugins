@@ -12,7 +12,7 @@ public:
     WidthEffect();
     ~WidthEffect();
 
-    void processBlock(float* inBufferL, float* inBufferR, float inWidth, int inNumSamples);
+    static void processBlock(float* inBufferL, float* inBufferR, float inWidth, int inNumSamples);
 
 private:
 

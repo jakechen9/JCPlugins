@@ -8,10 +8,9 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include "ParameterDefines.h"
 
 //==============================================================================
-Week6AssignmentAudioProcessorEditor::Week6AssignmentAudioProcessorEditor (Week6AssignmentAudioProcessor& p)
+JCAudioProcessorEditor::JCAudioProcessorEditor (JCAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
     mLookAndFeel = std::make_unique<MyLookAndFeel>();
@@ -30,19 +29,19 @@ Week6AssignmentAudioProcessorEditor::Week6AssignmentAudioProcessorEditor (Week6A
     setSize (1100, 720);
 }
 
-Week6AssignmentAudioProcessorEditor::~Week6AssignmentAudioProcessorEditor()
+JCAudioProcessorEditor::~JCAudioProcessorEditor()
 {
     setLookAndFeel(nullptr);
 }
 
 //==============================================================================
-void Week6AssignmentAudioProcessorEditor::paint (juce::Graphics& g)
+void JCAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 }
 
-void Week6AssignmentAudioProcessorEditor::resized()
+void JCAudioProcessorEditor::resized()
 {
     mBottomRow->setBounds(0, 483, 1100, 237);
     mTopRow -> setBounds(0, 0, 1100, 160);

@@ -11,30 +11,17 @@
 #include "RealTimeGranular.h"
 
 /* */
-void RealTimeGranular::prepareToPlay(int inSampleRate, int inBlockSize)
+void RealTimeGranular::prepareToPlay(int inSampleRate)
 {
-    mSampleRate = inSampleRate;
-    for (int i = 0; i < mGrains.size(); i++) {
-        mGrains[i].setSize(mGrainsizeSeconds * mSampleRate);
+    mSampleRate = static_cast<float>(inSampleRate);
+    for (auto & mGrain : mGrains) {
+        mGrain.setSize(static_cast<int>(mGrainsizeSeconds * mSampleRate));
     }
-    
-    mGrainBuffer.setSize(10.f * inSampleRate);
-    mScheduler.setTime(mGrainsizeSeconds / mGrainOverlapRate * inSampleRate);
-//    mScheduler.initialize(inSampleRate);
+
+    mGrainBuffer.setSize(static_cast<int>(10.f * static_cast<float>(inSampleRate)));
+    mScheduler.setTime(mGrainsizeSeconds / mGrainOverlapRate * static_cast<float>(inSampleRate));
     mScheduler.reset();
-    
 }
-
-
-
-//void RealTimeGranular::setParameters(float inGrainSize)
-//{
-//    for (int i = 0; i < mGrains.size(); i++) {
-//        mGrains[i].setSize(inGrainSize * mSampleRate);
-//    }
-//    mScheduler.setTime(inGrainSize);
-//}
-
 
 /* */
 float RealTimeGranular::processSample(float inSample, float inGrainPitch)
@@ -43,11 +30,11 @@ float RealTimeGranular::processSample(float inSample, float inGrainPitch)
     
     
     if (mScheduler.trigger()) {
-        for (int j = 0; j < mGrains.size(); j++) {
-            if (mGrains[j].isActive() == false) {
-                mGrains[j].start(mGrainBuffer.getWriteHead() - 2,
-                                 mGrainBuffer.getNumSamples(),
-                                 inGrainPitch);
+        for (auto & mGrain : mGrains) {
+            if (!mGrain.isActive()) {
+                mGrain.start(static_cast<float>(mGrainBuffer.getWriteHead() - 2),
+                             mGrainBuffer.getNumSamples(),
+                             inGrainPitch);
                 break;
             }
         }
@@ -58,9 +45,9 @@ float RealTimeGranular::processSample(float inSample, float inGrainPitch)
     float temp_left;
     float temp_right;
     
-    for (int j = 0; j < mGrains.size(); j++) {
-        if (mGrains[j].isActive()) {
-            mGrains[j].processSample(mGrainBuffer, temp_left, temp_right);
+    for (auto & mGrain : mGrains) {
+        if (mGrain.isActive()) {
+            mGrain.processSample(mGrainBuffer, temp_left, temp_right);
             inSample += temp_left;
         }
     }

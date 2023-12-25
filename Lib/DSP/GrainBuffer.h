@@ -33,17 +33,17 @@ public:
         }
     }
     
-    float getSample(int inChannel, int inSample) const {
+    [[nodiscard]] float getSample(int inChannel, int inSample) const {
         jassert(juce::isPositiveAndBelow(inSample, mCircularBuffer.getNumSamples()));
         return mCircularBuffer.getSample(inChannel, inSample);
         
     }
     
-    int getWriteHead() {
+    [[nodiscard]] int getWriteHead() const {
         return mWriteHead;
     }
     
-    int getNumSamples() const {
+    [[nodiscard]] int getNumSamples() const {
         return mCircularBuffer.getNumSamples();
     }
     

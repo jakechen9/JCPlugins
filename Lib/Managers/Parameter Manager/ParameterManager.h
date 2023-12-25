@@ -30,7 +30,7 @@ public:
     juce::AudioProcessorValueTreeState* getValueTree();
     
 private:
-    juce::Array<std::atomic<float>*> mParameterValues;
+//    juce::Array<std::atomic<float>*> mParameterValues;
     std::unique_ptr<juce::AudioProcessorValueTreeState> mParameterState;
     ProcessorInterface* mProcessorInterface;
 

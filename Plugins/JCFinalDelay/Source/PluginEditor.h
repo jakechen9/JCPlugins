@@ -19,14 +19,14 @@
 //==============================================================================
 /**
 */
-class Week6AssignmentAudioProcessorEditor  : public juce::AudioProcessorEditor,
+class JCAudioProcessorEditor  : public juce::AudioProcessorEditor,
                                              public juce::DragAndDropContainer,
                                              public juce::ComponentDragger,
                                              public juce::ComponentBoundsConstrainer
 {
 public:
-    Week6AssignmentAudioProcessorEditor (Week6AssignmentAudioProcessor&);
-    ~Week6AssignmentAudioProcessorEditor() override;
+    explicit JCAudioProcessorEditor (JCAudioProcessor&);
+    ~JCAudioProcessorEditor() override;
 
     //==============================================================================
     void paint (juce::Graphics&) override;
@@ -37,10 +37,9 @@ private:
     std::unique_ptr<TopRow> mTopRow;
     std::unique_ptr<MiddleRow> mMiddleRow;
     std::unique_ptr<MyLookAndFeel> mLookAndFeel;
-    juce::OwnedArray<SliderContainer> mSliderContainers;
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    Week6AssignmentAudioProcessor& audioProcessor;
+    JCAudioProcessor& audioProcessor;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Week6AssignmentAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JCAudioProcessorEditor)
 };

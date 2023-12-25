@@ -20,7 +20,7 @@ class RealTimeGranular {
 public:
     
     /* */
-    void prepareToPlay(int inSampleRate, int inBlockSize);
+    void prepareToPlay(int inSampleRate);
     
     
 //    void setParameters(float inGrainSize);

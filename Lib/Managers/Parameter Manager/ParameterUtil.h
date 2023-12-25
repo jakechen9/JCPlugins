@@ -71,8 +71,8 @@ void createTimeDivParameter(ParameterUtil::Parameters& inParameters,
                             float inMaximum,
                             float inDefaultValue);
 void createFrequencyParameter(ParameterUtil::Parameters& inParameters,
-                              juce::ParameterID inID,
-                              juce::String inName,
+                              const juce::ParameterID& inID,
+                              const juce::String& inName,
                               float inMinimum,
                               float inMaximum,
                               float inDefaultValue);

@@ -106,13 +106,13 @@ inline float getTimeDivisonSamples(int inDiv, float inSampleRate, float inBpm)
         case OneBarDotted: return samplesPerBeat * 6;
         case OneBar: return samplesPerBeat * 4;
 
-        case HalfNoteDotted: return (samplesPerBeat * 2) * 1.5;
-        case QuarterNoteDotted: return samplesPerBeat * 1.5;
-        case EighthNoteDotted: return (samplesPerBeat / 2.f) * 1.5;
-        case SixteenthNoteDotted: return (samplesPerBeat / 4.f) * 1.5;
-        case ThirtySecondNoteDotted: return (samplesPerBeat / 8.f) * 1.5;
-        case SixtyFourthNoteDotted: return (samplesPerBeat / 16.f) * 1.5;
-        case OneHundredTwentyEighthNoteDotted: return (samplesPerBeat / 32.f) * 1.5;
+        case HalfNoteDotted: return static_cast<float>((samplesPerBeat * 2) * 1.5);
+        case QuarterNoteDotted: return static_cast<float>(samplesPerBeat * 1.5);
+        case EighthNoteDotted: return static_cast<float>((samplesPerBeat / 2.f) * 1.5);
+        case SixteenthNoteDotted: return static_cast<float>((samplesPerBeat / 4.f) * 1.5);
+        case ThirtySecondNoteDotted: return static_cast<float>((samplesPerBeat / 8.f) * 1.5);
+        case SixtyFourthNoteDotted: return static_cast<float>((samplesPerBeat / 16.f) * 1.5);
+        case OneHundredTwentyEighthNoteDotted: return static_cast<float>((samplesPerBeat / 32.f) * 1.5);
 
         case HalfNote: return samplesPerBeat * 2;
         case QuarterNote: return samplesPerBeat;
@@ -122,17 +122,17 @@ inline float getTimeDivisonSamples(int inDiv, float inSampleRate, float inBpm)
         case SixtyFourthNote: return samplesPerBeat / 16.f;
         case OneHundredTwentyEighthNote: return samplesPerBeat / 32.f;
 
-        case OneBarTriplet:  return (samplesPerBeat * 4) / 1.5;
-        case HalfNoteTriplet: return (samplesPerBeat * 2) / 1.5;
-        case QuarterNoteTriplet: return (samplesPerBeat) / 1.5;
-        case EighthNoteTriplet: return (samplesPerBeat / 2.f) / 1.5;
-        case SixteenthNoteTriplet: return (samplesPerBeat / 4.f) / 1.5;
-        case ThirtySecondNoteTriplet: return (samplesPerBeat / 8.f) / 1.5;
-        case SixtyFourthNoteTriplet: return (samplesPerBeat / 16.f) / 1.5;
+        case OneBarTriplet:  return static_cast<float>((samplesPerBeat * 4) / 1.5);
+        case HalfNoteTriplet: return static_cast<float>((samplesPerBeat * 2) / 1.5);
+        case QuarterNoteTriplet: return static_cast<float>((samplesPerBeat) / 1.5);
+        case EighthNoteTriplet: return static_cast<float>((samplesPerBeat / 2.f) / 1.5);
+        case SixteenthNoteTriplet: return static_cast<float>((samplesPerBeat / 4.f) / 1.5);
+        case ThirtySecondNoteTriplet: return static_cast<float>((samplesPerBeat / 8.f) / 1.5);
+        case SixtyFourthNoteTriplet: return static_cast<float>((samplesPerBeat / 16.f) / 1.5);
 
         default: return -1;
     }
-};
+}
 
 
 inline float TIMEDIV(int inDiv, float inBpm)
@@ -151,13 +151,13 @@ inline float TIMEDIV(int inDiv, float inBpm)
         case OneBarDotted: return secondsPerBeat * 6;
         case OneBar: return secondsPerBeat * 4;
 
-        case HalfNoteDotted: return (secondsPerBeat * 2) * 1.5;
-        case QuarterNoteDotted: return secondsPerBeat * 1.5;
-        case EighthNoteDotted: return (secondsPerBeat / 2.f) * 1.5;
-        case SixteenthNoteDotted: return (secondsPerBeat / 4.f) * 1.5;
-        case ThirtySecondNoteDotted: return (secondsPerBeat / 8.f) * 1.5;
-        case SixtyFourthNoteDotted: return (secondsPerBeat / 16.f) * 1.5;
-        case OneHundredTwentyEighthNoteDotted: return (secondsPerBeat / 32.f) * 1.5;
+        case HalfNoteDotted: return static_cast<float>((secondsPerBeat * 2) * 1.5);
+        case QuarterNoteDotted: return static_cast<float>(secondsPerBeat * 1.5);
+        case EighthNoteDotted: return static_cast<float>((secondsPerBeat / 2.f) * 1.5);
+        case SixteenthNoteDotted: return static_cast<float>((secondsPerBeat / 4.f) * 1.5);
+        case ThirtySecondNoteDotted: return static_cast<float>((secondsPerBeat / 8.f) * 1.5);
+        case SixtyFourthNoteDotted: return static_cast<float>((secondsPerBeat / 16.f) * 1.5);
+        case OneHundredTwentyEighthNoteDotted: return static_cast<float>((secondsPerBeat / 32.f) * 1.5);
 
         case HalfNote: return secondsPerBeat * 2;
         case QuarterNote: return secondsPerBeat;
@@ -167,14 +167,14 @@ inline float TIMEDIV(int inDiv, float inBpm)
         case SixtyFourthNote: return secondsPerBeat / 16.f;
         case OneHundredTwentyEighthNote: return secondsPerBeat / 32.f;
 
-        case OneBarTriplet:  return (secondsPerBeat * 4) / 1.5;
-        case HalfNoteTriplet: return (secondsPerBeat * 2) / 1.5;
-        case QuarterNoteTriplet: return (secondsPerBeat) / 1.5;
-        case EighthNoteTriplet: return (secondsPerBeat / 2.f) / 1.5;
-        case SixteenthNoteTriplet: return (secondsPerBeat / 4.f) / 1.5;
-        case ThirtySecondNoteTriplet: return (secondsPerBeat / 8.f) / 1.5;
-        case SixtyFourthNoteTriplet: return (secondsPerBeat / 16.f) / 1.5;
+        case OneBarTriplet:  return static_cast<float>((secondsPerBeat * 4) / 1.5);
+        case HalfNoteTriplet: return static_cast<float>((secondsPerBeat * 2) / 1.5);
+        case QuarterNoteTriplet: return static_cast<float>((secondsPerBeat) / 1.5);
+        case EighthNoteTriplet: return static_cast<float>((secondsPerBeat / 2.f) / 1.5);
+        case SixteenthNoteTriplet: return static_cast<float>((secondsPerBeat / 4.f) / 1.5);
+        case ThirtySecondNoteTriplet: return static_cast<float>((secondsPerBeat / 8.f) / 1.5);
+        case SixtyFourthNoteTriplet: return static_cast<float>((secondsPerBeat / 16.f) / 1.5);
 
         default: return -1;
     }
-};
+}

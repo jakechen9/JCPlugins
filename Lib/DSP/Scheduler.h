@@ -13,12 +13,8 @@
 class Scheduler {
 public:
     
-//    void initialize(float inSampleRate) {
-//        mSampleRate = inSampleRate;
-//    }
-    
     void setTime(float inTimeSamples) {
-        mTimeInSamples = inTimeSamples;
+        mTimeInSamples = static_cast<int>(inTimeSamples);
     }
     
     bool trigger() {
@@ -41,9 +37,6 @@ private:
     
     int mCounter = 0;
     int mTimeInSamples = 0;
-    const float mGrainOverlapRate = 2.f;
-    float mSampleRate = 0.f;
-
 };
 
 #endif /* Scheduler_h */

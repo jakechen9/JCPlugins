@@ -7,8 +7,8 @@
 using namespace ParameterUtil;
 
 void ParameterUtil::createFrequencyParameter(ParameterUtil::Parameters& inParameters,
-                                                juce::ParameterID inID,
-                                                juce::String inName,
+                                                const juce::ParameterID& inID,
+                                                const juce::String& inName,
                                                 float inMinimum,
                                                 float inMaximum,
                                                 float inDefaultValue)

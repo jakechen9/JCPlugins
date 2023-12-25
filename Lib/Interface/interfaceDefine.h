@@ -12,7 +12,7 @@ class ParameterManager;
  class ProcessorInterface{
 
  public:
-     virtual ~ProcessorInterface() {}
+     virtual ~ProcessorInterface() = default;
 
      virtual ParameterManager* getParameterManager() = 0;
 

@@ -19,8 +19,8 @@
 //==============================================================================
 /**
 */
-class Week6AssignmentAudioProcessor  : public juce::AudioProcessor,
-                                       public ProcessorInterface
+class JCAudioProcessor  : public juce::AudioProcessor,
+                          public ProcessorInterface
 //                                      public juce::ADSR
                             #if JucePlugin_Enable_ARA
                              , public juce::AudioProcessorARAExtension
@@ -28,8 +28,8 @@ class Week6AssignmentAudioProcessor  : public juce::AudioProcessor,
 {
 public:
     //==============================================================================
-    Week6AssignmentAudioProcessor();
-    ~Week6AssignmentAudioProcessor() override;
+    JCAudioProcessor();
+    ~JCAudioProcessor() override;
 
     //==============================================================================
 //    juce::AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
@@ -72,16 +72,11 @@ public:
 
 private:
     std::unique_ptr<ParameterManager> mParameterManager;
-    
-    float mInputGain = 0;
-    float mOutputGain = 0;
     Delay mDelayL;
     Delay mDelayR;
     WidthEffect mWidth;
-
-//    juce::ADSR mADSR;
-    bool mADSRStarted = false;
-//    int mCounter = 0;
+    float mInputGain = 0;
+    float mOutputGain = 0;
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Week6AssignmentAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JCAudioProcessor)
 };

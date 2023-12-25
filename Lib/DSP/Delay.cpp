@@ -42,7 +42,7 @@ void Delay::initialize(float inSampleRate, int inBlocksize)
     mHighPassFilter.reset();
     mLowpassFilter.reset();
 
-    mRealTimeGranulator.prepareToPlay(inSampleRate, inBlocksize);
+    mRealTimeGranulator.prepareToPlay(inSampleRate);
 }
 
 /* */

@@ -10,7 +10,7 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-Week6AssignmentAudioProcessor::Week6AssignmentAudioProcessor()
+JCAudioProcessor::JCAudioProcessor()
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
                       #if ! JucePlugin_IsSynth
@@ -24,14 +24,14 @@ Week6AssignmentAudioProcessor::Week6AssignmentAudioProcessor()
 {
     mParameterManager.reset(new ParameterManager(this));
 }
-Week6AssignmentAudioProcessor::~Week6AssignmentAudioProcessor()
+JCAudioProcessor::~JCAudioProcessor()
 {
 }
 
 
 // Audio
 
-void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void JCAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     mDelayL.initialize(sampleRate, samplesPerBlock);
     mDelayR.initialize(sampleRate, samplesPerBlock);
@@ -39,7 +39,7 @@ void Week6AssignmentAudioProcessor::prepareToPlay (double sampleRate, int sample
     
 }
 
-void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void JCAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -145,19 +145,19 @@ void Week6AssignmentAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
 }
 
 
-ParameterManager* Week6AssignmentAudioProcessor::getParameterManager()
+ParameterManager* JCAudioProcessor::getParameterManager()
 {
     return mParameterManager.get();
 }
 
-juce::AudioProcessor* Week6AssignmentAudioProcessor::getAudioProcessor()
+juce::AudioProcessor* JCAudioProcessor::getAudioProcessor()
 {
     return this;
 }
 
 // STATE
 //==============================================================================
-void Week6AssignmentAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
+void JCAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
     auto state = mParameterManager->getValueTree()->copyState();
     std::unique_ptr<juce::XmlElement> xml(state.createXml());
@@ -165,7 +165,7 @@ void Week6AssignmentAudioProcessor::getStateInformation (juce::MemoryBlock& dest
 }
 
 
-void Week6AssignmentAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+void JCAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary (data, sizeInBytes));
     mParameterManager->getValueTree()->replaceState(juce::ValueTree::fromXml(*xmlState));
@@ -175,12 +175,12 @@ void Week6AssignmentAudioProcessor::setStateInformation (const void* data, int s
 
 
 //==============================================================================
-const juce::String Week6AssignmentAudioProcessor::getName() const
+const juce::String JCAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-bool Week6AssignmentAudioProcessor::acceptsMidi() const
+bool JCAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -189,7 +189,7 @@ bool Week6AssignmentAudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool Week6AssignmentAudioProcessor::producesMidi() const
+bool JCAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -198,7 +198,7 @@ bool Week6AssignmentAudioProcessor::producesMidi() const
    #endif
 }
 
-bool Week6AssignmentAudioProcessor::isMidiEffect() const
+bool JCAudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
     return true;
@@ -207,46 +207,46 @@ bool Week6AssignmentAudioProcessor::isMidiEffect() const
    #endif
 }
 
-double Week6AssignmentAudioProcessor::getTailLengthSeconds() const
+double JCAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int Week6AssignmentAudioProcessor::getNumPrograms()
+int JCAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int Week6AssignmentAudioProcessor::getCurrentProgram()
+int JCAudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void Week6AssignmentAudioProcessor::setCurrentProgram (int index)
+void JCAudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const juce::String Week6AssignmentAudioProcessor::getProgramName (int index)
+const juce::String JCAudioProcessor::getProgramName (int index)
 {
     return {};
 }
 
-void Week6AssignmentAudioProcessor::changeProgramName (int index, const juce::String& newName)
+void JCAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
 }
 
 //==============================================================================
 
 
-void Week6AssignmentAudioProcessor::releaseResources()
+void JCAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool Week6AssignmentAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool JCAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
@@ -274,14 +274,14 @@ bool Week6AssignmentAudioProcessor::isBusesLayoutSupported (const BusesLayout& l
 
 
 //==============================================================================
-bool Week6AssignmentAudioProcessor::hasEditor() const
+bool JCAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-juce::AudioProcessorEditor* Week6AssignmentAudioProcessor::createEditor()
+juce::AudioProcessorEditor* JCAudioProcessor::createEditor()
 {
-    return new Week6AssignmentAudioProcessorEditor (*this);
+    return new JCAudioProcessorEditor (*this);
 }
 
 
@@ -290,5 +290,5 @@ juce::AudioProcessorEditor* Week6AssignmentAudioProcessor::createEditor()
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new Week6AssignmentAudioProcessor();
+    return new JCAudioProcessor();
 }

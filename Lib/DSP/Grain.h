@@ -23,12 +23,12 @@ public:
         
         float val = getNextWindowSample();
         
-        outLeft = inGrainBuffer.getSample(0, mGrainReadhead) * val;
-        outRight = inGrainBuffer.getSample(1, mGrainReadhead) * val;
+        outLeft = inGrainBuffer.getSample(0, static_cast<int>(mGrainReadhead)) * val;
+        outRight = inGrainBuffer.getSample(1, static_cast<int>(mGrainReadhead)) * val;
         
         mGrainReadhead += 2.f;
         
-        mGrainReadhead = AudioHelpers::wrap_buffer(mGrainReadhead, inGrainBuffer.getNumSamples());
+        mGrainReadhead = AudioHelpers::wrap_buffer(mGrainReadhead, static_cast<float>(inGrainBuffer.getNumSamples()));
     }
 
     
@@ -49,9 +49,10 @@ public:
         
     void start(float inStartPosition, int inCircularBufferSize, float inGrainPitch) {
         // distance_past_write grain span,
-        float distance_past_write = (inGrainPitch - 1.f) * mGrainSize;
+        float distance_past_write = (inGrainPitch - 1.f) * static_cast<float>(mGrainSize);
         mGrainReadhead = inStartPosition;
-        mGrainReadhead = AudioHelpers::wrap_buffer(mGrainReadhead - distance_past_write, inCircularBufferSize);
+        mGrainReadhead = AudioHelpers::wrap_buffer(mGrainReadhead - distance_past_write,
+                                                   static_cast<float>(inCircularBufferSize));
         mGrainCounter = 0;
     }
     
@@ -65,7 +66,7 @@ public:
         }
     }
     
-    bool isActive() {
+    [[nodiscard]] bool isActive() const {
         if (mGrainCounter < mGrainSize) {
             return true;
         } else {
@@ -86,4 +87,4 @@ private:
 };
 
 
-#endif /* Grain_hpp */
+#endif /* Grain_h */
