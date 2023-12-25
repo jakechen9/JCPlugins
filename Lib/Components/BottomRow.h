@@ -17,7 +17,7 @@
 class BottomRow : public juce::Component
 {
 public:
-    explicit BottomRow(ProcessorInterface* inAudioProcessor);
+    BottomRow(ProcessorInterface* inAudioProcessor);
     ~BottomRow() override;
     
     void paint(juce::Graphics& g) override;

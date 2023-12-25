@@ -7,8 +7,6 @@
 */
 
 #include "PluginProcessor.h"
-
-#include <memory>
 #include "PluginEditor.h"
 
 //==============================================================================
@@ -24,18 +22,19 @@ JCAudioProcessor::JCAudioProcessor()
 
 
 {
-    mParameterManager = std::make_unique<ParameterManager>(this);
+    mParameterManager.reset(new ParameterManager(this));
 }
 JCAudioProcessor::~JCAudioProcessor()
-= default;
+{
+}
 
 
 // Audio
 
 void JCAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    mDelayL.initialize(static_cast<float>(sampleRate), samplesPerBlock);
-    mDelayR.initialize(static_cast<float>(sampleRate), samplesPerBlock);
+    mDelayL.initialize(sampleRate, samplesPerBlock);
+    mDelayR.initialize(sampleRate, samplesPerBlock);
 
     
 }
@@ -60,9 +59,8 @@ void JCAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
     getPlayHead()->getCurrentPosition(mTempoInfo);
     auto bpm = juce::jmax(static_cast<float>(mTempoInfo.bpm), 1.f);
 
-    auto noteLength = getTimeDivisonSamples(static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)),
-                                            static_cast<float>(getSampleRate()), bpm);
-    auto time_div = TIMEDIV(static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)), bpm);
+    auto noteLength = getTimeDivisonSamples(mParameterManager->getCurrentParameterValue(Rate), getSampleRate(), bpm);
+    auto time_div = TIMEDIV(mParameterManager->getCurrentParameterValue(Rate), bpm);
 
     // Set Delay Parameter to control
     mDelayL.setParameters(mParameterManager->getCurrentParameterValue(Time),
@@ -91,25 +89,19 @@ void JCAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
                           noteLength
                           );
 
+
     mDelayL.processBlock(buffer.getWritePointer(0),
                          buffer.getNumSamples());
     mDelayR.processBlock(buffer.getWritePointer(1),
                          buffer.getNumSamples());
 
 
+
     mWidth.processBlock(buffer.getWritePointer(0),
                         buffer.getWritePointer(1),
                         mParameterManager->getCurrentParameterValue(Width),
                         buffer.getNumSamples());
-    /* */
-//    for (int i = 0; i < buffer.getNumSamples(); i++)
-//    {
-//        Delay_Left *= buffer_write_left[i];
-//        Delay_Left *= buffer_write_right[i];
-//    }
-//
-//    DBG(Delay_Left);
-    /* */
+
     float output_gain = 0;
     output_gain += buffer.getMagnitude(0, 0, buffer.getNumSamples());
     output_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());

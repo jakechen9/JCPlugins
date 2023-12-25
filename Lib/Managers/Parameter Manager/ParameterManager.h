@@ -17,7 +17,7 @@
 class ParameterManager{
 public:
     
-    explicit ParameterManager(ProcessorInterface* inAudioProcessor);
+    ParameterManager(ProcessorInterface* inAudioProcessor);
     
 //    juce::AudioProcessorValueTreeState::ParameterLayout getParameterLayout();
 //

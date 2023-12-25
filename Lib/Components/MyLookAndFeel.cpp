@@ -57,8 +57,8 @@ void MyLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width,
     // draw inner circle
     float innerCircleDiameter = static_cast<float>(juce::jmin(width, height)) * .6f;
     float innerCircleRadius = innerCircleDiameter / 2;
-    float rx = static_cast<float>(static_cast<int>(x + width / 2)) - innerCircleRadius;
-    float ry = static_cast<float>(static_cast<int>(y + height / 2)) - innerCircleRadius;
+    float rx = static_cast<float>(static_cast<float>(x) + static_cast<float>(width) / 2) - innerCircleRadius;
+    float ry = static_cast<float>(static_cast<float>(y) + static_cast<float>(height) / 2) - innerCircleRadius;
     float angle = rotaryStartAngle + (sliderPos * (rotaryEndAngle - rotaryStartAngle));
 
     juce::Rectangle<float> dialArea(rx, ry, innerCircleDiameter, innerCircleDiameter);
@@ -77,6 +77,6 @@ void MyLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width,
     g.fillEllipse(dialArea);
     // draw tick
     g.setColour(juce::Colour(8, 143, 173));
-    g.fillPath(dialTick, juce::AffineTransform::rotation(angle).translated(static_cast<float>(static_cast<int>(x + width / 2)),
-                                                                           static_cast<float>(static_cast<int>(y + height / 2))));
+    g.fillPath(dialTick, juce::AffineTransform::rotation(angle).translated(static_cast<float>(static_cast<float>(x) + static_cast<float>(width) / 2),
+                                                                           static_cast<float>(static_cast<float>(y) + static_cast<float>(height) / 2)));
 }

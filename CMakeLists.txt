@@ -35,7 +35,7 @@ endif()
 
 if(${PluginChoice} STREQUAL "All")
   add_subdirectory("Plugins/GrainDelay")
-
+  add_subdirectory("Plugins/RhythmicCreator")
 else()
   add_subdirectory("Plugins/${PluginChoice}")
 endif()
