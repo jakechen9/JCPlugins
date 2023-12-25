@@ -2,15 +2,15 @@
 # Arguments
 # ---------
 
-set(PLUGIN_NAME "JCFinalDelay")
+set(PLUGIN_NAME "GrainDelay")
 set(VERSION "0.0.1")
 set(IS_SYNTH FALSE)
 set(SIDECHAIN_INPUT 0)
 set(MIDI_INPUT FALSE)
 set(MIDI_OUTPUT FALSE)
-set(PLUGIN_CODE "JCDL") # Must be 4 characters
+set(PLUGIN_CODE "JCGD") # Must be 4 characters
 
 
-project(JCFinalDelay VERSION ${VERSION})
+project(GrainDelay VERSION ${VERSION})
 
 Generate_Plugin()

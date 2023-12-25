@@ -31,6 +31,6 @@ inline float wrap_buffer(float in_value, float wrap_point) {
     return in_value;
 }
 
-};
+}
 
 #endif /* AudioHelpers_h */

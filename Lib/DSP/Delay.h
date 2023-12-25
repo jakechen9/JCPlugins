@@ -45,7 +45,7 @@ public:
 private:
     RealTimeGranular mRealTimeGranulator;
     
-    float mSampleRate;
+    float mSampleRate{};
     float mMix = 0;
     float mFeedbackAmount = 0;
     juce::LinearSmoothedValue<float> mTimeInSeconds;

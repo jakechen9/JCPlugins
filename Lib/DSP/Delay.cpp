@@ -12,26 +12,22 @@
 
 /* */
 Delay::Delay()
-{
-    
-}
+= default;
 
 /* */
 Delay::~Delay()
-{
-
-}
+= default;
 
 /* */
 void Delay::initialize(float inSampleRate, int inBlocksize)
 {
     mSampleRate = inSampleRate;
     mADSR.setSampleRate(inSampleRate);
-    mCircularBuffer.setSize(1, 5 * inSampleRate);
+    mCircularBuffer.setSize(1, static_cast<int>(5 * inSampleRate));
     mTimeInSeconds.reset(inSampleRate, 0.25);
     mTimeInSeconds.setCurrentAndTargetValue(0.01);
     mGrainPitch.reset(inSampleRate, .01);
-    juce::dsp::ProcessSpec spec;
+    juce::dsp::ProcessSpec spec{};
     spec.sampleRate = inSampleRate;
     spec.maximumBlockSize = inBlocksize;
     spec.numChannels = 1;
@@ -42,7 +38,7 @@ void Delay::initialize(float inSampleRate, int inBlocksize)
     mHighPassFilter.reset();
     mLowpassFilter.reset();
 
-    mRealTimeGranulator.prepareToPlay(inSampleRate);
+    mRealTimeGranulator.prepareToPlay(static_cast<int>(inSampleRate));
 }
 
 /* */

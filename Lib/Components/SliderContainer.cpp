@@ -28,8 +28,8 @@ void SliderContainer::setParameterToControl(juce::AudioProcessorValueTreeState &
 void SliderContainer::resized()
 {
     auto bounds = getLocalBounds();
-    mSlider.setBounds(bounds.removeFromTop(getHeight()*.8));
-    mSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, mSlider.getWidth(), getHeight()*.2);
+    mSlider.setBounds(bounds.removeFromTop(static_cast<int>(getHeight() * .8)));
+    mSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, mSlider.getWidth(), static_cast<int>(getHeight() * .2));
     mSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colour(62.f, 72.f, 73.f, 0.f));
     mLabel.setBounds(bounds);
 }

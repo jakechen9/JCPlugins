@@ -1,7 +1,7 @@
 include(CMake/GeneratePlugin.cmake)
 
 cmake_minimum_required(VERSION 3.23.0)
-project("JCFinalDelay")
+project("JCPlugins")
 string(TIMESTAMP CurrentYear "%Y")
 
 # Apple Targets Universal Architectures
@@ -34,7 +34,7 @@ if (NOT DEFINED PluginChoice)
 endif()
 
 if(${PluginChoice} STREQUAL "All")
-  add_subdirectory("Plugins/JCFinalDelay")
+  add_subdirectory("Plugins/GrainDelay")
 
 else()
   add_subdirectory("Plugins/${PluginChoice}")
