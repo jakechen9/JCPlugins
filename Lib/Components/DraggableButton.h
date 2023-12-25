@@ -19,7 +19,7 @@ class DraggableButton : public juce::Component,
 {
 public:
     DraggableButton();
-    ~DraggableButton();
+    ~DraggableButton() override;
     
     void paint(juce::Graphics& g) override;
     void resized() override;
@@ -29,11 +29,11 @@ public:
     void mouseExit(const juce::MouseEvent& event) override;
 
     std::function<void()> onDrag;
-    void setState(const bool state);
+    void setState(bool state);
     
 private:
     bool isEntered = false;
-    juce::Colour getColour();
+    juce::Colour getColour() const;
     bool mState = true;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DraggableButton)
 };

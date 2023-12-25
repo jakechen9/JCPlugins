@@ -12,19 +12,18 @@
 #include "DraggableButton.h"
 
 DraggableButton::DraggableButton()
-{
-}
+= default;
 
 DraggableButton::~DraggableButton()
-{
-}
+= default;
 
 void DraggableButton::paint (juce::Graphics& g)
 {
     g.setColour (juce::Colour(8, 143, 173));
-    g.fillEllipse (0, 0, getWidth(), getHeight());
+    g.fillEllipse (0, 0, static_cast<float>(getWidth()), static_cast<float>(getHeight()));
     g.setColour (getColour());
-    g.fillEllipse (getWidth() / 5.0f, getHeight() / 5.0f, getWidth() / 5.0f * 3, getHeight() / 5.0f * 3);
+    g.fillEllipse (static_cast<float>(getWidth()) / 5.0f, static_cast<float>(getHeight()) / 5.0f,
+                   static_cast<float>(getWidth()) / 5.0f * 3, static_cast<float>(getHeight()) / 5.0f * 3);
 }
 
 void DraggableButton::resized()
@@ -42,7 +41,7 @@ void DraggableButton::mouseExit(const juce::MouseEvent& event)
     isEntered = false;
 }
 
-juce::Colour DraggableButton::getColour()
+juce::Colour DraggableButton::getColour() const
 {
     if(isEntered){
         return juce::Colours::hotpink.brighter();

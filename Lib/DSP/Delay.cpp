@@ -25,11 +25,11 @@ void Delay::initialize(float inSampleRate, int inBlocksize)
     mADSR.setSampleRate(inSampleRate);
     mCircularBuffer.setSize(1, static_cast<int>(5 * inSampleRate));
     mTimeInSeconds.reset(inSampleRate, 0.25);
-    mTimeInSeconds.setCurrentAndTargetValue(0.01);
+    mTimeInSeconds.setCurrentAndTargetValue(static_cast<float>(0.01));
     mGrainPitch.reset(inSampleRate, .01);
     juce::dsp::ProcessSpec spec{};
     spec.sampleRate = inSampleRate;
-    spec.maximumBlockSize = inBlocksize;
+    spec.maximumBlockSize = static_cast<unsigned int>(inBlocksize);
     spec.numChannels = 1;
     
     mHighPassFilter.prepare(spec);
@@ -89,25 +89,26 @@ void Delay::processSample(float& inSample)
 
 
 
-    mCircularBuffer.setSample(0, mWriteHead, std::tanh(inSample + (mFeedbackSample * mFeedbackAmount)));
+    mCircularBuffer.setSample(0, static_cast<int>(mWriteHead), std::tanh(inSample + (mFeedbackSample * mFeedbackAmount)));
     
     mWriteHead++;
     
-    if (mWriteHead >= mCircularBuffer.getNumSamples()) {
+    if (mWriteHead >= static_cast<float>(mCircularBuffer.getNumSamples())) {
         mWriteHead = 0;
     }
     
     float time_in_sample = mTimeInSeconds.getNextValue() * mSampleRate;
     float read_head = mWriteHead - time_in_sample;
     
-    read_head = AudioHelpers::wrap_buffer(read_head, mCircularBuffer.getNumSamples());
+    read_head = AudioHelpers::wrap_buffer(read_head, static_cast<float>(mCircularBuffer.getNumSamples()));
 
-    int sample_x_pos = floor(read_head);
+    int sample_x_pos = static_cast<int>(floor(read_head));
     int sample_x1_pos = sample_x_pos + 1;
     
-    sample_x1_pos = AudioHelpers::wrap_buffer(sample_x1_pos, mCircularBuffer.getNumSamples());
+    sample_x1_pos = static_cast<int>(AudioHelpers::wrap_buffer(static_cast<float>(sample_x1_pos),
+                                                               static_cast<float>(mCircularBuffer.getNumSamples())));
     
-    float inter_sample_amount = read_head - sample_x_pos;
+    float inter_sample_amount = read_head - static_cast<float>(sample_x_pos);
 
     float sample_x = mCircularBuffer.getSample(0, sample_x_pos);
     float sample_x1 = mCircularBuffer.getSample(0, sample_x1_pos);

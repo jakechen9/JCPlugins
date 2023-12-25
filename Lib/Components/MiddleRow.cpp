@@ -110,7 +110,7 @@ void MiddleRow::sanatizePoints()
 
 void MiddleRow::updateBounds()
 {
-    float size = static_cast<float>(getWidth() / 1000.0f * 20);
+    auto size = static_cast<float>(static_cast<float>(getWidth()) / 1000.0f * 20);
     mDraggableAttackButton.setBounds(0, 301, static_cast<int>(size), static_cast<int>(size));
     float attackVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Attack);
     float decayVal = mProcessorInterface->getParameterManager()->getCurrentParameterValue(Decay);

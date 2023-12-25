@@ -7,6 +7,8 @@
 */
 
 #include "PluginProcessor.h"
+
+#include <memory>
 #include "PluginEditor.h"
 
 //==============================================================================
@@ -22,19 +24,18 @@ JCAudioProcessor::JCAudioProcessor()
 
 
 {
-    mParameterManager.reset(new ParameterManager(this));
+    mParameterManager = std::make_unique<ParameterManager>(this);
 }
 JCAudioProcessor::~JCAudioProcessor()
-{
-}
+= default;
 
 
 // Audio
 
 void JCAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    mDelayL.initialize(sampleRate, samplesPerBlock);
-    mDelayR.initialize(sampleRate, samplesPerBlock);
+    mDelayL.initialize(static_cast<float>(sampleRate), samplesPerBlock);
+    mDelayR.initialize(static_cast<float>(sampleRate), samplesPerBlock);
 
     
 }
@@ -58,16 +59,10 @@ void JCAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
     juce::AudioPlayHead::CurrentPositionInfo mTempoInfo;
     getPlayHead()->getCurrentPosition(mTempoInfo);
     auto bpm = juce::jmax(static_cast<float>(mTempoInfo.bpm), 1.f);
-//    DBG(bpm);
-    // trigger quarter note
-//    float samplePerBeats = (60.f/bpm) * getSampleRate();
-//    // 1/8 note
-//    float eighthNote = samplePerBeats / 2.f;
-//    // time division
-//    float time_div = (60.f/bpm) / 2.f;
 
-    auto noteLength = getTimeDivisonSamples(mParameterManager->getCurrentParameterValue(Rate), getSampleRate(), bpm);
-    auto time_div = TIMEDIV(mParameterManager->getCurrentParameterValue(Rate), bpm);
+    auto noteLength = getTimeDivisonSamples(static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)),
+                                            static_cast<float>(getSampleRate()), bpm);
+    auto time_div = TIMEDIV(static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)), bpm);
 
     // Set Delay Parameter to control
     mDelayL.setParameters(mParameterManager->getCurrentParameterValue(Time),
@@ -96,33 +91,11 @@ void JCAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
                           noteLength
                           );
 
-    /* */
-//    DBG("mDelay");
-//    float Delay_Left = 0.f;
-
     mDelayL.processBlock(buffer.getWritePointer(0),
                          buffer.getNumSamples());
     mDelayR.processBlock(buffer.getWritePointer(1),
                          buffer.getNumSamples());
 
-    /* */
-//    auto* buffer_write_left = buffer.getWritePointer(0);
-//    auto* buffer_write_right = buffer.getWritePointer(1);
-//
-//    for (int i = 0; i < buffer.getNumSamples(); i++)
-//    {
-//        Delay_Left *= buffer_write_left[i];
-//        Delay_Left *= buffer_write_right[i];
-//    }
-//
-//    DBG(Delay_Left);
-//
-//    Delay_Left = 0;
-//
-//
-//    DBG("Width:");
-//    Delay_Left = 0;
-    /* */
 
     mWidth.processBlock(buffer.getWritePointer(0),
                         buffer.getWritePointer(1),

@@ -20,7 +20,7 @@ class MiddleRow : public juce::Component,
                   public juce::Timer
 {
 public:
-    MiddleRow(ProcessorInterface* inAudioProcessor);
+    explicit MiddleRow(ProcessorInterface* inAudioProcessor);
     ~MiddleRow() override;
     
     void paint(juce::Graphics& g) override;
@@ -31,7 +31,7 @@ public:
     
 private:
     DraggableButton mDraggableAttackButton, mDraggableDecayButton, mDraggableSustainButton, mDraggableReleaseButton;
-    juce::Colour getColour();
+//    juce::Colour getColour();
     std::unique_ptr<SliderContainer> mAttack;
     ProcessorInterface* mProcessorInterface;
 
