@@ -29,7 +29,7 @@ void Delay::initialize(float inSampleRate, int inBlocksize)
     mGrainPitch.reset(inSampleRate, .01);
     juce::dsp::ProcessSpec spec{};
     spec.sampleRate = inSampleRate;
-    spec.maximumBlockSize = inBlocksize;
+    spec.maximumBlockSize = static_cast<unsigned int>(inBlocksize);
     spec.numChannels = 1;
     
     mHighPassFilter.prepare(spec);

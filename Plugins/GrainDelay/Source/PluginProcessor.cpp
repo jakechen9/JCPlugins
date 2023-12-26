@@ -25,16 +25,15 @@ JCAudioProcessor::JCAudioProcessor()
     mParameterManager.reset(new ParameterManager(this));
 }
 JCAudioProcessor::~JCAudioProcessor()
-{
-}
+= default;
 
 
 // Audio
 
 void JCAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    mDelayL.initialize(sampleRate, samplesPerBlock);
-    mDelayR.initialize(sampleRate, samplesPerBlock);
+    mDelayL.initialize(static_cast<float>(sampleRate), samplesPerBlock);
+    mDelayR.initialize(static_cast<float>(sampleRate), samplesPerBlock);
 
     
 }
@@ -59,8 +58,9 @@ void JCAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
     getPlayHead()->getCurrentPosition(mTempoInfo);
     auto bpm = juce::jmax(static_cast<float>(mTempoInfo.bpm), 1.f);
 
-    auto noteLength = getTimeDivisonSamples(mParameterManager->getCurrentParameterValue(Rate), getSampleRate(), bpm);
-    auto time_div = TIMEDIV(mParameterManager->getCurrentParameterValue(Rate), bpm);
+    auto noteLength = getTimeDivisonSamples(static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)),
+                                            static_cast<float>(getSampleRate()), bpm);
+    auto time_div = TIMEDIV(static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)), bpm);
 
     // Set Delay Parameter to control
     mDelayL.setParameters(mParameterManager->getCurrentParameterValue(Time),
@@ -97,7 +97,7 @@ void JCAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
 
 
 
-    mWidth.processBlock(buffer.getWritePointer(0),
+    WidthEffect::processBlock(buffer.getWritePointer(0),
                         buffer.getWritePointer(1),
                         mParameterManager->getCurrentParameterValue(Width),
                         buffer.getNumSamples());

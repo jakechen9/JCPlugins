@@ -31,12 +31,12 @@ void DraggableButton::resized()
     
 }
 
-void DraggableButton::mouseEnter(const juce::MouseEvent& event)
+void DraggableButton::mouseEnter(const juce::MouseEvent&)
 {
     isEntered = true;
 }
 
-void DraggableButton::mouseExit(const juce::MouseEvent& event)
+void DraggableButton::mouseExit(const juce::MouseEvent&)
 {
     isEntered = false;
 }
