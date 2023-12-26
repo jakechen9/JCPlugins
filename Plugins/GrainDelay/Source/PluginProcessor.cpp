@@ -107,6 +107,10 @@ void JCAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
     output_gain += buffer.getMagnitude(1, 0, buffer.getNumSamples());
     output_gain /= 2;
     mOutputGain = output_gain;
+
+// clear buffer when playback stops to avoid super long tails
+    if (!mTempoInfo.isPlaying)
+        buffer.clear();
 }
 
 
