@@ -7,6 +7,8 @@
 */
 
 #include "PluginProcessor.h"
+
+#include <memory>
 #include "PluginEditor.h"
 
 //==============================================================================
@@ -22,7 +24,7 @@ JCAudioProcessor::JCAudioProcessor()
 
 
 {
-    mParameterManager.reset(new ParameterManager(this));
+    mParameterManager = std::make_unique<ParameterManager>(this);
 }
 JCAudioProcessor::~JCAudioProcessor()
 = default;
@@ -40,6 +42,7 @@ void JCAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 
 void JCAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    (void) midiMessages;
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
@@ -194,15 +197,19 @@ int JCAudioProcessor::getCurrentProgram()
 
 void JCAudioProcessor::setCurrentProgram (int index)
 {
+    (void) index;
 }
 
 const juce::String JCAudioProcessor::getProgramName (int index)
 {
+    (void) index;
     return {};
 }
 
 void JCAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
+    (void) index;
+    (void) newName;
 }
 
 //==============================================================================
