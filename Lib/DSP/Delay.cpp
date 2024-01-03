@@ -80,14 +80,10 @@ void Delay::processSample(float& inSample)
         mADSR.noteOff();
         mCounter = 0;
         mADSR.noteOn();
-//        DBG("ADSR Triggered");
     }
     mCounter +=1;
-//    DBG(mCounter);
+
     float ADSRMOD = mADSR.getNextSample();
-
-
-
 
     mCircularBuffer.setSample(0, static_cast<int>(mWriteHead), std::tanh(inSample + (mFeedbackSample * mFeedbackAmount)));
     

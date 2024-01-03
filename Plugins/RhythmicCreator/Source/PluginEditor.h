@@ -10,7 +10,9 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "SliderContainer.h"
 #include "MyLookAndFeel.h"
+#include "AudioFilterUI.h"
 
 //==============================================================================
 /**
@@ -27,6 +29,7 @@ public:
 
 private:
     std::unique_ptr<MyLookAndFeel> mLookAndFeel;
+    std::unique_ptr<AudioFilterUI> mAudioFilterUI;
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     RhythmicCreatorAudioProcessor& audioProcessor;

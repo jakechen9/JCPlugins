@@ -43,9 +43,9 @@ void JCAudioProcessorEditor::paint (juce::Graphics& g)
 
 void JCAudioProcessorEditor::resized()
 {
-    mBottomRow->setBounds(0, 483, 1100, 237);
     mTopRow -> setBounds(0, 0, 1100, 160);
     mMiddleRow -> setBounds(0, 160, 1100, 323);
+    mBottomRow->setBounds(0, 483, 1100, 237);
 }
 
 

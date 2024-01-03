@@ -14,8 +14,12 @@ RhythmicCreatorAudioProcessorEditor::RhythmicCreatorAudioProcessorEditor (Rhythm
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
     mLookAndFeel = std::make_unique<MyLookAndFeel>();
+    setLookAndFeel(mLookAndFeel.get());
+
+    mAudioFilterUI = std::make_unique<AudioFilterUI>(&audioProcessor);
+    addAndMakeVisible(mAudioFilterUI.get());
     
-    setSize (1100, 720);
+    setSize (1100, 360);
 }
 
 RhythmicCreatorAudioProcessorEditor::~RhythmicCreatorAudioProcessorEditor()
@@ -32,7 +36,7 @@ void RhythmicCreatorAudioProcessorEditor::paint (juce::Graphics& g)
 
 void RhythmicCreatorAudioProcessorEditor::resized()
 {
-
+    mAudioFilterUI->setBounds(0, 0, 1100, 360);
 }
 
 
