@@ -13,14 +13,14 @@
 
 BottomRow::BottomRow(ProcessorInterface* inAudioProcessor) :mProcessorInterface(inAudioProcessor){
 
-    mBackGround = juce::ImageCache::getFromMemory(BinaryData::DelayGrainParamFrame_png, BinaryData::DelayGrainParamFrame_pngSize);
+    mBackGround = juce::ImageCache::getFromMemory(BinaryData::DelayGrainParamFrame_png,
+                                                  BinaryData::DelayGrainParamFrame_pngSize);
 
     auto& tree_state = *mProcessorInterface->getParameterManager()->getValueTree();
     
     mDelayMix = std::make_unique<SliderContainer>();
     mDelayMix->setParameterToControl(tree_state, PARAM_ID[AppParamID::Mix].getParamID());
     addAndMakeVisible(mDelayMix.get());
-    
     
     mDelayTime = std::make_unique<SliderContainer>();
     mDelayTime->setParameterToControl(tree_state, PARAM_ID[AppParamID::Time].getParamID());
@@ -52,9 +52,8 @@ BottomRow::~BottomRow() = default;
 
 void BottomRow::paint(juce::Graphics& g)
 {
-    g.drawImage(mBackGround, 0, 0, 1100, 237, 0, 0, mBackGround.getWidth(), mBackGround.getHeight());
-//    g.setColour(juce::Colour(62, 72, 73));
-//    g.fillRoundedRectangle(getLocalBounds().toFloat(), 0.f);
+    g.drawImage(mBackGround, 0, 0, 1100, 237,
+                0, 0, mBackGround.getWidth(), mBackGround.getHeight());
 }
 
 void BottomRow::resized()
