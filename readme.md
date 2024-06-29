@@ -2,11 +2,12 @@
 
 ![](/img/graindelay_screenshot.png)
 
-Granular Delay is a very simple delay effects with granular
-feedback, LPF and HPF implemented inside the delay engine. 
+Granular Delay is a straightforward delay effect with granular feedback, 
+and integrated low-pass (LPF) and high-pass (HPF) filters within the delay engine. 
+It also includes a draggable ADSR section with synced rate for rhythmic manipulation.
 
-It also features a draggable ADSR section with synced rate
-for some rhythm manipulation.
+Still under development...
 
-Still under active development, and will update the 
-readme.md along the way...
+### Todo
+- update readme
+- cmake build
