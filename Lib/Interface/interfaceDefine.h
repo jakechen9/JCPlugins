@@ -9,15 +9,16 @@
 
 class ParameterManager;
 
- class ProcessorInterface{
+class ProcessorInterface
+{
 
- public:
-     virtual ~ProcessorInterface() = default;
+public:
 
-     virtual ParameterManager* getParameterManager() = 0;
+    virtual ~ProcessorInterface() = default;
 
-     virtual juce::AudioProcessor* getAudioProcessor() = 0;
- };
+    virtual ParameterManager* getParameterManager() = 0;
 
+    virtual juce::AudioProcessor* getAudioProcessor() = 0;
+};
 
 #endif //JCFINALDELAY_INTERFACEDEFINE_H

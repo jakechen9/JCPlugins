@@ -4,7 +4,8 @@
 
 #include "AudioFilterUI.h"
 
-AudioFilterUI::AudioFilterUI(ProcessorInterface *inAudioProcessor) :mFilterProcessorInterface(inAudioProcessor)
+AudioFilterUI::AudioFilterUI(ProcessorInterface* inAudioProcessor)
+: mFilterProcessorInterface(inAudioProcessor)
 {
 
     auto& tree_state = *mFilterProcessorInterface->getParameterManager()->getValueTree();
@@ -30,5 +31,4 @@ void AudioFilterUI::resized()
     auto size = 80;
     mHPFreq->setBounds(0, 20, size, size);
     mLPFreq->setBounds(100, 20, size, size);
-
 }

@@ -8,28 +8,25 @@
   ==============================================================================
 */
 
-#include "JuceHeader.h"
 #include "DraggableButton.h"
+#include "JuceHeader.h"
 
-DraggableButton::DraggableButton()
-= default;
+DraggableButton::DraggableButton() = default;
 
-DraggableButton::~DraggableButton()
-= default;
+DraggableButton::~DraggableButton() = default;
 
-void DraggableButton::paint (juce::Graphics& g)
+void DraggableButton::paint(juce::Graphics& g)
 {
-    g.setColour (juce::Colour(8, 143, 173));
-    g.fillEllipse (0, 0, static_cast<float>(getWidth()), static_cast<float>(getHeight()));
-    g.setColour (getColour());
-    g.fillEllipse (static_cast<float>(getWidth()) / 5.0f, static_cast<float>(getHeight()) / 5.0f,
-                   static_cast<float>(getWidth()) / 5.0f * 3, static_cast<float>(getHeight()) / 5.0f * 3);
+    g.setColour(juce::Colour(8, 143, 173));
+    g.fillEllipse(0, 0, static_cast<float>(getWidth()), static_cast<float>(getHeight()));
+    g.setColour(getColour());
+    g.fillEllipse(static_cast<float>(getWidth()) / 5.0f,
+                  static_cast<float>(getHeight()) / 5.0f,
+                  static_cast<float>(getWidth()) / 5.0f * 3,
+                  static_cast<float>(getHeight()) / 5.0f * 3);
 }
 
-void DraggableButton::resized()
-{
-    
-}
+void DraggableButton::resized() {}
 
 void DraggableButton::mouseEnter(const juce::MouseEvent&)
 {
@@ -43,22 +40,20 @@ void DraggableButton::mouseExit(const juce::MouseEvent&)
 
 juce::Colour DraggableButton::getColour() const
 {
-    if(isEntered){
+    if (isEntered) {
         return juce::Colours::hotpink.brighter();
-    } else{
+    } else {
         return juce::Colours::hotpink;
     }
 }
 
-void DraggableButton::mouseDown (const juce::MouseEvent& e)
+void DraggableButton::mouseDown(const juce::MouseEvent& e)
 {
-    
+
     juce::ComponentDragger::startDraggingComponent(this, e);
-    
-    
 }
 
-void DraggableButton::mouseDrag (const juce::MouseEvent& e)
+void DraggableButton::mouseDrag(const juce::MouseEvent& e)
 {
     juce::ComponentBoundsConstrainer constrainer;
     constrainer.setMinimumOnscreenAmounts(200, 200, 200, 200);
@@ -66,7 +61,7 @@ void DraggableButton::mouseDrag (const juce::MouseEvent& e)
     onDrag();
 }
 
-void DraggableButton::setState (const bool state)
+void DraggableButton::setState(const bool state)
 {
     mState = state;
 }

@@ -14,27 +14,25 @@
 #include "GrainBuffer.h"
 #include "Scheduler.h"
 
-
-class RealTimeGranular {
+class RealTimeGranular
+{
 
 public:
-    
+
     /* */
     void prepareToPlay(int inSampleRate);
-    
-    
-//    void setParameters(float inGrainSize);
-    
+
+    //    void setParameters(float inGrainSize);
+
     /* */
     float processSample(float inSample, float inGrainPitch);
-    
+
 private:
-    
+
     const float mGrainsizeSeconds = 0.1f;
     const float mGrainOverlapRate = 2.f;
     float mSampleRate = 0.f;
-    
-    
+
     Scheduler mScheduler;
     GrainBuffer mGrainBuffer;
     std::array<Grain, 10> mGrains;

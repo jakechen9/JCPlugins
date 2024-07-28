@@ -10,21 +10,22 @@
 #pragma once
 
 #include "JuceHeader.h"
-#include "SliderContainer.h"
 #include "PluginProcessor.h"
+#include "SliderContainer.h"
 #include "interfaceDefine.h"
 
 class BottomRow : public juce::Component
 {
 public:
+
     BottomRow(ProcessorInterface* inAudioProcessor);
     ~BottomRow() override;
-    
+
     void paint(juce::Graphics& g) override;
     void resized() override;
-    
+
 private:
-    
+
     std::unique_ptr<SliderContainer> mDelayMix;
     std::unique_ptr<SliderContainer> mDelayTime;
     std::unique_ptr<SliderContainer> mDelayWidth;
@@ -34,7 +35,6 @@ private:
     std::unique_ptr<SliderContainer> mDelayHighpass;
     juce::Image mBackGround;
     ProcessorInterface* mProcessorInterface;
-    
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(BottomRow)
 };
-

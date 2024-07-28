@@ -6,16 +6,14 @@
 
 /* */
 PluginProcessorBase::PluginProcessorBase()
-        : AudioProcessor (BusesProperties()
-                                  .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                                  .withOutput ("Output", juce::AudioChannelSet::stereo(), true))
+: AudioProcessor(BusesProperties()
+                     .withInput("Input", juce::AudioChannelSet::stereo(), true)
+                     .withOutput("Output", juce::AudioChannelSet::stereo(), true))
 {
-
 }
 
 /* */
-PluginProcessorBase::~PluginProcessorBase()
-= default;
+PluginProcessorBase::~PluginProcessorBase() = default;
 
 //==============================================================================
 const juce::String PluginProcessorBase::getName() const
@@ -57,7 +55,7 @@ double PluginProcessorBase::getTailLengthSeconds() const
 
 int PluginProcessorBase::getNumPrograms()
 {
-    return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
+    return 1; // NB: some hosts don't cope very well if you tell them there are 0 programs,
     // so this should be at least 1, even if you're not really implementing programs.
 }
 
@@ -66,21 +64,21 @@ int PluginProcessorBase::getCurrentProgram()
     return 0;
 }
 
-void PluginProcessorBase::setCurrentProgram (int index)
+void PluginProcessorBase::setCurrentProgram(int index)
 {
-    (void) index;
+    (void)index;
 }
 
-const juce::String PluginProcessorBase::getProgramName (int index)
+const juce::String PluginProcessorBase::getProgramName(int index)
 {
-    (void) index;
+    (void)index;
     return {};
 }
 
-void PluginProcessorBase::changeProgramName (int index, const juce::String& newName)
+void PluginProcessorBase::changeProgramName(int index, const juce::String& newName)
 {
-    (void) index;
-    (void) newName;
+    (void)index;
+    (void)newName;
 }
 
 void PluginProcessorBase::releaseResources()
@@ -90,10 +88,10 @@ void PluginProcessorBase::releaseResources()
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool PluginProcessorBase::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool PluginProcessorBase::isBusesLayoutSupported(const BusesLayout& layouts) const
 {
 #if JucePlugin_IsMidiEffect
-    juce::ignoreUnused (layouts);
+    juce::ignoreUnused(layouts);
     return true;
 #else
     // This is the place where you check if the layout is supported.
@@ -104,8 +102,8 @@ bool PluginProcessorBase::isBusesLayoutSupported (const BusesLayout& layouts) co
         && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
         return false;
 
-    // This checks if the input layout matches the output layout
-#if ! JucePlugin_IsSynth
+        // This checks if the input layout matches the output layout
+#if !JucePlugin_IsSynth
     if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
         return false;
 #endif

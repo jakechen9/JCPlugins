@@ -9,16 +9,13 @@
 class WidthEffect
 {
 public:
+
     WidthEffect();
     ~WidthEffect();
 
     static void processBlock(float* inBufferL, float* inBufferR, float inWidth, int inNumSamples);
 
 private:
-
 };
-
-
-
 
 #endif //JCFINALDELAY_WIDTHEFFECT_H

@@ -11,12 +11,10 @@
 #include "Delay.h"
 
 /* */
-Delay::Delay()
-= default;
+Delay::Delay() = default;
 
 /* */
-Delay::~Delay()
-= default;
+Delay::~Delay() = default;
 
 /* */
 void Delay::initialize(float inSampleRate, int inBlocksize)
@@ -27,14 +25,14 @@ void Delay::initialize(float inSampleRate, int inBlocksize)
     mTimeInSeconds.reset(inSampleRate, 0.25);
     mTimeInSeconds.setCurrentAndTargetValue(static_cast<float>(0.01));
     mGrainPitch.reset(inSampleRate, .01);
-    juce::dsp::ProcessSpec spec{};
+    juce::dsp::ProcessSpec spec {};
     spec.sampleRate = inSampleRate;
     spec.maximumBlockSize = static_cast<unsigned int>(inBlocksize);
     spec.numChannels = 1;
-    
+
     mHighPassFilter.prepare(spec);
     mLowpassFilter.prepare(spec);
-    
+
     mHighPassFilter.reset();
     mLowpassFilter.reset();
 
@@ -42,8 +40,17 @@ void Delay::initialize(float inSampleRate, int inBlocksize)
 }
 
 /* */
-void Delay::setParameters(float inTimeSeconds, float inFeedbackAmount, float inMix, float inLPFreq, float inHPFreq, float inGrainPitch, float inAttack,
-                          float inDecay, float inSustain, float inRelease, float inNoteLength)
+void Delay::setParameters(float inTimeSeconds,
+                          float inFeedbackAmount,
+                          float inMix,
+                          float inLPFreq,
+                          float inHPFreq,
+                          float inGrainPitch,
+                          float inAttack,
+                          float inDecay,
+                          float inSustain,
+                          float inRelease,
+                          float inNoteLength)
 {
     mTimeInSeconds.setTargetValue(inTimeSeconds);
     mFeedbackAmount = inFeedbackAmount;
@@ -76,47 +83,48 @@ void Delay::processSample(float& inSample)
         mADSRStarted = true;
         mADSR.noteOn();
     }
-    if (static_cast<float>(mCounter) > mNoteLength){
+    if (static_cast<float>(mCounter) > mNoteLength) {
         mADSR.noteOff();
         mCounter = 0;
         mADSR.noteOn();
     }
-    mCounter +=1;
+    mCounter += 1;
 
     float ADSRMOD = mADSR.getNextSample();
 
-    mCircularBuffer.setSample(0, static_cast<int>(mWriteHead), std::tanh(inSample + (mFeedbackSample * mFeedbackAmount)));
-    
+    mCircularBuffer.setSample(
+        0, static_cast<int>(mWriteHead), std::tanh(inSample + (mFeedbackSample * mFeedbackAmount)));
+
     mWriteHead++;
-    
+
     if (mWriteHead >= static_cast<float>(mCircularBuffer.getNumSamples())) {
         mWriteHead = 0;
     }
-    
+
     float time_in_sample = mTimeInSeconds.getNextValue() * mSampleRate;
     float read_head = mWriteHead - time_in_sample;
-    
+
     read_head = AudioHelpers::wrap_buffer(read_head, static_cast<float>(mCircularBuffer.getNumSamples()));
 
     int sample_x_pos = static_cast<int>(floor(read_head));
     int sample_x1_pos = sample_x_pos + 1;
-    
+
     sample_x1_pos = static_cast<int>(AudioHelpers::wrap_buffer(static_cast<float>(sample_x1_pos),
                                                                static_cast<float>(mCircularBuffer.getNumSamples())));
-    
+
     float inter_sample_amount = read_head - static_cast<float>(sample_x_pos);
 
     float sample_x = mCircularBuffer.getSample(0, sample_x_pos);
     float sample_x1 = mCircularBuffer.getSample(0, sample_x1_pos);
     float output_sample = AudioHelpers::lin_interp(sample_x, sample_x1, inter_sample_amount);
-        
+
     output_sample = mHighPassFilter.processSample(output_sample);
     output_sample = mLowpassFilter.processSample(output_sample);
-    
+
     mFeedbackSample = output_sample;
-    
+
     mFeedbackSample = mRealTimeGranulator.processSample(mFeedbackSample, mGrainPitch.getNextValue());
-        
+
     inSample = (output_sample * mMix) + (inSample * (1.f - mMix));
 
     inSample *= ADSRMOD;

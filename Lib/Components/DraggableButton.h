@@ -18,20 +18,22 @@ class DraggableButton : public juce::Component,
                         public juce::ComponentBoundsConstrainer
 {
 public:
+
     DraggableButton();
     ~DraggableButton() override;
-    
+
     void paint(juce::Graphics& g) override;
     void resized() override;
-    void mouseDown (const juce::MouseEvent& e) override;
-    void mouseDrag (const juce::MouseEvent& e) override;
+    void mouseDown(const juce::MouseEvent& e) override;
+    void mouseDrag(const juce::MouseEvent& e) override;
     void mouseEnter(const juce::MouseEvent&) override;
     void mouseExit(const juce::MouseEvent&) override;
 
     std::function<void()> onDrag;
     void setState(bool state);
-    
+
 private:
+
     bool isEntered = false;
     juce::Colour getColour() const;
     bool mState = true;

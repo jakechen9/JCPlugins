@@ -4,17 +4,15 @@
 
 #include "AudioFilters.h"
 
-AudioFilter::AudioFilter()
-= default;
+AudioFilter::AudioFilter() = default;
 
-AudioFilter::~AudioFilter()
-= default;
+AudioFilter::~AudioFilter() = default;
 
 void AudioFilter::initialize(float inSampleRate, int inBlocksize)
 {
     mSampleRate = inSampleRate;
     mCircularBuffer.setSize(1, static_cast<int>(5 * inSampleRate));
-    juce::dsp::ProcessSpec spec{};
+    juce::dsp::ProcessSpec spec {};
     spec.sampleRate = inSampleRate;
     spec.maximumBlockSize = static_cast<unsigned int>(inBlocksize);
     spec.numChannels = 1;
@@ -28,10 +26,8 @@ void AudioFilter::initialize(float inSampleRate, int inBlocksize)
 
 void AudioFilter::setParameters(float inLPFreq, float inHPFreq)
 {
-    mLowpassFilter.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(mSampleRate,
-                                                                                   inLPFreq);
-    mHighPassFilter.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(mSampleRate,
-                                                                                     inHPFreq);
+    mLowpassFilter.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(mSampleRate, inLPFreq);
+    mHighPassFilter.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(mSampleRate, inHPFreq);
 }
 
 void AudioFilter::processBlock(float* inBuffer, int inNumSamples)

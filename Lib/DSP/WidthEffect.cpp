@@ -3,11 +3,9 @@
 //
 
 #include "WidthEffect.h"
-WidthEffect::WidthEffect()
-= default;
+WidthEffect::WidthEffect() = default;
 
-WidthEffect::~WidthEffect()
-= default;
+WidthEffect::~WidthEffect() = default;
 
 void WidthEffect::processBlock(float* inBufferL, float* inBufferR, float inWidth, int inNumSamples)
 {

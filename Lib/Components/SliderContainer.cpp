@@ -16,10 +16,9 @@ SliderContainer::SliderContainer()
     mLabel.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(mSlider);
     addAndMakeVisible(mLabel);
-    
 }
 
-void SliderContainer::setParameterToControl(juce::AudioProcessorValueTreeState &inVTS, const juce::String &inParamID)
+void SliderContainer::setParameterToControl(juce::AudioProcessorValueTreeState& inVTS, const juce::String& inParamID)
 {
     mLabel.setText(inParamID, juce::dontSendNotification);
     mAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(inVTS, inParamID, mSlider));

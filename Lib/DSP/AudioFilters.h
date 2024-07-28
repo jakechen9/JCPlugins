@@ -4,10 +4,11 @@
 
 #ifndef JCPLUGINS_AUDIOFILTERS_H
 #define JCPLUGINS_AUDIOFILTERS_H
-#include "JuceHeader.h"
 #include "AudioHelpers.h"
+#include "JuceHeader.h"
 
-class AudioFilter{
+class AudioFilter
+{
 
 public:
 
@@ -23,10 +24,9 @@ public:
 
     void processSample(float& inSample);
 
-
 private:
 
-    float mSampleRate{};
+    float mSampleRate {};
     juce::AudioBuffer<float> mCircularBuffer;
     juce::dsp::IIR::Filter<float> mHighPassFilter;
     juce::dsp::IIR::Filter<float> mLowpassFilter;
