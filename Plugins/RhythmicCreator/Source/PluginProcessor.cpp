@@ -7,8 +7,6 @@
 */
 
 #include "PluginProcessor.h"
-
-#include <memory>
 #include "PluginEditor.h"
 
 //==============================================================================
