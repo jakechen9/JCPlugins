@@ -6,27 +6,28 @@
   ==============================================================================
 */
 
-#include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "PluginProcessor.h"
 
 //==============================================================================
-JCAudioProcessorEditor::JCAudioProcessorEditor (JCAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+JCAudioProcessorEditor::JCAudioProcessorEditor(JCAudioProcessor& p)
+: AudioProcessorEditor(&p),
+  audioProcessor(p)
 {
     mLookAndFeel = std::make_unique<MyLookAndFeel>();
-    
+
     setLookAndFeel(mLookAndFeel.get());
-    
+
     mTopRow = std::make_unique<TopRow>(&audioProcessor);
     addAndMakeVisible(mTopRow.get());
-  
+
     mBottomRow = std::make_unique<BottomRow>(&audioProcessor);
     addAndMakeVisible(mBottomRow.get());
-    
+
     mMiddleRow = std::make_unique<MiddleRow>(&audioProcessor);
     addAndMakeVisible(mMiddleRow.get());
-    
-    setSize (1100, 720);
+
+    setSize(1100, 720);
 }
 
 JCAudioProcessorEditor::~JCAudioProcessorEditor()
@@ -35,18 +36,15 @@ JCAudioProcessorEditor::~JCAudioProcessorEditor()
 }
 
 //==============================================================================
-void JCAudioProcessorEditor::paint (juce::Graphics& g)
+void JCAudioProcessorEditor::paint(juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 }
 
 void JCAudioProcessorEditor::resized()
 {
-    mTopRow -> setBounds(0, 0, 1100, 160);
-    mMiddleRow -> setBounds(0, 160, 1100, 323);
+    mTopRow->setBounds(0, 0, 1100, 160);
+    mMiddleRow->setBounds(0, 160, 1100, 323);
     mBottomRow->setBounds(0, 483, 1100, 237);
 }
-
-
-

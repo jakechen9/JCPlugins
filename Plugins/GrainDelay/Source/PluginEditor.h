@@ -8,31 +8,33 @@
 
 #pragma once
 
-#include <JuceHeader.h>
-#include "PluginProcessor.h"
-#include "SliderContainer.h"
-#include "MyLookAndFeel.h"
-#include "TopRow.h"
 #include "BottomRow.h"
 #include "MiddleRow.h"
+#include "MyLookAndFeel.h"
+#include "PluginProcessor.h"
+#include "SliderContainer.h"
+#include "TopRow.h"
+#include <JuceHeader.h>
 
 //==============================================================================
 /**
 */
-class JCAudioProcessorEditor  : public juce::AudioProcessorEditor,
-                                             public juce::DragAndDropContainer,
-                                             public juce::ComponentDragger,
-                                             public juce::ComponentBoundsConstrainer
+class JCAudioProcessorEditor : public juce::AudioProcessorEditor,
+                               public juce::DragAndDropContainer,
+                               public juce::ComponentDragger,
+                               public juce::ComponentBoundsConstrainer
 {
 public:
-    explicit JCAudioProcessorEditor (JCAudioProcessor&);
+
+    explicit JCAudioProcessorEditor(JCAudioProcessor&);
     ~JCAudioProcessorEditor() override;
 
     //==============================================================================
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics&) override;
     void resized() override;
 
 private:
+
     std::unique_ptr<BottomRow> mBottomRow;
     std::unique_ptr<TopRow> mTopRow;
     std::unique_ptr<MiddleRow> mMiddleRow;
@@ -41,5 +43,5 @@ private:
     // access the processor object that created it.
     JCAudioProcessor& audioProcessor;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JCAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(JCAudioProcessorEditor)
 };

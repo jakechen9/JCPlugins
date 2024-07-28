@@ -6,20 +6,21 @@
   ==============================================================================
 */
 
-#include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "PluginProcessor.h"
 
 //==============================================================================
-RhythmicCreatorAudioProcessorEditor::RhythmicCreatorAudioProcessorEditor (RhythmicCreatorAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+RhythmicCreatorAudioProcessorEditor::RhythmicCreatorAudioProcessorEditor(RhythmicCreatorAudioProcessor& p)
+: AudioProcessorEditor(&p),
+  audioProcessor(p)
 {
     mLookAndFeel = std::make_unique<MyLookAndFeel>();
     setLookAndFeel(mLookAndFeel.get());
 
     mAudioFilterUI = std::make_unique<AudioFilterUI>(&audioProcessor);
     addAndMakeVisible(mAudioFilterUI.get());
-    
-    setSize (1100, 360);
+
+    setSize(1100, 360);
 }
 
 RhythmicCreatorAudioProcessorEditor::~RhythmicCreatorAudioProcessorEditor()
@@ -28,16 +29,13 @@ RhythmicCreatorAudioProcessorEditor::~RhythmicCreatorAudioProcessorEditor()
 }
 
 //==============================================================================
-void RhythmicCreatorAudioProcessorEditor::paint (juce::Graphics& g)
+void RhythmicCreatorAudioProcessorEditor::paint(juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 }
 
 void RhythmicCreatorAudioProcessorEditor::resized()
 {
     mAudioFilterUI->setBounds(0, 0, 1100, 360);
 }
-
-
-
