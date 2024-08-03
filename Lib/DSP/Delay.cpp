@@ -50,7 +50,7 @@ void Delay::setParameters(float inTimeSeconds,
                           float inDecay,
                           float inSustain,
                           float inRelease,
-                          float inNoteLength)
+                          double inNoteLength)
 {
     mTimeInSeconds.setTargetValue(inTimeSeconds);
     mFeedbackAmount = inFeedbackAmount;

@@ -56,6 +56,7 @@ private:
     WidthEffect mWidth;
     float mInputGain = 0;
     float mOutputGain = 0;
+    double mCurrentBPM;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(JCAudioProcessor)
 };

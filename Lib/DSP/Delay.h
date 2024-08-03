@@ -40,7 +40,7 @@ public:
                        float inDecay,
                        float inSustain,
                        float inRelease,
-                       float inNoteLength);
+                       double inNoteLength);
 
     /* */
     void processBlock(float* inBuffer, int inNumSamples);

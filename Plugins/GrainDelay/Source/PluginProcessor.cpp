@@ -41,13 +41,19 @@ void JCAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::Midi
     input_gain /= 2;
     mInputGain = input_gain;
 
-    juce::AudioPlayHead::CurrentPositionInfo mTempoInfo;
-    getPlayHead()->getCurrentPosition(mTempoInfo);
-    auto bpm = juce::jmax(static_cast<float>(mTempoInfo.bpm), 1.f);
+    auto playHead = getPlayHead();
 
-    auto noteLength = getTimeDivisonSamples(
-        static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)), static_cast<float>(getSampleRate()), bpm);
-    auto time_div = TIMEDIV(static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)), bpm);
+    if (playHead->getPosition().hasValue()) {
+        mCurrentBPM = static_cast<double>(playHead->getPosition()->getBpm().orFallback(120.f));
+    } else {
+        mCurrentBPM = 120.f;
+    }
+
+    auto noteLength = getTimeDivisonSamples(static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)),
+                                            static_cast<float>(getSampleRate()),
+                                            mCurrentBPM);
+    auto time_div =
+        static_cast<float>(TIMEDIV(static_cast<int>(mParameterManager->getCurrentParameterValue(Rate)), mCurrentBPM));
 
     // Set Delay Parameter to control
     mDelayL.setParameters(mParameterManager->getCurrentParameterValue(Time),
@@ -89,8 +95,10 @@ void JCAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::Midi
     mOutputGain = output_gain;
 
     // clear buffer when playback stops to avoid super long tails
-    if (!mTempoInfo.isPlaying)
+    auto info = *getPlayHead()->getPosition();
+    if (!info.getIsPlaying()) {
         buffer.clear();
+    }
 }
 
 ParameterManager* JCAudioProcessor::getParameterManager()
