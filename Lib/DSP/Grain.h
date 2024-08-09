@@ -40,14 +40,6 @@ public:
         // could be more explicit
         mGrainCounter = mGrainSize;
     }
-    //    void setSize(int inGrainSize) {
-    //        if (mGrainSize != inGrainSize) {
-    //            mGrainSize = inGrainSize;
-    //            // this make it not active after a set size call.
-    //            // could be more explicit
-    //            mGrainCounter = mGrainSize;
-    //        }
-    //    }
 
     void start(float inStartPosition, int inCircularBufferSize, float inGrainPitch)
     {

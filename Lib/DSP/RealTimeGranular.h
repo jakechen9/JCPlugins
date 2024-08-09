@@ -22,8 +22,6 @@ public:
     /* */
     void prepareToPlay(int inSampleRate);
 
-    //    void setParameters(float inGrainSize);
-
     /* */
     float processSample(float inSample, float inGrainPitch);
 
