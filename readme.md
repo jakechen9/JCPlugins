@@ -2,12 +2,21 @@
 
 ![](/img/graindelay_screenshot.png)
 
-Granular Delay is a straightforward delay effect with granular feedback, 
-and integrated low-pass (LPF) and high-pass (HPF) filters within the delay engine. 
-It also includes a draggable ADSR section with synced rate for rhythmic manipulation.
+Grain Delay is a cutting-edge audio plugin designed to revolutionize sound creativity. By integrating a real-time
+granular engine within the delay processing, this plugin offers un paralleled control over pitch shifting, time
+adjustment and feedback modulation.
 
-Still under development...
+Key features include:
+
+- Real-time Granular Engine
+- Pitch Shifting
+- Time Adjustment & Feedback Controls
+- FIlter & Envelope Modulation
+
+Under active development
 
 ### Todo
+
 - update readme
 - cmake build
+- getting started
