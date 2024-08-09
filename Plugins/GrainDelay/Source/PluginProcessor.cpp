@@ -66,6 +66,7 @@ void JCAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::Midi
                           mParameterManager->getCurrentParameterValue(Decay) * time_div,
                           mParameterManager->getCurrentParameterValue(Sustain) * time_div,
                           mParameterManager->getCurrentParameterValue(Release) * time_div,
+                          mParameterManager->getCurrentParameterValue(GrainSize),
                           noteLength);
 
     mDelayR.setParameters(mParameterManager->getCurrentParameterValue(Time),
@@ -78,6 +79,7 @@ void JCAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::Midi
                           mParameterManager->getCurrentParameterValue(Decay) * time_div,
                           mParameterManager->getCurrentParameterValue(Sustain) * time_div,
                           mParameterManager->getCurrentParameterValue(Release) * time_div,
+                          mParameterManager->getCurrentParameterValue(GrainSize),
                           noteLength);
 
     mDelayL.processBlock(buffer.getWritePointer(0), buffer.getNumSamples());

@@ -15,7 +15,7 @@ void RealTimeGranular::prepareToPlay(int inSampleRate)
 {
     mSampleRate = static_cast<float>(inSampleRate);
     for (auto& mGrain : mGrains) {
-        mGrain.setSize(static_cast<int>(mGrainsizeSeconds * mSampleRate));
+        mGrain.setSize(mGrainsizeSeconds * mSampleRate);
     }
 
     mGrainBuffer.setSize(static_cast<int>(10.f * static_cast<float>(inSampleRate)));
@@ -24,8 +24,9 @@ void RealTimeGranular::prepareToPlay(int inSampleRate)
 }
 
 /* */
-float RealTimeGranular::processSample(float inSample, float inGrainPitch)
+float RealTimeGranular::processSample(float inSample, float inGrainPitch, float inGrainSize)
 {
+    mGrainsizeSeconds = inGrainSize;
     mGrainBuffer.writeToBuffer(inSample, inSample);
 
     if (mScheduler.trigger()) {

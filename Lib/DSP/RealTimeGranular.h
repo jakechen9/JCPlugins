@@ -23,11 +23,11 @@ public:
     void prepareToPlay(int inSampleRate);
 
     /* */
-    float processSample(float inSample, float inGrainPitch);
+    float processSample(float inSample, float inGrainPitch, float inGrainSize);
 
 private:
 
-    const float mGrainsizeSeconds = 0.1f;
+    float mGrainsizeSeconds = 0.1f;
     const float mGrainOverlapRate = 2.f;
     float mSampleRate = 0.f;
 

@@ -31,6 +31,7 @@ private:
     std::unique_ptr<SliderContainer> mDelayWidth;
     std::unique_ptr<SliderContainer> mDelayFeedback;
     std::unique_ptr<SliderContainer> mGrainPitch;
+    std::unique_ptr<SliderContainer> mGrainSize;
     std::unique_ptr<SliderContainer> mDelayLowpass;
     std::unique_ptr<SliderContainer> mDelayHighpass;
     juce::Image mBackGround;

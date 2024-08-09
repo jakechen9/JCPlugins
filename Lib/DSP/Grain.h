@@ -33,18 +33,19 @@ public:
         mGrainReadhead = AudioHelpers::wrap_buffer(mGrainReadhead, static_cast<float>(inGrainBuffer.getNumSamples()));
     }
 
-    void setSize(int inGrainSize)
+    void setSize(float inGrainSize)
     {
         mGrainSize = inGrainSize;
         // this make it not active after a set size call.
         // could be more explicit
-        mGrainCounter = mGrainSize;
+        mGrainCounter = static_cast<int>(mGrainSize);
     }
 
     void start(float inStartPosition, int inCircularBufferSize, float inGrainPitch)
     {
         // distance_past_write grain span,
-        float distance_past_write = (inGrainPitch - 1.f) * static_cast<float>(mGrainSize);
+
+        float distance_past_write = (inGrainPitch - 1.f) * mGrainSize;
         mGrainReadhead = inStartPosition;
         mGrainReadhead =
             AudioHelpers::wrap_buffer(mGrainReadhead - distance_past_write, static_cast<float>(inCircularBufferSize));
@@ -64,7 +65,7 @@ public:
 
     [[nodiscard]] bool isActive() const
     {
-        if (mGrainCounter < mGrainSize) {
+        if (mGrainCounter < static_cast<int>(mGrainSize)) {
             return true;
         } else {
             return false;
@@ -77,7 +78,7 @@ private:
     float mGrainReadhead = 0.f;
 
     // size in sample
-    int mGrainSize = 0;
+    float mGrainSize = 0.f;
 
     // position in sample
     int mGrainCounter = 0;

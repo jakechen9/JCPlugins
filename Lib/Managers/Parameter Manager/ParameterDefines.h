@@ -24,7 +24,7 @@ enum AppParamID {
     Highpass,
     //  Grain Section
     GrainPitch,
-    //    GrainSize,
+    GrainSize,
     //  ADSR MOD Section
     Attack,
     Decay,
@@ -56,7 +56,7 @@ static const juce::Array<juce::ParameterID> PARAM_ID {
     juce::ParameterID("Highpass", 1),
     //  Grain Section
     juce::ParameterID("GrainPitch", 1),
-    //    juce::ParameterID("GrainSize", 1),
+    juce::ParameterID("GrainSize", 1),
     //  ADSR MOD Section
     juce::ParameterID("Attack", 1),
     juce::ParameterID("Decay", 1),
@@ -86,6 +86,7 @@ static const juce::Array<ParameterUtil::PARAMETER_TYPE> PARAM_TYPE {
     ParameterUtil::FreqP,
     //  GrainSection
     ParameterUtil::FloatP,
+    ParameterUtil::PercentP,
     //  ADSR MOD Section
     ParameterUtil::FloatP,
     ParameterUtil::FloatP,
@@ -115,6 +116,7 @@ static const juce::Array<float> ParameterMinimum {
     20.f,
     //  Grain Section
     .3f,
+    0.005f,
     //  ADSR MOD Section
     0.f,
     0.f,
@@ -144,6 +146,7 @@ static const juce::Array<float> ParameterMaximum {
     22000.f,
     //  Grain Section
     6.f,
+    1.0f,
     //  ADSR MOD Section
     1.f,
     1.f,
@@ -173,6 +176,7 @@ static const juce::Array<float> ParameterDefault {
     20.f,
     //  Grain Section
     1.f,
+    0.5f,
     //  ADSR MOD Section
     .2f,
     .3f,
@@ -202,6 +206,7 @@ static const juce::Array<float> ParameterCenter {
     500.f,
     //  Grain Section
     3.5f,
+    0.5f,
     //  ADSR MOD Section
     .5f,
     .5f,

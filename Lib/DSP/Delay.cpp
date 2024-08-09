@@ -25,6 +25,7 @@ void Delay::initialize(float inSampleRate, int inBlocksize)
     mTimeInSeconds.reset(inSampleRate, 0.25);
     mTimeInSeconds.setCurrentAndTargetValue(static_cast<float>(0.01));
     mGrainPitch.reset(inSampleRate, .01);
+    mGrainSize.reset(inSampleRate, .01);
     juce::dsp::ProcessSpec spec {};
     spec.sampleRate = inSampleRate;
     spec.maximumBlockSize = static_cast<unsigned int>(inBlocksize);
@@ -50,6 +51,7 @@ void Delay::setParameters(float inTimeSeconds,
                           float inDecay,
                           float inSustain,
                           float inRelease,
+                          float inGrainSize,
                           double inNoteLength)
 {
     mTimeInSeconds.setTargetValue(inTimeSeconds);
@@ -66,6 +68,7 @@ void Delay::setParameters(float inTimeSeconds,
     mHighPassFilter.coefficients = mHighpassCoefficients.makeHighPass(mSampleRate, inHPFreq);
     mLowpassFilter.coefficients = mLowpassCoefficients.makeLowPass(mSampleRate, inLPFreq);
     mGrainPitch.setTargetValue(inGrainPitch);
+    mGrainSize.setTargetValue(inGrainSize);
 }
 
 /* */
@@ -123,7 +126,8 @@ void Delay::processSample(float& inSample)
 
     mFeedbackSample = output_sample;
 
-    mFeedbackSample = mRealTimeGranulator.processSample(mFeedbackSample, mGrainPitch.getNextValue());
+    mFeedbackSample =
+        mRealTimeGranulator.processSample(mFeedbackSample, mGrainPitch.getNextValue(), mGrainSize.getNextValue());
 
     inSample = (output_sample * mMix) + (inSample * (1.f - mMix));
 

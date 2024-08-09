@@ -40,6 +40,7 @@ public:
                        float inDecay,
                        float inSustain,
                        float inRelease,
+                       float inGrainSize,
                        double inNoteLength);
 
     /* */
@@ -57,6 +58,7 @@ private:
     float mFeedbackAmount = 0;
     juce::LinearSmoothedValue<float> mTimeInSeconds;
     juce::LinearSmoothedValue<float> mGrainPitch;
+    juce::LinearSmoothedValue<float> mGrainSize;
 
     float mWriteHead = 0;
     float mFeedbackSample = 0;
