@@ -40,6 +40,7 @@ public:
                        float inDecay,
                        float inSustain,
                        float inRelease,
+                       float inGrainSize,
                        double inNoteLength);
 
     /* */
@@ -57,11 +58,12 @@ private:
     float mFeedbackAmount = 0;
     juce::LinearSmoothedValue<float> mTimeInSeconds;
     juce::LinearSmoothedValue<float> mGrainPitch;
+    juce::LinearSmoothedValue<float> mGrainSize;
 
     float mWriteHead = 0;
     float mFeedbackSample = 0;
     juce::AudioBuffer<float> mCircularBuffer;
-    float mNoteLength = 0;
+    double mNoteLength = 0.f;
     float mCounter = 0;
     bool mADSRStarted = false;
     juce::ADSR mADSR;

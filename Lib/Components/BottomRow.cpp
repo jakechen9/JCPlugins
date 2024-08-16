@@ -39,6 +39,10 @@ BottomRow::BottomRow(ProcessorInterface* inAudioProcessor)
     mGrainPitch->setParameterToControl(tree_state, PARAM_ID[AppParamID::GrainPitch].getParamID());
     addAndMakeVisible(mGrainPitch.get());
 
+    mGrainSize = std::make_unique<SliderContainer>();
+    mGrainSize->setParameterToControl(tree_state, PARAM_ID[AppParamID::GrainSize].getParamID());
+    addAndMakeVisible(mGrainSize.get());
+
     mDelayLowpass = std::make_unique<SliderContainer>();
     mDelayLowpass->setParameterToControl(tree_state, PARAM_ID[AppParamID::Lowpass].getParamID());
     addAndMakeVisible(mDelayLowpass.get());
@@ -58,9 +62,10 @@ void BottomRow::paint(juce::Graphics& g)
 void BottomRow::resized()
 {
     auto size = 100;
-    mDelayMix->setBounds(61 * 2, 80, size, size);
+    mDelayMix->setBounds(61 * 2, 28, size, size);
+    mDelayWidth->setBounds(61 * 2, 135, size, size);
     mDelayTime->setBounds(176 * 2, 28, size, size);
-    mDelayWidth->setBounds(176 * 2, 135, size, size);
+    mGrainSize->setBounds(176 * 2, 135, size, size);
     mDelayFeedback->setBounds(301 * 2, 28, size, size);
     mGrainPitch->setBounds(301 * 2, 135, size, size);
     mDelayLowpass->setBounds(426 * 2, 135, size, size);
