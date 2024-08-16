@@ -86,7 +86,7 @@ static const juce::Array<ParameterUtil::PARAMETER_TYPE> PARAM_TYPE {
     ParameterUtil::FreqP,
     //  GrainSection
     ParameterUtil::FloatP,
-    ParameterUtil::PercentP,
+    ParameterUtil::FloatP,
     //  ADSR MOD Section
     ParameterUtil::FloatP,
     ParameterUtil::FloatP,
@@ -176,7 +176,7 @@ static const juce::Array<float> ParameterDefault {
     20.f,
     //  Grain Section
     1.f,
-    0.5f,
+    0.1f,
     //  ADSR MOD Section
     .2f,
     .3f,
@@ -206,7 +206,7 @@ static const juce::Array<float> ParameterCenter {
     500.f,
     //  Grain Section
     3.5f,
-    0.5f,
+    0.1f,
     //  ADSR MOD Section
     .5f,
     .5f,

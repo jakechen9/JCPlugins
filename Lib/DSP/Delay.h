@@ -63,7 +63,7 @@ private:
     float mWriteHead = 0;
     float mFeedbackSample = 0;
     juce::AudioBuffer<float> mCircularBuffer;
-    float mNoteLength = 0;
+    double mNoteLength = 0.f;
     float mCounter = 0;
     bool mADSRStarted = false;
     juce::ADSR mADSR;
