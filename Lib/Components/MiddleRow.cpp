@@ -15,7 +15,12 @@ MiddleRow::MiddleRow(ProcessorInterface* inAudioProcessor)
 {
     startTimerHz(30);
     mDraggableAttackButton.onDrag = [this]() { sanatizePoints(); };
-    mDraggableDecayButton.onDrag = [this]() { sanatizePoints(); };
+    mDraggableDecayButton.onDrag = [this]() {
+        sanatizePoints();
+        //        auto& tree_state = audioProcessor.getParameterManager()->getTreeState();
+        //        mAttack = std::make_unique<SliderContainer>();
+        //        mAttack->setParameterToControl(tree_state, ParameterIDStrings[AppParameterID::Attack]);
+    };
     mDraggableSustainButton.onDrag = [this]() { sanatizePoints(); };
     mDraggableReleaseButton.onDrag = [this]() { sanatizePoints(); };
     addAndMakeVisible(mDraggableAttackButton);
